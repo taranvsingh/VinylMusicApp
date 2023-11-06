@@ -1,1 +1,1 @@
-# comp302
+# COMP 3020 - Group 12
