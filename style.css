@@ -14,15 +14,17 @@ body
 #liked-songs-page
 {
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
+    row-gap: 2.5rem;
 }
 
 #liked-songs-page header
 {
     display: flex;
-    flex-flow: row;
+    flex-direction: row;
     align-items: center;
     gap: 1.5rem;
+    border: 1px solid green;
 }
 
 #liked-songs-page header h1 
@@ -30,17 +32,26 @@ body
     font-size: 3rem;
 }
 
+.library-controls
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid red;
+}
+
 .library-grid
 {
     display: grid;
     grid-template-columns: repeat(5, 5fr);
     gap: 2.5rem;
+    border: 1px solid blue;
 }
 
 .library-libraryItem
 {
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
     gap: 0.5rem;
 }
 
@@ -49,20 +60,17 @@ body
     width: 100%;
 }
 
-.library-libraryItem .library-libraryItem-label
+.library-libraryItem-label p
 {
-    border: 1px solid green;
-    padding: none;
+    margin: 0;
 }
 
 .library-libraryItem .library-libraryItem-label .library-libraryItem-title
 {
     font-size: 2rem;
-    border: 1px solid red;
 }
 
 .library-libraryItem .library-libraryItem-label .library-libraryItem-artist
 {
     font-size: 1.5rem;
-    border: 1px solid blue;
 }
