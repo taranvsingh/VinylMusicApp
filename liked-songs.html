@@ -4,52 +4,225 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
         <title>Rad.io: Hydrate your senses</title>
     </head>
-    <body>
+    <body class="box-border m-0 font-sans">
         <section id="left-panel"></section>
-        <section id="right-panel">
+        <section id="right-panel" class="p-8">
             <nav id="navbar"></nav>
             <div id="liked-songs-page">
-                <header>
-                    <a>
+                <header class="flex flex-row items-center gap-6 mb-10">
+                    <div
+                        class="libraryPage-backButton fill-black hover:cursor-pointer hover:fill-zinc-600">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="36"
                             height="30"
-                            viewBox="0 0 36 30"
-                            fill="none">
+                            viewBox="0 0 36 30">
                             <path
-                                d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z"
-                                fill="black" />
+                                d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
                         </svg>
-                    </a>
-                    <h1>Liked Songs</h1>
+                    </div>
+                    <h1 class="text-5xl">Liked Songs</h1>
                 </header>
-                <div class="library-controls">
-                    <div class="libraryControls-sort">
-                        <label for="sort">Sort:</label>
-                        <select name="sort" id="library-likedSongs-sort">
-                            <option value="alphabetical">Alphabetical</option>
-                            <option value="played">Recently Played</option>
-                            <option value="added">Recently Added</option>
-                            <option value="release">Release Date</option>
-                        </select>
+                <div class="library-content-wrapper">
+                    <div
+                        class="library-controls flex flex-row items-center justify-between mb-4">
+                        <div
+                            class="libraryControls-play flex flex-row items-center gap-x-4">
+                            <div
+                                class="libraryControlsPlay-playButton fill-black hover:fill-zinc-500 hover:cursor-pointer">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="48"
+                                    height="48"
+                                    viewBox="0 0 50 50">
+                                    <circle cx="25" cy="25" r="25" class="fill-inherit" />
+                                    <path
+                                        d="M35 25L20 33.6603L20 16.3397L35 25Z"
+                                        fill="white" />
+                                </svg>
+                            </div>
+                            <div
+                                class="libraryControlsPlay-queueButton fill-black hover:fill-zinc-500 hover:cursor-pointer">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="40"
+                                    height="40"
+                                    viewBox="0 0 256 256">
+                                    <path
+                                        class="fill-inherit"
+                                        d="M32 64a8 8 0 0 1 8-8h176a8 8 0 0 1 0 16H40a8 8 0 0 1-8-8Zm104 56H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm0 64H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm112-24a8 8 0 0 1-3.76 6.78l-64 40A8 8 0 0 1 168 200v-80a8 8 0 0 1 12.24-6.78l64 40A8 8 0 0 1 248 160Zm-23.09 0L184 134.43v51.14Z" />
+                                </svg>
+                            </div>
+                            <!-- <button type="button">Queue</button> -->
+                        </div>
+                        <div class="libraryControls-sort">
+                            <p class="inline text-base">Sort:</p>
+                            <select
+                                name="sort"
+                                class="bg-transparent text-base"
+                                id="library-likedSongs-sort"
+                                disabled>
+                                <option value="alphabetical">Alphabetical</option>
+                                <option value="played">Recently Played</option>
+                                <option value="added">Recently Added</option>
+                                <option value="release">Release Date</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="libraryControls-play">
-                        <button type="button" disabled>Queue</button>
-                        <button type="button" disabled>Play</button>
-                    </div>
-                </div>
-                <div class="library-grid">
-                    <div class="library-libraryItem">
-                        <img
-                            src="/assets/song-cover.jpg"
-                            alt="Album cover"
-                            class="library-libraryItem-cover" />
-                        <div class="library-libraryItem-label">
-                            <p class="library-libraryItem-title">Song title</p>
-                            <p class="library-libraryItem-artist">Artist</p>
+                    <div
+                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
+                        </div>
+                        <div class="library-libraryItem hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-full mb-4 rounded" />
+                            <div class="library-libraryItem-label leading-6">
+                                <p class="library-libraryItem-title text-2xl">Title</p>
+                                <p class="library-libraryItem-artist">Artist</p>
+                            </div>
                         </div>
                     </div>
                 </div>
