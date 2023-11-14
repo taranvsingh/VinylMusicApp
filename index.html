@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="style.css"></script>
+    <title>VinylMusic</title>
+  </head>
+  <body>
+    <!-- main container -->
+    <div class="main-container grid h-screen grid-rows-4 grid-flow-col gap-2 p-2">
+
+      <!-- 1. music player -->
+      <div class="music-player-container row-span-3 col-span-2 border-4 border-black rounded-md"></div>
+      <!-- 2. queue -->
+      <div class="queue-container row-span-1 col-span-2 border-4 border-black rounded-md"></div>
+
+      <!-- 3. bars container -->
+      <div class="bars-container grid grid-rows-2 col-span-2 rounded-md gap-2">
+
+        <!-- 3.a navigation bar -->
+        <nav class="nav-bar grid-row-1 nav-bar flex items-center border-4 border-black rounded-md px-4">
+          
+            <!-- Navigation Links -->
+          <ul class="flex space-x-4 h-fit">
+
+            <!-- 3.a.i Library Button -->
+            <li>
+              <button id="library-button" class="text-white bg-black border-4 border-black hover:bg-green-300 hover:text-black py-1 px-2 rounded-md" onclick="changeContent('library')">
+                Library
+              </button>
+            </li>
+
+            <!-- 3.a.ii Friends Button -->
+            <li>
+              <button id="friends-button" class="text-white bg-black border-4 border-black hover:bg-green-300 hover:text-black py-1 px-2 rounded-md" onclick="changeContent('friends')">
+                Friends
+              </button>
+            </li>
+
+            <!-- 3.a.iii Settings Button -->
+            <li>
+              <button id="settings-button" class="text-white bg-black border-4 border-black hover:bg-green-300 hover:text-black py-1 px-2 rounded-md"
+                onclick="changeContent('settings')">
+                Settings
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- 3.b section bar -->
+        <div class="section-bar grid-row-2 flex items-center px-4 border-4 border-black rounded-md">
+            <div id="library-bar" class="active">
+                <h2 id="library-bar-title" class="text-5xl font-bold">LIBRARY</h2>
+                <!-- sort function -->
+            </div>
+            <div id="friends-bar" class="hidden">
+                <h2 id="friends-bar-title" class="text-5xl font-bold">FRIENDS</h2>
+                <!-- sort function -->
+            </div>
+            <div id="settings-bar" class="hidden">
+                <h2 id="settings-bar-title" class="text-5xl font-bold">SETTINGS</h2>
+                <!-- sort function -->
+            </div>
+        </div>
+        
+      </div>
+
+      <!-- 4. section -->
+      <div
+        id="content-section"
+        class="row-span-3 border-4 border-black col-span-2 rounded-md p-4"
+      >
+        <!-- 4.a Library Interface -->
+        <div id="library-subsection" class="active">
+          <h2 class="text-xl font-bold">Library Subsection</h2>
+        </div>
+
+        <!-- 4.b Friends Interface-->
+        <div id="friends-subsection" class="hidden">
+          <h2 class="text-xl font-bold">Friends Subsection</h2>
+        </div>
+
+        <!-- 4.c Settings Interface -->
+        <div id="settings-subsection" class="hidden">
+          <h2 class="text-xl font-bold">Settings Subsection</h2>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
