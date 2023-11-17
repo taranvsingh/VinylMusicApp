@@ -61,18 +61,267 @@
                 <div
                     class="section-bar grid-row-2 flex items-center px-4 border-4 border-black rounded-md">
                     <div id="library-bar" class="active">
-                        <h2 id="library-bar-title" class="text-5xl font-bold">LIBRARY</h2>
-                        <!-- sort function -->
+                        <h2 id="library-bar-title" class="text-5xl font-bold">Library</h2>
                     </div>
+
+                    <div id="liked-songs-bar" class="hidden w-full">
+                        <header class="flex flex-row items-center gap-6">
+                            <button
+                                class="libraryPage-backButton pt-2 fill-black hover:cursor-pointer hover:fill-green-400"
+                                onclick="changeContent('library')">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="36"
+                                    height="30"
+                                    viewBox="0 0 36 30">
+                                    <path
+                                        d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
+                                </svg>
+                            </button>
+                            <h2 id="liked-songs-bar-title" class="text-5xl font-bold">
+                                Liked Songs
+                            </h2>
+                        </header>
+                        <div
+                            class="library-controls flex flex-row items-center justify-between pt-4">
+                            <div
+                                class="libraryControls-play flex flex-row items-center gap-x-4">
+                                <div
+                                    class="libraryControlsPlay-playButton fill-black hover:fill-green-400 hover:cursor-pointer">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="50"
+                                        height="50"
+                                        viewBox="0 0 50 50">
+                                        <circle
+                                            cx="25"
+                                            cy="25"
+                                            r="25"
+                                            class="fill-inherit" />
+                                        <path
+                                            d="M35 25L20 33.6603L20 16.3397L35 25Z"
+                                            fill="white" />
+                                    </svg>
+                                </div>
+                                <div
+                                    class="libraryControlsPlay-queueButton fill-black hover:fill-green-400 hover:cursor-pointer">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 256 256">
+                                        <path
+                                            class="fill-inherit"
+                                            d="M32 64a8 8 0 0 1 8-8h176a8 8 0 0 1 0 16H40a8 8 0 0 1-8-8Zm104 56H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm0 64H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm112-24a8 8 0 0 1-3.76 6.78l-64 40A8 8 0 0 1 168 200v-80a8 8 0 0 1 12.24-6.78l64 40A8 8 0 0 1 248 160Zm-23.09 0L184 134.43v51.14Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="libraryControls-sort">
+                                <p class="inline text-base">Sort:</p>
+                                <select
+                                    name="sort"
+                                    class="bg-transparent text-base"
+                                    id="library-likedSongs-sort"
+                                    disabled>
+                                    <option value="alphabetical">Alphabetical</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="playlists-bar" class="hidden w-full">
+                        <header class="flex flex-row items-center gap-6">
+                            <button
+                                class="libraryPage-backButton pt-2 fill-black hover:cursor-pointer hover:fill-green-400"
+                                onclick="changeContent('library')">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="36"
+                                    height="30"
+                                    viewBox="0 0 36 30">
+                                    <path
+                                        d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
+                                </svg>
+                            </button>
+                            <h2 id="liked-songs-bar-title" class="text-5xl font-bold">
+                                Playlists
+                            </h2>
+                        </header>
+                        <div id="library-controls-sort" class="float-right pt-4">
+                            <p class="inline text-base">Sort:</p>
+                            <select
+                                name="sort"
+                                class="bg-transparent text-base"
+                                id="library-likedSongs-sort"
+                                disabled>
+                                <option value="alphabetical">Alphabetical</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="albums-bar" class="hidden w-full">
+                        <header class="flex flex-row items-center gap-6">
+                            <button
+                                class="libraryPage-backButton pt-2 fill-black hover:cursor-pointer hover:fill-green-400"
+                                onclick="changeContent('library')">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="36"
+                                    height="30"
+                                    viewBox="0 0 36 30">
+                                    <path
+                                        d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
+                                </svg>
+                            </button>
+                            <h2 id="liked-songs-bar-title" class="text-5xl font-bold">
+                                Albums
+                            </h2>
+                        </header>
+                        <div id="library-controls-sort" class="float-right pt-4">
+                            <p class="inline text-base">Sort:</p>
+                            <select
+                                name="sort"
+                                class="bg-transparent text-base"
+                                id="library-likedSongs-sort"
+                                disabled>
+                                <option value="alphabetical">Alphabetical</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="playlist-bar" class="hidden w-full">
+                        <header class="flex flex-row items-center gap-6">
+                            <button
+                                class="libraryPage-backButton pt-2 fill-black hover:cursor-pointer hover:fill-green-400"
+                                onclick="changeContent('playlists')">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="36"
+                                    height="30"
+                                    viewBox="0 0 36 30">
+                                    <path
+                                        d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
+                                </svg>
+                            </button>
+                            <h2 id="liked-songs-bar-title" class="text-5xl font-bold">
+                                Playlist Name
+                            </h2>
+                        </header>
+                        <div
+                            class="library-controls flex flex-row items-center justify-between pt-4">
+                            <div
+                                class="libraryControls-play flex flex-row items-center gap-x-4">
+                                <div
+                                    class="libraryControlsPlay-playButton fill-black hover:fill-green-400 hover:cursor-pointer">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="50"
+                                        height="50"
+                                        viewBox="0 0 50 50">
+                                        <circle
+                                            cx="25"
+                                            cy="25"
+                                            r="25"
+                                            class="fill-inherit" />
+                                        <path
+                                            d="M35 25L20 33.6603L20 16.3397L35 25Z"
+                                            fill="white" />
+                                    </svg>
+                                </div>
+                                <div
+                                    class="libraryControlsPlay-queueButton fill-black hover:fill-green-400 hover:cursor-pointer">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 256 256">
+                                        <path
+                                            class="fill-inherit"
+                                            d="M32 64a8 8 0 0 1 8-8h176a8 8 0 0 1 0 16H40a8 8 0 0 1-8-8Zm104 56H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm0 64H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm112-24a8 8 0 0 1-3.76 6.78l-64 40A8 8 0 0 1 168 200v-80a8 8 0 0 1 12.24-6.78l64 40A8 8 0 0 1 248 160Zm-23.09 0L184 134.43v51.14Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="libraryControls-sort">
+                                <p class="inline text-base">Sort:</p>
+                                <select
+                                    name="sort"
+                                    class="bg-transparent text-base"
+                                    id="library-likedSongs-sort"
+                                    disabled>
+                                    <option value="alphabetical">Alphabetical</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="album-bar" class="hidden w-full">
+                        <header class="flex flex-row items-center gap-6">
+                            <button
+                                class="libraryPage-backButton pt-2 fill-black hover:cursor-pointer hover:fill-green-400"
+                                onclick="changeContent('albums')">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="36"
+                                    height="30"
+                                    viewBox="0 0 36 30">
+                                    <path
+                                        d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
+                                </svg>
+                            </button>
+                            <h2 id="liked-songs-bar-title" class="text-5xl font-bold">
+                                Album Name
+                            </h2>
+                        </header>
+                        <div
+                            class="library-controls flex flex-row items-center justify-between pt-4">
+                            <div
+                                class="libraryControls-play flex flex-row items-center gap-x-4">
+                                <div
+                                    class="libraryControlsPlay-playButton fill-black hover:fill-green-400 hover:cursor-pointer">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="50"
+                                        height="50"
+                                        viewBox="0 0 50 50">
+                                        <circle
+                                            cx="25"
+                                            cy="25"
+                                            r="25"
+                                            class="fill-inherit" />
+                                        <path
+                                            d="M35 25L20 33.6603L20 16.3397L35 25Z"
+                                            fill="white" />
+                                    </svg>
+                                </div>
+                                <div
+                                    class="libraryControlsPlay-queueButton fill-black hover:fill-green-400 hover:cursor-pointer">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="40"
+                                        height="40"
+                                        viewBox="0 0 256 256">
+                                        <path
+                                            class="fill-inherit"
+                                            d="M32 64a8 8 0 0 1 8-8h176a8 8 0 0 1 0 16H40a8 8 0 0 1-8-8Zm104 56H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm0 64H40a8 8 0 0 0 0 16h96a8 8 0 0 0 0-16Zm112-24a8 8 0 0 1-3.76 6.78l-64 40A8 8 0 0 1 168 200v-80a8 8 0 0 1 12.24-6.78l64 40A8 8 0 0 1 248 160Zm-23.09 0L184 134.43v51.14Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="libraryControls-sort">
+                                <p class="inline text-base">Sort:</p>
+                                <select
+                                    name="sort"
+                                    class="bg-transparent text-base"
+                                    id="library-likedSongs-sort"
+                                    disabled>
+                                    <option value="alphabetical">Alphabetical</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="friends-bar" class="hidden">
-                        <h2 id="friends-bar-title" class="text-5xl font-bold">FRIENDS</h2>
-                        <!-- sort function -->
+                        <h2 id="friends-bar-title" class="text-5xl font-bold">Friends</h2>
                     </div>
                     <div id="settings-bar" class="hidden">
                         <h2 id="settings-bar-title" class="text-5xl font-bold">
-                            SETTINGS
+                            Friends
                         </h2>
-                        <!-- sort function -->
                     </div>
                 </div>
             </div>
@@ -83,7 +332,7 @@
                 class="row-span-3 border-4 border-black col-span-2 rounded-md p-4">
                 <!-- 4.a Library Interface -->
                 <div id="library-subsection" class="active">
-                    <div id="liked-songs-subsection" class="mb-8">
+                    <div id="liked-songs-area" class="mb-8">
                         <div class="flex flex-row items-baseline gap-6">
                             <h3 class="text-3xl font-bold mb-4">Liked Songs</h3>
                         </div>
@@ -244,23 +493,75 @@
                                         </p>
                                     </div>
                                 </div>
+                                <div
+                                    class="library-libraryItem libraryItem-song hover:cursor-pointer extra-4 hidden 2xl:block">
+                                    <img
+                                        src="/assets/song-cover.jpg"
+                                        alt="Album cover"
+                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
+                                    <div class="library-libraryItem-label">
+                                        <p
+                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                            Title
+                                        </p>
+                                        <p
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            Artist
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="library-libraryItem libraryItem-song hover:cursor-pointer extra-4 hidden 2xl:block">
+                                    <img
+                                        src="/assets/song-cover.jpg"
+                                        alt="Album cover"
+                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
+                                    <div class="library-libraryItem-label">
+                                        <p
+                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                            Title
+                                        </p>
+                                        <p
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            Artist
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="library-libraryItem libraryItem-song hover:cursor-pointer extra-4 hidden 2xl:block">
+                                    <img
+                                        src="/assets/song-cover.jpg"
+                                        alt="Album cover"
+                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
+                                    <div class="library-libraryItem-label">
+                                        <p
+                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                            Title
+                                        </p>
+                                        <p
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            Artist
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                             <button
                                 type="button"
                                 class="more-button px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300"
-                                onclick="">
+                                onclick="changeContent('liked-songs')">
                                 More
                             </button>
                         </div>
                     </div>
-                    <div id="playlist-subsection" class="mb-8">
+                    <div id="playlist-area" class="mb-8">
                         <h3 class="text-3xl font-bold mb-4">Playlists</h3>
                         <div class="w-fit flex flex-row justify-start items-center">
                             <div
                                 id="playlists-preview"
                                 class="library-item-preview flex flex-row items-start gap-x-4 mr-4">
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -272,12 +573,13 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -289,12 +591,13 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -306,12 +609,13 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -323,12 +627,13 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-1 hidden md:block">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-1 hidden md:block"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -340,12 +645,13 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-2 hidden lg:block">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-2 hidden lg:block"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -357,12 +663,13 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-3 hidden xl:block">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-3 hidden xl:block"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -374,12 +681,31 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- <div
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-3 hidden xl:block"
+                                    onclick="changeContent('playlist')">
+                                    <img
+                                        src="/assets/song-cover.jpg"
+                                        alt="Album cover"
+                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
+                                    <div class="library-libraryItem-label">
+                                        <p
+                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                            Title
+                                        </p>
+                                        <p
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-3 hidden xl:block">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-3 hidden xl:block"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -391,12 +717,13 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-3 hidden xl:block">
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-4 hidden 2xl:block"
+                                    onclick="changeContent('playlist')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -408,27 +735,64 @@
                                         </p>
                                         <p
                                             class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
+                                            Creator
                                         </p>
                                     </div>
                                 </div>
+                                <div
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-4 hidden 2xl:block"
+                                    onclick="changeContent('playlist')">
+                                    <img
+                                        src="/assets/song-cover.jpg"
+                                        alt="Album cover"
+                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
+                                    <div class="library-libraryItem-label">
+                                        <p
+                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                            Title
+                                        </p>
+                                        <p
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            Creator
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-4 hidden 2xl:block"
+                                    onclick="changeContent('playlist')">
+                                    <img
+                                        src="/assets/song-cover.jpg"
+                                        alt="Album cover"
+                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
+                                    <div class="library-libraryItem-label">
+                                        <p
+                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                            Title
+                                        </p>
+                                        <p
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            Creator
+                                        </p>
+                                    </div>
+                                </div> -->
                             </div>
                             <button
                                 type="button"
                                 class="more-button px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300"
-                                onclick="">
+                                onclick="changeContent('playlists')">
                                 More
                             </button>
                         </div>
                     </div>
-                    <div id="album-subsection" class="mb-8">
+                    <div id="album-area" class="mb-8">
                         <h3 class="text-3xl font-bold mb-4">Albums</h3>
                         <div class="w-fit flex flex-row justify-start items-center">
                             <div
                                 id="albums-preview"
                                 class="library-item-preview flex flex-row items-start gap-x-4 mr-4">
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                                    onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -445,7 +809,8 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                                    onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -462,7 +827,8 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                                    onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -479,7 +845,8 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                                    onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -496,7 +863,8 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-1 hidden md:block">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-1 hidden md:block"
+                                    onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -513,7 +881,25 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-2 hidden lg:block">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-2 hidden lg:block"
+                                    onclick="changeContent('album')">
+                                    <img
+                                        src="/assets/song-cover.jpg"
+                                        alt="Album cover"
+                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
+                                    <div class="library-libraryItem-label">
+                                        <p
+                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                            Title
+                                        </p>
+                                        <p
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            Artist
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- <div
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-3 hidden xl:block" onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -530,7 +916,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-3 hidden xl:block">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-3 hidden xl:block" onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -547,7 +933,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-3 hidden xl:block">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-3 hidden xl:block" onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -564,7 +950,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-3 hidden xl:block">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-4 hidden 2xl:block" onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -581,7 +967,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-4 hidden 2xl:block">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-4 hidden 2xl:block" onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -598,7 +984,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-4 hidden 2xl:block">
+                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-4 hidden 2xl:block" onclick="changeContent('album')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
@@ -613,34 +999,17 @@
                                             Artist
                                         </p>
                                     </div>
-                                </div>
-                                <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-4 hidden 2xl:block">
-                                    <img
-                                        src="/assets/song-cover.jpg"
-                                        alt="Album cover"
-                                        class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
-                                        <p
-                                            class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                            Title
-                                        </p>
-                                        <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                            Artist
-                                        </p>
-                                    </div>
-                                </div>
+                                </div> -->
                             </div>
                             <button
                                 type="button"
                                 class="more-button px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300"
-                                onclick="">
+                                onclick="changeContent('albums')">
                                 More
                             </button>
                         </div>
                     </div>
-                    <div id="artist-subsection" class="mb-8">
+                    <div id="artist-area" class="mb-8">
                         <h3 class="text-3xl font-bold mb-4">Artists</h3>
                         <div class="w-fit flex flex-row justify-start items-center">
                             <div
@@ -770,6 +1139,131 @@
                                 onclick="">
                                 More
                             </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4.a.i song grid -->
+                <div id="song-grid" class="hidden">
+                    <div
+                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
+                        <div
+                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-28 mb-4 rounded" />
+                            <div class="library-libraryItem-label">
+                                <p
+                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                    Title
+                                </p>
+                                <p
+                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                    Artist
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-28 mb-4 rounded" />
+                            <div class="library-libraryItem-label">
+                                <p
+                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                    Title
+                                </p>
+                                <p
+                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                    Artist
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-28 mb-4 rounded" />
+                            <div class="library-libraryItem-label">
+                                <p
+                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                    Title
+                                </p>
+                                <p
+                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                    Artist
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-28 mb-4 rounded" />
+                            <div class="library-libraryItem-label">
+                                <p
+                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                    Title
+                                </p>
+                                <p
+                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                    Artist
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4.a.ii playlists Page -->
+                <div id="playlists-subsection" class="hidden">
+                    <div
+                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
+                        <div
+                            class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                            onclick="changeContent('playlist')">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-28 mb-4 rounded" />
+                            <div class="library-libraryItem-label">
+                                <p
+                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                    Title
+                                </p>
+                                <p
+                                    class="libraryItem-labelArtist text-Creatormd:text-base lg:text-lg">
+                                    Creator
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4.a.iii albums Page -->
+                <div id="albums-subsection" class="hidden">
+                    <div
+                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
+                        <div
+                            class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                            onclick="changeContent('album')">
+                            <img
+                                src="/assets/song-cover.jpg"
+                                alt="Album cover"
+                                class="library-libraryItem-cover w-28 mb-4 rounded" />
+                            <div class="library-libraryItem-label">
+                                <p
+                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
+                                    Title
+                                </p>
+                                <p
+                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                    Artist
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
