@@ -6,6 +6,7 @@ function changeContent(option) {
     const songGrid = document.getElementById("song-grid");
     const playlistsSubsection = document.getElementById("playlists-subsection");
     const albumsSubsection = document.getElementById("albums-subsection");
+    const artistsSubsection = document.getElementById("artists-subsection");
 
     // Navbar buttons
     const libraryButton = document.getElementById("library-button");
@@ -21,6 +22,8 @@ function changeContent(option) {
     const playlistHeader = document.getElementById("playlist-bar");
     const albumsHeader = document.getElementById("albums-bar");
     const albumHeader = document.getElementById("album-bar");
+    const artistsHeader = document.getElementById("artists-bar");
+    const artistHeader = document.getElementById("artist-bar");
 
     // Hide all subsections by default
     librarySubsection.classList.add("hidden");
@@ -29,6 +32,7 @@ function changeContent(option) {
     songGrid.classList.add("hidden");
     playlistsSubsection.classList.add("hidden");
     albumsSubsection.classList.add("hidden");
+    artistsSubsection.classList.add("hidden");
 
     libraryHeader.classList.add("hidden");
     friendsHeader.classList.add("hidden");
@@ -38,6 +42,8 @@ function changeContent(option) {
     playlistHeader.classList.add("hidden");
     albumsHeader.classList.add("hidden");
     albumHeader.classList.add("hidden");
+    artistsHeader.classList.add("hidden");
+    artistHeader.classList.add("hidden");
 
     libraryButton.classList.remove("bg-white", "text-black");
     friendsButton.classList.remove("bg-white", "text-black");
@@ -79,6 +85,14 @@ function changeContent(option) {
         case "album":
             songGrid.classList.remove("hidden");
             albumHeader.classList.remove("hidden");
+            break;
+        case "artists":
+            artistsSubsection.classList.remove("hidden");
+            artistsHeader.classList.remove("hidden");
+            break;
+        case "artist":
+            albumsSubsection.classList.remove("hidden");
+            artistHeader.classList.remove("hidden");
             break;
     }
 }
