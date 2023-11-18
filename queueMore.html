@@ -4,6 +4,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
+       
         <title>QueuePage</title>
     </head>
     <body> 
@@ -48,9 +49,9 @@
 
         <script>
             var songsInQueue = [
-              { title: 'Jingle Bell Rock',                        artist: 'Brenda Lee',    image: 'song1.jpg' },
-              { title: 'Let It Snow! Let it Snow! Let It Snow! ', artist: 'Frank Sinatra', image: 'song2.jpg' },
-              { title: 'Santa Claus Is Coming To Town',           artist: 'The Jackson 5', image: 'song3.jpg' },
+              { title: 'Jingle Bell Rock',                        artist: 'Brenda Lee',    image: './assets/compact-disc-solid.svg' },
+              { title: 'Let It Snow! Let it Snow! Let It Snow! ', artist: 'Frank Sinatra', image: './assets/compact-disc-solid.svg' },
+              { title: 'Santa Claus Is Coming To Town',           artist: 'The Jackson 5', image: './assets/compact-disc-solid.svg' },
             ];
         
             function goToHomePage()
@@ -62,25 +63,27 @@
             {
                 var container = document.getElementById('songBoxes');
                 container.innerHTML = "";
+            
                 songsInQueue.forEach(song => {
                     var songBox = document.createElement("div");
                     songBox.className = "flex items-center mb-5 h-20 border-2 hover:cursor-grab mr-4";
                    
                     var songImg = document.createElement("img");
                     songImg.src = song.image;
-                    songImg.className = "w-20 h-20 ";
+                    songImg.className = "w-20 h-20 mr-2";
                     
                     //song info
                     var songInfo = document.createElement('div');
-                    songInfo.className = 'ml-4';
+
+
                     //title
                     var title = document.createElement('p');
-                    title.className = 'font-semibold text-xs  lg:text-base  ' ;
+                    title.className = 'font-semibold text-xs lg:text-base text-ellipsis' ;
                     title.textContent = song.title;
                     
                     //artist
                     var artist = document.createElement('p');
-                    artist.className = 'text-gray-500 text-xs  lg:text-sm ';
+                    artist.className = 'text-gray-500 text-xs lg:text-sm text-ellipsis';
                     artist.textContent = song.artist;
     
                     songBox.appendChild(songImg);
@@ -98,9 +101,17 @@
                 songsInQueue = [];
                 loadSongsInQueue();
             }
+
+            function addSongs(song)
+            {
+                songsInQueue.push(song)
+                loadSongsInQueue();
+            }
+            
         
             loadSongsInQueue();
         </script>
+        
     </body>
     
 </html>
