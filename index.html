@@ -22,6 +22,7 @@
                     id="music-player"
                 >
                     <!-- top half -->
+                    <!-- slider colors are temporary -->
                     <div class="mb-8">
                         <!-- labels -->
                         <div class="mb-4">
@@ -33,7 +34,7 @@
                             </p>
                         </div>
                         <!-- record -->
-                        <div class="flex flex-row">
+                        <div class="flex flex-row gap-x-2.5">
                             <div class="inline" id="player-record">
                                 <svg
                                     width="360"
@@ -44,32 +45,52 @@
                                 </svg>
                             </div>
                             <!-- volume bar -->
-                            <div
-                                class="w-2 rounded-full bg-green-300 border-2 border-black inline"
-                            ></div>
+                            <div class="flex flex-col justify-end">
+                                <div
+                                    id="player-volume-bar"
+                                    class="w-2 rounded-full bg-zinc-300 inline"
+                                >
+                                    <div
+                                        id="player-volume-bar-slider"
+                                        class="w-2 bg-black rounded-full h-1/2"
+                                    >
+                                        <div
+                                            id="player-volume-bar-slider-circle"
+                                            class="bg-zinc-500 hover:bg-black w-4 h-4 rounded-full absolute -m-1"
+                                        ></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <svg height="1em" viewBox="0 0 448 512">
+                                        <path
+                                            d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM412.6 181.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5z"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- progress bar -->
-                    <div id="player-progress-bar" class="w-full">
+                    <div
+                        id="player-progress-bar"
+                        class="w-full h-2 bg-zinc-300 rounded-full mb-6"
+                    >
                         <div
                             id="player-progress-bar-slider"
-                            class="absolute w-1/2 h-2 border-black border-2"
+                            class="h-2 bg-black rounded-full w-1/2"
                         >
                             <div
-                                id="player-progress-bar-slider-circle-lol"
-                                class="bg-zinc-200 hover:bg-zinc-500 h-4 w-4 mb-4 rounded-full border-2 float-right"
+                                id="player-progress-bar-slider-circle"
+                                class="bg-zinc-500 hover:bg-black h-4 w-4 mb-4 rounded-full float-right -m-1"
                             ></div>
                         </div>
-                        <div
-                            id="player-progress-bar-track"
-                            class="bg-zinc-300 h-2 w-full mb-4 rounded-full"
-                        ></div>
                     </div>
                     <!-- buttons -->
                     <div class="flex items-center space-x-16">
+                        <!-- shuffle button -->
                         <button class="player-buttons" id="player-shuffle">
                             <svg
-                                class="fill-black hover:fill-green-300"
+                                class="fill-zinc-500 hover:fill-black"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="28"
                                 height="25"
@@ -80,11 +101,12 @@
                                 />
                             </svg>
                         </button>
-                        <!-- play controls -->
+                        <!-- player controls -->
                         <div class="flex items-center space-x-5">
+                            <!-- previous button -->
                             <button class="player-buttons" id="player-previous">
                                 <svg
-                                    class="fill-black hover:fill-green-300"
+                                    class="fill-zinc-500 hover:fill-black"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="30"
                                     height="30"
@@ -95,9 +117,10 @@
                                     />
                                 </svg>
                             </button>
+                            <!-- play button -->
                             <button class="player-buttons" id="player-play">
                                 <svg
-                                    class="fill-black hover:fill-green-300"
+                                    class="fill-zinc-500 hover:fill-black"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="30"
                                     height="30"
@@ -108,9 +131,10 @@
                                     />
                                 </svg>
                             </button>
+                            <!-- next button -->
                             <button class="player-buttons" id="player-next">
                                 <svg
-                                    class="fill-black hover:fill-green-300"
+                                    class="fill-zinc-500 hover:fill-black"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="30"
                                     height="30"
@@ -122,9 +146,10 @@
                                 </svg>
                             </button>
                         </div>
+                        <!-- loop button -->
                         <button class="player-buttons" id="player-loop">
                             <svg
-                                class="fill-black hover:fill-green-300"
+                                class="fill-zinc-500 hover:fill-black"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="27"
                                 height="25"
