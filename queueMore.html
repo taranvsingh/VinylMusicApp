@@ -74,16 +74,16 @@
                     
                     //song info
                     var songInfo = document.createElement('div');
-                    songInfo.className = "w-5/6 whitespace-nowrap text-ellipsis overflow-hidden"
+                    songInfo.className = "w-5/6 whitespace-nowrap overflow-hidden"
 
                     //title
                     var title = document.createElement('p');
-                    title.className = ' font-semibold text-xs lg:text-base ' ;
+                    title.className = ' font-semibold text-xs lg:text-base text-ellipsis overflow-hidden' ;
                     title.textContent = song.title;
                     
                     //artist
                     var artist = document.createElement('p');
-                    artist.className = 'text-gray-500 text-xs lg:text-sm text-ellipsis';
+                    artist.className = 'text-gray-500 text-xs lg:text-sm text-ellipsis overflow-hidden';
                     artist.textContent = song.artist;
     
                     songBox.appendChild(songImg);
