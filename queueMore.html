@@ -23,7 +23,7 @@
                             d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
                     </svg>
                 </button>
-                <h2 id="queueTitle" class="text-5xl ">
+                <h2 id="queueTitle" class=" text-lg md:text-3xl lg:text-5xl ">
                     Queue
                 </h2>
             </header>
@@ -66,7 +66,7 @@
             
                 songsInQueue.forEach(song => {
                     var songBox = document.createElement("div");
-                    songBox.className = "flex items-center mb-5 h-20 border-2 hover:cursor-grab mr-4";
+                    songBox.className = "flex items-center mb-5 h-20 border-2 hover:cursor-grab mr-4 select-none";
                    
                     var songImg = document.createElement("img");
                     songImg.src = song.image;
@@ -74,11 +74,11 @@
                     
                     //song info
                     var songInfo = document.createElement('div');
-
+                    songInfo.className = "w-5/6 whitespace-nowrap text-ellipsis overflow-hidden"
 
                     //title
                     var title = document.createElement('p');
-                    title.className = 'font-semibold text-xs lg:text-base text-ellipsis' ;
+                    title.className = ' font-semibold text-xs lg:text-base ' ;
                     title.textContent = song.title;
                     
                     //artist
@@ -94,6 +94,8 @@
     
                     container.appendChild(songBox)
                 });
+
+                
             }
     
             function clickedClear()
