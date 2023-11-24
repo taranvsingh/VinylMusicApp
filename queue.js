@@ -1,13 +1,45 @@
 var songsInQueue = [
     { title: 'Jingle Bell Rock',                        artist: 'Brenda Lee',    image: './assets/compact-disc-solid.svg' },
-    { title: 'Let It Snow! Let it Snow! Let It Snow! ', artist: 'Frank Sinatra', image: './assets/compact-disc-solid.svg' },
+    { title: 'Let It Snow! Let it Snow! Let It Snow!', artist: 'Frank Sinatra', image: './assets/compact-disc-solid.svg' },
     { title: 'Santa Claus Is Coming To Town',           artist: 'The Jackson 5', image: './assets/compact-disc-solid.svg' },
   ];
+  
+  function expandQueue () {
+    var smallqueue = document.getElementById('small-queue');
+    var largequeue = document.getElementById('expanded-queue');
+    var queuecontainer = document.getElementById('queue-container');
+    var playContainer = document.getElementById('music-player-container');
+    var expandButton = document.getElementById('expandButton');
+    //var hideButton = document.getElementById('backButton');
 
-  function goToHomePage()
-  {
-      alert("Going to Home Page")
-  }
+    smallqueue.classList.add('hidden');
+    expandButton.classList.add('hidden');
+    playContainer.classList.add('hidden');
+    //hideButton.classList.remove('hidden');
+    largequeue.classList.remove('hidden');
+    queuecontainer.classList.remove('row-span-1');
+    queuecontainer.classList.add('row-span-4');
+
+
+}
+
+function backToHome () {
+    var smallqueue = document.getElementById('small-queue');
+    var largequeue = document.getElementById('expanded-queue');
+    var queuecontainer = document.getElementById('queue-container');
+    var playContainer = document.getElementById('music-player-container');
+    var expandButton = document.getElementById('expandButton');
+    //var hideButton = document.getElementById('backButton');
+
+    smallqueue.classList.remove('hidden');
+    expandButton.classList.remove('hidden');
+    playContainer.classList.remove('hidden');
+    //hideButton.classList.add('hidden');
+    largequeue.classList.add('hidden');
+    queuecontainer.classList.add('row-span-1');
+    queuecontainer.classList.remove('row-span-4');
+}
+
 
   function loadSongsInQueue()
   {
@@ -16,7 +48,7 @@ var songsInQueue = [
   
       songsInQueue.forEach(song => {
           var songBox = document.createElement("div");
-          songBox.className = "flex items-center mb-5 h-20 border-2 hover:cursor-grab mr-4 select-none";
+          songBox.className = "flex items-center mb-5 h-20 border-double border-2 hover:cursor-grab hover:border-dashed select-none";
          
           var songImg = document.createElement("img");
           songImg.src = song.image;
@@ -24,11 +56,11 @@ var songsInQueue = [
           
           //song info
           var songInfo = document.createElement('div');
-          songInfo.className = "w-5/6 whitespace-nowrap overflow-hidden"
+          songInfo.className = "w-full whitespace-nowrap overflow-hidden"
 
           //title
           var title = document.createElement('p');
-          title.className = ' font-semibold text-xs md:text-sm lg:text-base text-ellipsis overflow-hidden' ;
+          title.className = 'font-semibold text-xs md:text-sm lg:text-base text-ellipsis overflow-hidden' ;
           title.textContent = song.title;
           
           //artist
