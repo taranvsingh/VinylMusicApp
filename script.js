@@ -125,22 +125,5 @@ function changeContent(to, from) {
             break;
     }
 }
-
-// Get all songs in the song grid
-gridSongs = document.getElementsByClassName("grid-song");
-
-for (const song in gridSongs) {
-    if (Object.hasOwnProperty.call(gridSongs, song)) {
-        const element = gridSongs[song];
-
-        // Toggle the background colour of the song on click
-        element.addEventListener("click", () =>
-            element.classList.contains("bg-green-200")
-                ? element.classList.remove("bg-green-200")
-                : element.classList.add("bg-green-200")
-        );
-    }
-}
-
 // Intitial state
 libraryButton.classList.add("bg-white", "text-black");
