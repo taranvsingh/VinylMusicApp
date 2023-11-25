@@ -5,6 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
+        <!-- <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script> -->
         <script src="style.css"></script>
         <title>VinylMusic</title>
     </head>
@@ -525,86 +529,91 @@
                                 id="liked-songs-preview"
                                 class="library-item-preview flex flex-row items-start gap-x-4 mr-4">
                                 <div
-                                    class="library-libraryItem libraryItem-song hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-song p-2 hover:cursor-pointer hover:bg-green-100">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-song hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-song p-2 hover:cursor-pointer hover:bg-green-100">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-song hover:cursor-pointer">
+                                    class="library-libraryItem libraryItem-song p-2 hover:cursor-pointer hover:bg-green-100 extra-1 hidden md:block">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-song hover:cursor-pointer extra-1 hidden md:block">
+                                    class="library-libraryItem libraryItem-song p-2 hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-song hover:cursor-pointer extra-2 hidden lg:block">
+                                    class="library-libraryItem libraryItem-song p-2 hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
@@ -626,91 +635,96 @@
                                 id="playlists-preview"
                                 class="library-item-preview flex flex-row items-start gap-x-4 mr-4">
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100"
                                     onclick="changeContent('playlist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100"
                                     onclick="changeContent('playlist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-1 hidden md:block"
                                     onclick="changeContent('playlist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-1 hidden md:block"
+                                    class="library-libraryItem libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block"
                                     onclick="changeContent('playlist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Creator
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-playlist hover:cursor-pointer extra-2 hidden lg:block"
+                                    class="library-libraryItem libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block"
                                     onclick="changeContent('playlist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Creator
                                         </p>
                                     </div>
@@ -732,91 +746,96 @@
                                 id="albums-preview"
                                 class="library-item-preview flex flex-row items-start gap-x-4 mr-4">
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100"
                                     onclick="changeContent('album', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-1 hidden md:block"
                                     onclick="changeContent('album', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100"
                                     onclick="changeContent('album', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-1 hidden md:block"
+                                    class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block"
                                     onclick="changeContent('album', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-album hover:cursor-pointer extra-2 hidden lg:block"
+                                    class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block"
                                     onclick="changeContent('album', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Album cover"
                                         class="library-libraryItem-cover w-28 mb-4 rounded" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
                                             class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                             Title
                                         </p>
                                         <p
-                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                            class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                             Artist
                                         </p>
                                     </div>
@@ -838,72 +857,77 @@
                                 id="artists-preview"
                                 class="library-item-preview flex flex-row items-start gap-x-4 mr-4">
                                 <div
-                                    class="library-libraryItem libraryItem-artist hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100"
                                     onclick="changeContent('artist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Artist profile picture"
                                         class="library-libraryItem-cover w-28 mb-4 rounded-full" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
-                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis">
-                                            Artist Name
+                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden">
+                                            Name
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-artist hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100"
                                     onclick="changeContent('artist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Artist profile picture"
                                         class="library-libraryItem-cover w-28 mb-4 rounded-full" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
-                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis">
-                                            Artist Name
+                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden">
+                                            Name
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-artist hover:cursor-pointer"
+                                    class="library-libraryItem libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-1 hidden md:block"
                                     onclick="changeContent('artist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Artist profile picture"
                                         class="library-libraryItem-cover w-28 mb-4 rounded-full" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
-                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis">
-                                            Artist Name
+                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden">
+                                            Name
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-artist hover:cursor-pointer extra-1 hidden md:block"
+                                    class="library-libraryItem libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block"
                                     onclick="changeContent('artist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Artist profile picture"
                                         class="library-libraryItem-cover w-28 mb-4 rounded-full" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
-                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis">
-                                            Artist Name
+                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden">
+                                            Name
                                         </p>
                                     </div>
                                 </div>
                                 <div
-                                    class="library-libraryItem libraryItem-artist hover:cursor-pointer extra-2 hidden lg:block"
+                                    class="library-libraryItem libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100 extra-2 hidden lg:block"
                                     onclick="changeContent('artist', 'library')">
                                     <img
                                         src="/assets/song-cover.jpg"
                                         alt="Artist profile picture"
                                         class="library-libraryItem-cover w-28 mb-4 rounded-full" />
-                                    <div class="library-libraryItem-label">
+                                    <div
+                                        class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                         <p
-                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis">
-                                            Artist Name
+                                            class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden">
+                                            Name
                                         </p>
                                     </div>
                                 </div>
@@ -919,98 +943,29 @@
                 </div>
 
                 <!-- 4.a.i song grid -->
-                <div id="song-grid" class="hidden">
-                    <div
-                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
-                        <div
-                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Album cover"
-                                class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div class="library-libraryItem-label">
-                                <p
-                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                    Title
-                                </p>
-                                <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                    Artist
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Album cover"
-                                class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div class="library-libraryItem-label">
-                                <p
-                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                    Title
-                                </p>
-                                <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                    Artist
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Album cover"
-                                class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div class="library-libraryItem-label">
-                                <p
-                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                    Title
-                                </p>
-                                <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                    Artist
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="library-libraryItem libraryItem-song hover:cursor-pointer">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Album cover"
-                                class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div class="library-libraryItem-label">
-                                <p
-                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                    Title
-                                </p>
-                                <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
-                                    Artist
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div
+                    id="song-grid"
+                    class="hidden grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-x-4 gap-y-2 lg:gap-y-8 py-2"></div>
 
                 <!-- 4.a.ii playlists Page -->
                 <div id="playlists-subsection" class="hidden">
                     <div
                         class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
                         <div
-                            class="library-libraryItem libraryItem-playlist hover:cursor-pointer"
+                            class="library-libraryItem libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100"
                             onclick="changeContent('playlist', 'playlists')">
                             <img
                                 src="/assets/song-cover.jpg"
                                 alt="Album cover"
                                 class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div class="library-libraryItem-label">
+                            <div
+                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                 <p
                                     class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                     Title
                                 </p>
                                 <p
-                                    class="libraryItem-labelArtist text-base md:text-base lg:text-lg">
+                                    class="libraryItem-labelArtist text-base md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                     Creator
                                 </p>
                             </div>
@@ -1023,19 +978,20 @@
                     <div
                         class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
                         <div
-                            class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                            class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100"
                             onclick="changeContent('album', 'albums')">
                             <img
                                 src="/assets/song-cover.jpg"
                                 alt="Album cover"
                                 class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div class="library-libraryItem-label">
+                            <div
+                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                 <p
                                     class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                     Title
                                 </p>
                                 <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                     Artist
                                 </p>
                             </div>
@@ -1048,15 +1004,16 @@
                     <div
                         class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
                         <div
-                            class="library-libraryItem libraryItem-artist hover:cursor-pointer"
+                            class="library-libraryItem libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100"
                             onclick="changeContent('artist', 'artists')">
                             <img
                                 src="/assets/song-cover.jpg"
                                 alt="Artist profile picture"
                                 class="library-libraryItem-cover w-28 mb-4 rounded-full" />
-                            <div class="library-libraryItem-label">
+                            <div
+                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                 <p
-                                    class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis">
+                                    class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden">
                                     Artist Name
                                 </p>
                             </div>
@@ -1069,19 +1026,20 @@
                     <div
                         class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
                         <div
-                            class="library-libraryItem libraryItem-album hover:cursor-pointer"
+                            class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100"
                             onclick="changeContent('album', 'artist')">
                             <img
                                 src="/assets/song-cover.jpg"
                                 alt="Album cover"
                                 class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div class="library-libraryItem-label">
+                            <div
+                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
                                 <p
                                     class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
                                     Title
                                 </p>
                                 <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg">
+                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
                                     Artist
                                 </p>
                             </div>
@@ -1102,5 +1060,7 @@
         </div>
 
         <script src="script.js"></script>
+        <script src="populate.js"></script>
+        <script src="select.js"></script>
     </body>
 </html>

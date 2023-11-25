@@ -125,6 +125,5 @@ function changeContent(to, from) {
             break;
     }
 }
-
 // Intitial state
 libraryButton.classList.add("bg-white", "text-black");
