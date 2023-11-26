@@ -32,3 +32,48 @@ function updateOrder() {
         document.getElementById(song.id + "-selected").innerHTML = i;
     }
 }
+
+// Upon clicking, play buttons should play the first selected song and queue all others
+const playButtons = document.getElementsByClassName("libraryControlsPlay-playButton");
+for (const element in playButtons) {
+    if (Object.hasOwnProperty.call(playButtons, element)) {
+        const button = playButtons[element];
+
+        button.addEventListener("click", () => {
+            queued = "queuing song IDs ";
+            for (let i = 0; i < selected.length; i++) {
+                const songID = selected[i];
+
+                if (i == 0) {
+                    console.log("playing song id " + songID);
+                } else if (i < selected.length - 1) {
+                    queued += songID + ", ";
+                } else {
+                    queued += songID;
+                }
+            }
+            console.log(queued);
+        });
+    }
+}
+
+const queueButtons = document.getElementsByClassName("libraryControlsPlay-queueButton");
+for (const element in queueButtons) {
+    if (Object.hasOwnProperty.call(queueButtons, element)) {
+        const button = queueButtons[element];
+
+        button.addEventListener("click", () => {
+            queued = "queuing song IDs ";
+            for (let i = 0; i < selected.length; i++) {
+                const songID = selected[i];
+
+                if (i < selected.length - 1) {
+                    queued += songID + ", ";
+                } else {
+                    queued += songID;
+                }
+            }
+            console.log(queued);
+        });
+    }
+}
