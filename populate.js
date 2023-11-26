@@ -2,15 +2,15 @@ var songList = [
     /* 
     { title: str, artist: str, image: str}
     */
-    { title: "Jingle Bell Rock", artist: "Brenda Lee", image: "./assets/song-cover.jpg" },
+    { title: "Lucky Drive", artist: "Sarah Kinsley", image: "./assets/song-cover.jpg" },
     {
-        title: "Let It Snow! Let it Snow! Let It Snow! ",
-        artist: "Frank Sinatra",
+        title: "Green",
+        artist: "Sarah Kinsley",
         image: "./assets/song-cover.jpg",
     },
     {
-        title: "Santa Claus Is Coming To Town",
-        artist: "The Jackson 5",
+        title: "Hills of Fire",
+        artist: "Sarah Kinsley",
         image: "./assets/song-cover.jpg",
     },
 ];
