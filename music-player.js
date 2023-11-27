@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const record = document.getElementById("player-record");
 let angle = 0;
 let rotationStart = new Date();
@@ -41,3 +42,34 @@ function rotateRecord(timestamp) {
     }
     */
 })();
+=======
+$(document).ready(function () {
+    var record = $("#player-record");
+
+    function playing() {
+        //var trackduration
+
+        record.velocity(
+            {
+                rotateZ: "+=360deg",
+            },
+            {
+                duration: 1820,
+                easing: "linear",
+                loop: true,
+                delay: 0,
+            }
+        );
+    }
+
+    function paused() {
+        record.velocity("stop", true);
+    }
+
+    $(".player-play").click(function () {
+        playing();
+        // $(this).addClass("paused");
+        // $(".player-buttons #player-play").addClass("paused");
+    });
+});
+>>>>>>> 7b42ea0e552917c9588870e68800ae77572db2ad
