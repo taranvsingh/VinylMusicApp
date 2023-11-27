@@ -7,6 +7,9 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://unpkg.com/feather-icons"></script>
         <link rel="stylesheet" href="style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
+        <script type="text/javascript" src="music-player.js"></script>
         <title>VinylMusic</title>
     </head>
     <body class="bg-gray-300">
@@ -35,7 +38,7 @@
                 </div>
                 <!-- record -->
                 <div
-                    class="row-span-2 flex flex-row justify-between sm:w-50 max-w-xs">
+                    class="player-record row-span-2 flex flex-row justify-between sm:w-50 max-w-xs">
                     <div class="inline px-5" id="player-record">
                         <img
                             id="player-record"
@@ -80,7 +83,7 @@
                 <div
                     class="row-span-1 mb-1 flex items-center max-w-xs sm:gap-2 md:gap-8 lg:gap-16">
                     <!-- shuffle button -->
-                    <button class="player-buttons" id="player-shuffle">
+                    <button class="player-shuffle" id="player-shuffle">
                         <svg
                             class="fill-zinc-500 hover:fill-black"
                             xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +97,7 @@
                     <!-- player controls -->
                     <div class="flex items-center space-x-5">
                         <!-- previous button -->
-                        <button class="player-buttons" id="player-previous">
+                        <button class="player-previous" id="player-previous">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +109,7 @@
                             </svg>
                         </button>
                         <!-- play button -->
-                        <button class="player-buttons" id="player-play">
+                        <button class="player-play" id="player-play">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +121,7 @@
                             </svg>
                         </button>
                         <!-- next button -->
-                        <button class="player-buttons" id="player-next">
+                        <button class="player-next" id="player-next">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
                                 xmlns="http://www.w3.org/2000/svg"
