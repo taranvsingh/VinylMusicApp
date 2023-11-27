@@ -36,7 +36,7 @@
                 <!-- record -->
                 <div
                     class="row-span-2 flex flex-row justify-between sm:w-50 max-w-xs">
-                    <div class="inline px-3" id="player-record">
+                    <div class="inline px-5" id="player-record">
                         <img
                             id="player-record"
                             src="/assets/song-cover.jpg"
@@ -49,7 +49,7 @@
                         <input
                             type="range"
                             id="player-volume-bar"
-                            class="h-full" />
+                            class="h-full w-1" />
                         <div class="absolute -my-6 -mx-1">
                             <svg height="1em" viewBox="0 0 448 512">
                                 <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -59,18 +59,23 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- progress bar -->
-                <div
+                <input
+                    type="range"
                     id="player-progress-bar"
-                    class="row-span-1 w-full max-w-xs h-2 bg-zinc-300 rounded-full">
-                    <div
+                    class="row-span-1 w-full max-w-xs h-1" />
+                <!-- <div
+                    id="player-progress-bar"
+                    class=" bg-zinc-300 rounded-full">
+                     <div
                         id="player-progress-bar-slider"
                         class="h-2 bg-black rounded-full w-1/2">
                         <div
                             id="player-progress-bar-slider-circle"
                             class="bg-zinc-500 hover:bg-black h-4 w-4 mb-4 rounded-full float-right -m-1"></div>
                     </div>
-                </div>
+                </div> -->
                 <!-- buttons -->
                 <div
                     class="row-span-1 mb-1 flex items-center max-w-xs sm:gap-2 md:gap-8 lg:gap-16">
