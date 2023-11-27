@@ -38,13 +38,13 @@
                 </div>
                 <!-- record -->
                 <div
-                    class="player-record row-span-2 flex flex-row justify-between sm:w-50 max-w-xs">
-                    <div class="inline px-5" id="player-record">
+                    class="row-span-2 flex flex-row justify-between sm:w-50 max-w-xs">
+                    <div class="inline px-5">
                         <img
                             id="player-record"
                             src="/assets/song-cover.jpg"
                             alt="Song Cover Disk"
-                            class="rounded-full player-rotation" />
+                            class="rounded-full" />
                     </div>
                     <!-- volume bar -->
 
@@ -83,7 +83,7 @@
                 <div
                     class="row-span-1 mb-1 flex items-center max-w-xs sm:gap-2 md:gap-8 lg:gap-16">
                     <!-- shuffle button -->
-                    <button class="player-shuffle" id="player-shuffle">
+                    <button class="player-shuffle-button">
                         <svg
                             class="fill-zinc-500 hover:fill-black"
                             xmlns="http://www.w3.org/2000/svg"
@@ -97,10 +97,9 @@
                     <!-- player controls -->
                     <div class="flex items-center space-x-5">
                         <!-- previous button -->
-                        <button class="player-previous" id="player-previous">
+                        <button class="player-previous-button">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
-                                xmlns="http://www.w3.org/2000/svg"
                                 width="30"
                                 height="30"
                                 viewBox="0 0 27 33">
@@ -109,10 +108,9 @@
                             </svg>
                         </button>
                         <!-- play button -->
-                        <button class="player-play" id="player-play">
+                        <button class="player-play-button">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
-                                xmlns="http://www.w3.org/2000/svg"
                                 width="30"
                                 height="30"
                                 viewBox="0 0 28 33">
@@ -120,8 +118,19 @@
                                     d="M5.82292 0.87903C4.74375 0.229145 3.3875 0.20772 2.28646 0.814756C1.18542 1.42179 0.5 2.56445 0.5 3.80708V28.9455C0.5 30.1881 1.18542 31.3308 2.28646 31.9378C3.3875 32.5449 4.74375 32.5163 5.82292 31.8736L26.8229 19.3043C27.8656 18.683 28.5 17.5761 28.5 16.3763C28.5 15.1765 27.8656 14.0767 26.8229 13.4482L5.82292 0.87903Z" />
                             </svg>
                         </button>
+                        <!-- pause button -->
+                        <button class="player-pause-button hidden">
+                            <svg
+                                class="fill-zinc-500 hover:fill-black"
+                                width="30"
+                                height="30"
+                                viewBox="0 0 28 32">
+                                <path
+                                    d="M4.2 0C1.88125 0 0 1.79167 0 4V28C0 30.2083 1.88125 32 4.2 32H7C9.31875 32 11.2 30.2083 11.2 28V4C11.2 1.79167 9.31875 0 7 0H4.2ZM21 0C18.6813 0 16.8 1.79167 16.8 4V28C16.8 30.2083 18.6813 32 21 32H23.8C26.1187 32 28 30.2083 28 28V4C28 1.79167 26.1187 0 23.8 0H21Z" />
+                            </svg>
+                        </button>
                         <!-- next button -->
-                        <button class="player-next" id="player-next">
+                        <button class="player-next-button">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +143,7 @@
                         </button>
                     </div>
                     <!-- loop button -->
-                    <button class="player-buttons" id="player-loop">
+                    <button class="player-loop-button">
                         <svg
                             class="fill-zinc-500 hover:fill-black"
                             xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +155,6 @@
                         </svg>
                     </button>
                 </div>
-                <div class="" id="music-player"></div>
             </div>
             <!-- 2. queue -->
             <div

@@ -21,9 +21,15 @@ $(document).ready(function () {
         record.velocity("stop", true);
     }
 
-    $(".player-play").click(function () {
+    $(".player-play-button").click(function () {
         playing();
-        // $(this).addClass("paused");
-        // $(".player-buttons #player-play").addClass("paused");
+        $(this).css("display", "none");
+        $(".player-pause-button").css("display", "block");
+    });
+
+    $(".player-pause-button").click(function () {
+        paused();
+        $(this).css("display", "none");
+        $(".player-play-button").css("display", "block");
     });
 });
