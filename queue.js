@@ -43,9 +43,11 @@ function backToHome () {
 
   function loadSongsInQueue()
   {
+      //console.log(songsInQueue)
       var container = document.getElementById('songBoxes');
+      
       container.innerHTML = "";
-  
+      
       songsInQueue.forEach(song => {
           var songBox = document.createElement("div");
           songBox.className = "flex items-center mb-5 h-20 border-double border-2 hover:cursor-grab hover:border-dashed select-none";
@@ -77,7 +79,24 @@ function backToHome () {
           container.appendChild(songBox)
       });
 
-      
+      new Sortable(container, {
+        animation: 200,
+        sort: true,
+
+        //Update index when dropped
+        onEnd: function (evt) {
+            var newIndex = evt.newIndex;
+            
+            // Remove the item from the old position
+            var removedSong = songsInQueue.splice(evt.oldIndex, 1)[0];
+        
+            // Insert the item at the new position
+            songsInQueue.splice(newIndex, 0, removedSong);
+
+            //console.log(songsInQueue)
+        },
+      });
+
   }
 
   function clickedClear()
@@ -92,5 +111,4 @@ function backToHome () {
       loadSongsInQueue();
   }
   
-
   loadSongsInQueue();
