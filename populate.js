@@ -674,7 +674,7 @@ function loadPreviews(areaID) {
         const songBox = document.createElement("div");
         songBox.id = "preview-song-" + i;
         songBox.className =
-            "h-fit p-2 xl:p-4 rounded hover:cursor-pointer hover:bg-green-100";
+            "h-fit p-2 rounded-lg hover:cursor-pointer hover:bg-green-100";
 
         if (i > 2) {
             songBox.className += " hidden lg:block";
