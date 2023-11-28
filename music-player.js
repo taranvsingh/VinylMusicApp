@@ -1,15 +1,37 @@
 $(document).ready(function () {
     var record = $("#player-record");
+    var play = $(".player-play-button");
+    var pause = $(".player-pause-button");
+    var progress = document.getElementById("player-progress-bar");
+    var isPaused = true;
+    var time = 0;
+
+    reset();
+
+    window.setInterval(function () {
+        if (!isPaused) {
+            time++;
+            progress.value = time;
+            if (time > progress.max) {
+                changeSong();
+                playing();
+            }
+        }
+    }, 1000);
+
+    progress.addEventListener("change", function () {
+        time = progress.value;
+    });
 
     function playing() {
         //var trackduration
-
+        isPaused = false;
         record.velocity(
             {
                 rotateZ: "+=360deg",
             },
             {
-                duration: 3640,
+                duration: 30000,
                 easing: "linear",
                 loop: true,
                 delay: 0,
@@ -19,30 +41,36 @@ $(document).ready(function () {
 
     function paused() {
         record.velocity("stop", true);
+        isPaused = true;
     }
 
     function reset() {
+        progress.value = 0;
+        time = 0;
         paused();
         record.velocity({ rotateZ: "0deg" });
-        $(".player-pause-button").css("display", "block");
-        $(".player-play-button").css("display", "none");
     }
 
-    $(".player-play-button").click(function () {
+    function changeSong() {
+        reset();
+        pause.css("display", "block");
+        play.css("display", "none");
+    }
+
+    play.click(function () {
         playing();
+        pause.css("display", "block");
         $(this).css("display", "none");
-        $(".player-pause-button").css("display", "block");
     });
 
-    $(".player-pause-button").click(function () {
-        reset();
+    pause.click(function () {
         paused();
         $(this).css("display", "none");
-        $(".player-play-button").css("display", "block");
+        play.css("display", "block");
     });
 
-    $(".reset-record").click(function () {
-        reset();
+    $(".change-song").click(function () {
+        changeSong();
         playing();
     });
 });

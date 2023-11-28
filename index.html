@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="style.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/utils/Draggable.min.js"></script>
         <script src="music-player.js"></script>
         <title>VinylMusic</title>
     </head>
@@ -64,7 +63,10 @@
                 <input
                     type="range"
                     id="player-progress-bar"
-                    class="row-span-1 w-full max-w-xs hover:cursor-pointer" />
+                    class="row-span-1 w-full max-w-xs hover:cursor-pointer"
+                    value="0"
+                    min="0"
+                    max="180" />
                 <!-- buttons -->
                 <div
                     class="row-span-1 mb-1 flex items-center max-w-xs sm:gap-2 md:gap-8 lg:gap-16">
@@ -83,7 +85,7 @@
                     <!-- player controls -->
                     <div class="flex items-center space-x-5">
                         <!-- previous button -->
-                        <button class="player-previous-button reset-record">
+                        <button class="player-previous-button change-song">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
                                 width="30"
@@ -116,7 +118,7 @@
                             </svg>
                         </button>
                         <!-- next button -->
-                        <button class="player-next-button reset-record">
+                        <button class="player-next-button change-song">
                             <svg
                                 class="fill-zinc-500 hover:fill-black"
                                 xmlns="http://www.w3.org/2000/svg"
