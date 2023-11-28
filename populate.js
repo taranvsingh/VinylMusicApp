@@ -614,7 +614,7 @@ function loadDiscography(discography) {
 
 function loadPreviews() {
     console.log("loading preview");
-    const PREVIEW_SIZE = 5;
+    const PREVIEW_SIZE = 6;
     // populate the liked song preview
     const likedSongs = document.getElementById("liked-songs-area");
 
@@ -624,11 +624,12 @@ function loadPreviews() {
 
     // container for preview and more button
     const container = document.createElement("div");
-    container.className = "flex flex-row justify-start items-center";
+    container.className = "w-full flex flex-row justify-start items-center";
 
     const preview = document.createElement("div");
     preview.id = "liked-songs-preview";
-    preview.className = "flex flex-row items-start gap-x-4 mr-4";
+    preview.className =
+        "w-full grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 mr-4";
 
     const more = document.createElement("button");
     more.type = "button";
@@ -642,26 +643,31 @@ function loadPreviews() {
 
         const songBox = document.createElement("div");
         songBox.id = "preview-song-" + i;
-        songBox.className = "w-full p-2 rounded hover:cursor-pointer hover:bg-green-100";
+        songBox.className = "p-2 hover:cursor-pointer hover:bg-green-100 border-2";
+
+        if (i > 4) {
+            songBox.className += " hidden xl:block";
+        } else if (i > 1) {
+            songBox.className += " hidden lg:block";
+        }
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
-        songCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+        songCover.className = "w-full mb-4 rounded";
 
         //song info
         const songLabel = document.createElement("div");
-        songLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+        songLabel.className = "border-2 whitespace-nowrap";
 
         //title
         const title = document.createElement("p");
-        title.className =
-            "libraryItem-labelTitle text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         title.textContent = song.title;
 
         //artist
         const artist = document.createElement("p");
         artist.className =
-            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
         artist.textContent = song.artist;
 
         songBox.appendChild(songCover);
