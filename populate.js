@@ -612,52 +612,84 @@ function loadDiscography(discography) {
     });
 }
 
-function loadPreviews() {
-    console.log("loading preview");
-    const PREVIEW_SIZE = 6;
+function loadPreviews(areaID) {
+    const PREVIEW_SIZE = 5;
     // populate the liked song preview
-    const likedSongs = document.getElementById("liked-songs-area");
+    const area = document.getElementById("liked-songs-area");
+    // const area = document.getElementById(areaID + '-area');
 
     const header = document.createElement("h3");
     header.className = "text-3xl font-bold mb-4";
+    switch (areaID) {
+        case "liked-songs":
+            header.textContent = "Liked Songs";
+            break;
+        case "playlists":
+            header.textContent = "Playlists";
+            break;
+        case "albums":
+            header.textContent = "Albums";
+            break;
+        case "artists":
+            header.textContent = "Artists";
+            break;
+    }
     header.textContent = "Liked Songs";
 
     // container for preview and more button
     const container = document.createElement("div");
-    container.className = "w-full flex flex-row justify-start items-center";
+    container.className = "w-fit flex flex-row justify-start items-center";
 
     const preview = document.createElement("div");
-    preview.id = "liked-songs-preview";
-    preview.className =
-        "w-full grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 mr-4";
+
+    preview.id = areaID + "-preview";
+    preview.className = "flex flex-row justify-start gap-x-4 mr-4";
 
     const more = document.createElement("button");
     more.type = "button";
     more.className =
         "px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300";
-    more.addEventListener("click", changeContent.bind("liked-songs", "library"));
+    more.addEventListener("click", changeContent.bind(areaID, "library"));
     more.textContent = "More";
 
-    for (let i = 0; i < Math.min(PREVIEW_SIZE, songList.length); i++) {
-        let song = songList[i]; // song jsons
+    list = undefined;
+    switch (areaID) {
+        case "liked-songs":
+            list = songList;
+            break;
+        case "playlists":
+            list = playlistList;
+            break;
+        case "albums":
+            list = albumList;
+            break;
+        case "artists":
+            list = artistList;
+            break;
+    }
+
+    for (let i = 0; i < Math.min(PREVIEW_SIZE, list.length); i++) {
+        let song = list[i]; // song json
 
         const songBox = document.createElement("div");
         songBox.id = "preview-song-" + i;
-        songBox.className = "p-2 hover:cursor-pointer hover:bg-green-100 border-2";
+        songBox.className =
+            "h-fit p-2 xl:p-4 rounded hover:cursor-pointer hover:bg-green-100";
 
-        if (i > 4) {
-            songBox.className += " hidden xl:block";
-        } else if (i > 1) {
+        if (i > 2) {
             songBox.className += " hidden lg:block";
+        } else if (i > 1) {
+            songBox.className += " hidden md:block";
         }
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
-        songCover.className = "w-full mb-4 rounded";
+        songCover.className = "preview-cover w-full mb-4 rounded";
+        songCover.style = "max-width: 12rem;";
 
         //song info
         const songLabel = document.createElement("div");
-        songLabel.className = "border-2 whitespace-nowrap";
+        songLabel.className = "whitespace-nowrap";
 
         //title
         const title = document.createElement("p");
@@ -676,14 +708,19 @@ function loadPreviews() {
         songLabel.appendChild(artist);
         songBox.appendChild(songLabel);
 
+        // placeholder event listener for playing the song
+        songBox.addEventListener("click", () => {
+            console.log(song.title + " by " + song.artist);
+        });
+
         preview.appendChild(songBox);
     }
 
     container.appendChild(preview);
     container.appendChild(more);
 
-    likedSongs.appendChild(header);
-    likedSongs.appendChild(container);
+    area.appendChild(header);
+    area.appendChild(container);
 }
 
-loadPreviews();
+loadPreviews("liked-songs");
