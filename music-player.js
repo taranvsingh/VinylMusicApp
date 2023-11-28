@@ -8,6 +8,7 @@ $(document).ready(function () {
 
     reset();
 
+    //change progress bar
     window.setInterval(function () {
         if (!isPaused) {
             time++;
@@ -19,10 +20,12 @@ $(document).ready(function () {
         }
     }, 1000);
 
+    //set time to current progress bar value
     progress.addEventListener("change", function () {
         time = progress.value;
     });
 
+    //to spin the record
     function playing() {
         //var trackduration
         isPaused = false;
@@ -39,11 +42,13 @@ $(document).ready(function () {
         );
     }
 
+    //pause record
     function paused() {
         record.velocity("stop", true);
         isPaused = true;
     }
 
+    //reset all values, record and progress bar
     function reset() {
         progress.value = 0;
         time = 0;
@@ -51,24 +56,28 @@ $(document).ready(function () {
         record.velocity({ rotateZ: "0deg" });
     }
 
+    //reset record and display pause button
     function changeSong() {
         reset();
         pause.css("display", "block");
         play.css("display", "none");
     }
 
+    //play button
     play.click(function () {
         playing();
         pause.css("display", "block");
         $(this).css("display", "none");
     });
 
+    //pause button
     pause.click(function () {
         paused();
         $(this).css("display", "none");
         play.css("display", "block");
     });
 
+    //prev and next buttons
     $(".change-song").click(function () {
         changeSong();
         playing();
