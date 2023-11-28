@@ -9,7 +9,8 @@
         <link rel="stylesheet" href="style.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
-        <script type="text/javascript" src="music-player.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/utils/Draggable.min.js"></script>
+        <script src="music-player.js"></script>
         <title>VinylMusic</title>
     </head>
     <body class="bg-gray-300">
@@ -46,20 +47,16 @@
                             alt="Song Cover Disk"
                             class="rounded-full" />
                     </div>
-                    <!-- volume bar -->
-
-                    <div class="flex flex-col w-1">
-                        <input
-                            type="range"
-                            id="player-volume-bar"
-                            class="h-full" />
-                        <div class="absolute -my-6 -mx-1">
-                            <svg height="1em" viewBox="0 0 448 512">
-                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                <path
-                                    d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM412.6 181.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5z" />
-                            </svg>
-                        </div>
+                    <!-- volume button -->
+                    <div class="">
+                        <svg
+                            height="1.5em"
+                            viewBox="0 0 448 512"
+                            class="fill-zinc-500 hover:fill-black hover:cursor-not-allowed">
+                            <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path
+                                d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM412.6 181.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5z" />
+                        </svg>
                     </div>
                 </div>
 
@@ -67,18 +64,7 @@
                 <input
                     type="range"
                     id="player-progress-bar"
-                    class="row-span-1 w-full max-w-xs" />
-                <!-- <div
-                    id="player-progress-bar"
-                    class=" bg-zinc-300 rounded-full">
-                     <div
-                        id="player-progress-bar-slider"
-                        class="h-2 bg-black rounded-full w-1/2">
-                        <div
-                            id="player-progress-bar-slider-circle"
-                            class="bg-zinc-500 hover:bg-black h-4 w-4 mb-4 rounded-full float-right -m-1"></div>
-                    </div>
-                </div> -->
+                    class="row-span-1 w-full max-w-xs hover:cursor-pointer" />
                 <!-- buttons -->
                 <div
                     class="row-span-1 mb-1 flex items-center max-w-xs sm:gap-2 md:gap-8 lg:gap-16">
