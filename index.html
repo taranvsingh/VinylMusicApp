@@ -521,7 +521,7 @@
                 <!-- 4.a Library Interface -->
                 <div id="library-subsection" class="active">
                     <div id="liked-songs-area" class="mb-8">
-                        <div class="flex flex-row items-baseline gap-6">
+                        <!-- <div class="flex flex-row items-baseline gap-6">
                             <h3 class="text-3xl font-bold mb-4">Liked Songs</h3>
                         </div>
                         <div class="w-fit flex flex-row justify-start items-center">
@@ -625,7 +625,7 @@
                                 onclick="changeContent('liked-songs', 'library')">
                                 More
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div id="playlist-area" class="mb-8">
@@ -948,104 +948,24 @@
                     class="hidden grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-x-4 gap-y-2 lg:gap-y-8 py-2"></div>
 
                 <!-- 4.a.ii playlists Page -->
-                <div id="playlists-subsection" class="hidden">
-                    <div
-                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
-                        <div
-                            class="library-libraryItem libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100"
-                            onclick="changeContent('playlist', 'playlists')">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Album cover"
-                                class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div
-                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
-                                <p
-                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                    Title
-                                </p>
-                                <p
-                                    class="libraryItem-labelArtist text-base md:text-base lg:text-lg text-ellipsis overflow-hidden">
-                                    Creator
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div
+                    id="playlists-subsection"
+                    class="hidden grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10"></div>
 
                 <!-- 4.a.iii albums Page -->
-                <div id="albums-subsection" class="hidden">
-                    <div
-                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
-                        <div
-                            class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100"
-                            onclick="changeContent('album', 'albums')">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Album cover"
-                                class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div
-                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
-                                <p
-                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                    Title
-                                </p>
-                                <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
-                                    Artist
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div
+                    id="albums-subsection"
+                    class="hidden grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10"></div>
 
                 <!-- 4.a.iv artists page -->
-                <div id="artists-subsection" class="hidden">
-                    <div
-                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
-                        <div
-                            class="library-libraryItem libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100"
-                            onclick="changeContent('artist', 'artists')">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Artist profile picture"
-                                class="library-libraryItem-cover w-28 mb-4 rounded-full" />
-                            <div
-                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
-                                <p
-                                    class="libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden">
-                                    Artist Name
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div
+                    id="artists-subsection"
+                    class="hidden grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10"></div>
 
                 <!-- 4.a.v artist discography -->
-                <div id="discography-subsection" class="hidden">
-                    <div
-                        class="library-grid grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10">
-                        <div
-                            class="library-libraryItem libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100"
-                            onclick="changeContent('album', 'artist')">
-                            <img
-                                src="/assets/song-cover.jpg"
-                                alt="Album cover"
-                                class="library-libraryItem-cover w-28 mb-4 rounded" />
-                            <div
-                                class="library-libraryItem-label w-11/12 whitespace-nowrap">
-                                <p
-                                    class="libraryItem-labelTitle text-base md:text-lg lg:text-xl !leading-4">
-                                    Title
-                                </p>
-                                <p
-                                    class="libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden">
-                                    Artist
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div
+                    id="discography-subsection"
+                    class="hidden grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-10"></div>
 
                 <!-- 4.b Friends Interface-->
                 <div id="friends-subsection" class="hidden">

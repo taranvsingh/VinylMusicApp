@@ -305,3 +305,245 @@ function loadSongs(list) {
         i++;
     });
 }
+
+function loadPlaylists() {
+    const playlistGrid = document.getElementById("playlists-subsection");
+
+    i = 0;
+    playlistList.forEach((playlist) => {
+        const playlistBox = document.createElement("div");
+        playlistBox.id = "playlist-" + i;
+        playlistBox.className =
+            "libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100";
+        playlistBox.addEventListener(
+            "click",
+            changeContent.bind("playlist", "playlists", playlist.songList)
+        );
+
+        // playlist cover
+        const playlistCover = document.createElement("img");
+        playlistCover.src = playlist.image;
+        playlistCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+
+        // playlist info
+        const playlistLabel = document.createElement("div");
+        playlistLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+
+        //title
+        const playlistTitle = document.createElement("p");
+        playlistTitle.className =
+            "libraryItem-labelTitle text-base md:text-lg lg:text-xl";
+        playlistTitle.textContent = playlist.title;
+
+        //artist
+        const playlistCreator = document.createElement("p");
+        playlistCreator.className =
+            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+        playlistCreator.textContent = playlist.creator;
+
+        playlistBox.appendChild(playlistCover);
+
+        playlistLabel.appendChild(playlistTitle);
+        playlistLabel.appendChild(playlistCreator);
+
+        playlistBox.appendChild(playlistLabel);
+        playlistGrid.appendChild(playlistBox);
+    });
+}
+
+function loadAlbums() {
+    const albumGrid = document.getElementById("albums-subsection");
+
+    i = 0;
+    albumList.forEach((album) => {
+        const albumBox = document.createElement("div");
+        albumBox.id = "album-" + i;
+        albumBox.className =
+            "libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100";
+        albumBox.addEventListener(
+            "click",
+            changeContent.bind("album", "albums", album.songList)
+        );
+
+        // playlist cover
+        const albumCover = document.createElement("img");
+        albumCover.src = album.image;
+        albumCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+
+        // playlist info
+        const albumLabel = document.createElement("div");
+        albumLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+
+        //title
+        const albumTitle = document.createElement("p");
+        albumTitle.className = "libraryItem-labelTitle text-base md:text-lg lg:text-xl";
+        albumTitle.textContent = album.title;
+
+        //artist
+        const albumArtist = document.createElement("p");
+        albumArtist.className =
+            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+        albumArtist.textContent = album.artist;
+
+        albumBox.appendChild(albumCover);
+
+        albumLabel.appendChild(albumTitle);
+        albumLabel.appendChild(albumArtist);
+
+        albumBox.appendChild(albumLabel);
+        albumGrid.appendChild(albumBox);
+    });
+}
+
+function loadArtists() {
+    const artistGrid = document.getElementById("artists-subsection");
+
+    i = 0;
+    artistList.forEach((artist) => {
+        const artistBox = document.createElement("div");
+        artistBox.id = "artist-" + i;
+        artistBox.className =
+            "libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100";
+        artistBox.addEventListener(
+            "click",
+            changeContent.bind("artist", "artists", artist.discography)
+        );
+
+        // playlist cover
+        const artistCover = document.createElement("img");
+        artistCover.src = album.image;
+        artistCover.className = "library-libraryItem-cover w-28 mb-4 rounded-full";
+
+        // playlist info
+        const artistLabel = document.createElement("div");
+        artistLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+
+        //artist
+        const name = document.createElement("p");
+        name.className =
+            "libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        name.textContent = artist.name;
+
+        artistBox.appendChild(artistCover);
+
+        artistLabel.appendChild(artistTitle);
+        artistLabel.appendChild(name);
+
+        artistBox.appendChild(artistLabel);
+        artistGrid.appendChild(artistBox);
+    });
+}
+
+function loadDiscography(discography) {
+    const discGrid = document.getElementById("albums-subsection");
+
+    i = 0;
+    discography.forEach((album) => {
+        const albumBox = document.createElement("div");
+        albumBox.id = "disco-" + i;
+        albumBox.className =
+            "libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100";
+        albumBox.addEventListener(
+            "click",
+            changeContent.bind("album", "artist", album.songList)
+        );
+
+        // playlist cover
+        const albumCover = document.createElement("img");
+        albumCover.src = album.image;
+        albumCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+
+        // playlist info
+        const albumLabel = document.createElement("div");
+        albumLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+
+        //title
+        const albumTitle = document.createElement("p");
+        albumTitle.className = "libraryItem-labelTitle text-base md:text-lg lg:text-xl";
+        albumTitle.textContent = album.title;
+
+        //artist
+        const albumArtist = document.createElement("p");
+        albumArtist.className =
+            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+        albumArtist.textContent = album.artist;
+
+        albumBox.appendChild(albumCover);
+
+        albumLabel.appendChild(albumTitle);
+        albumLabel.appendChild(albumArtist);
+
+        albumBox.appendChild(albumLabel);
+        discGrid.appendChild(albumBox);
+    });
+}
+
+function loadPreviews() {
+    console.log("loading preview");
+    const PREVIEW_SIZE = 5;
+    // populate the liked song preview
+    const likedSongs = document.getElementById("liked-songs-area");
+
+    const header = document.createElement("h3");
+    header.className = "text-3xl font-bold mb-4";
+    header.textContent = "Liked Songs";
+
+    // container for preview and more button
+    const container = document.createElement("div");
+    container.className = "w-fit flex flex-row justify-start items-center";
+
+    const preview = document.createElement("div");
+    preview.id = "liked-songs-preview";
+    preview.className = "flex flex-row items-start gap-x-4 mr-4";
+
+    const more = document.createElement("button");
+    more.type = "button";
+    more.className =
+        "px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300";
+    more.addEventListener("click", changeContent.bind("liked-songs", "library"));
+    more.textContent = "More";
+
+    for (let i = 0; i < Math.min(PREVIEW_SIZE, songList.length); i++) {
+        let song = songList[i]; // song jsons
+
+        const songBox = document.createElement("div");
+        songBox.id = "preview-song-" + i;
+        songBox.className = "w-full p-2 rounded hover:cursor-pointer hover:bg-green-100";
+
+        const songCover = document.createElement("img");
+        songCover.src = song.image;
+        songCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+
+        //song info
+        const songLabel = document.createElement("div");
+        songLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+
+        //title
+        const title = document.createElement("p");
+        title.className =
+            "libraryItem-labelTitle text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.textContent = song.title;
+
+        //artist
+        const artist = document.createElement("p");
+        artist.className =
+            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+        artist.textContent = song.artist;
+
+        songBox.appendChild(songCover);
+
+        songLabel.appendChild(title);
+        songLabel.appendChild(artist);
+        songBox.appendChild(songLabel);
+
+        preview.appendChild(songBox);
+    }
+
+    container.appendChild(preview);
+    container.appendChild(more);
+
+    likedSongs.appendChild(header);
+    likedSongs.appendChild(container);
+}
+
+loadPreviews();
