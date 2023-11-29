@@ -30,7 +30,7 @@ var songList = [
         image: "./assets/albums/ascension.jpg",
     },
     {
-        title: "Starshps",
+        title: "Starships",
         artist: "Nicki Minaj",
         image: "./assets/songs/pink-friday.png",
     },
@@ -55,7 +55,7 @@ var playlistList = [
             {
                 title: "The Christmas Waltz",
                 artist: "Laufey",
-                image: "./assets/albums/cypress.jpg",
+                image: "./assets/albums/a-very-laufey-holiday.jpg",
             },
         ],
     },
@@ -102,17 +102,17 @@ var albumList = [
             {
                 title: "Christmas Dreaming",
                 artist: "Laufey",
-                image: "./assets/albums/cypress.jpg",
+                image: "./assets/albums/a-very-laufey-holiday.jpg",
             },
             {
                 title: "The Christmas Waltz",
                 artist: "Laufey",
-                image: "./assets/albums/cypress.jpg",
+                image: "./assets/albums/a-very-laufey-holiday.jpg",
             },
             {
                 title: "Love to Keep Me Warm",
                 artist: "Laufey, dodie",
-                image: "./assets/albums/cypress.jpg",
+                image: "./assets/albums/a-very-laufey-holiday.jpg",
             },
         ],
     },
@@ -319,9 +319,7 @@ function changeContent(to, from, content = null) {
         historyStack.push(from);
     }
 
-    if (content != null) {
-        console.log(content);
-    }
+    console.log(to, from, content);
 
     // Show the corresponding subsection based on the selected to
     switch (to) {
@@ -348,36 +346,44 @@ function changeContent(to, from, content = null) {
             break;
         case "liked-songs":
             // display the liked songs page
+            loadSongs(content);
             songGrid.classList.remove("hidden");
             likedSongsHeader.classList.remove("hidden");
             break;
         case "playlists":
             // display the playlists page
+            loadPlaylists();
             playlistsSubsection.classList.remove("hidden");
             playlistsHeader.classList.remove("hidden");
             break;
         case "playlist":
             // display the page of a single playlist
+            // console.log(content);
+            loadSongs(content);
             songGrid.classList.remove("hidden");
             playlistHeader.classList.remove("hidden");
             break;
         case "albums":
             // display the albums page
+            loadAlbums();
             albumsSubsection.classList.remove("hidden");
             albumsHeader.classList.remove("hidden");
             break;
         case "album":
             // display the page of a single album
+            loadSongs(content);
             songGrid.classList.remove("hidden");
             albumHeader.classList.remove("hidden");
             break;
         case "artists":
             // display the artists page
+            loadArtists();
             artistsSubsection.classList.remove("hidden");
             artistsHeader.classList.remove("hidden");
             break;
         case "artist":
             // display the page of a single artist
+            loadDiscography(content);
             discoSubsection.classList.remove("hidden");
             artistHeader.classList.remove("hidden");
             break;
@@ -395,17 +401,18 @@ libraryButton.classList.add("bg-white", "text-black");
 
 function loadSongs(list) {
     const songGrid = document.getElementById("song-grid");
+    songGrid.innerHTML = "";
 
     i = 0;
     list.forEach((song) => {
         const songBox = document.createElement("div");
         songBox.id = "grid-song-" + i;
         songBox.className =
-            "grid-song relative w-full p-2 rounded hover:cursor-pointer hover:bg-green-100";
+            "grid-song relative w-full p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
-        songCover.className = "hidden md:block w-full max-w-xs mb-4 rounded";
+        songCover.className = "w-full mb-4 rounded-md";
 
         //song info
         const songLabel = document.createElement("div");
@@ -442,37 +449,38 @@ function loadSongs(list) {
 
 function loadPlaylists() {
     const playlistGrid = document.getElementById("playlists-subsection");
+    playlistGrid.innerHTML = "";
 
     i = 0;
     playlistList.forEach((playlist) => {
         const playlistBox = document.createElement("div");
         playlistBox.id = "playlist-" + i;
         playlistBox.className =
-            "libraryItem-playlist p-2 rounded hover:cursor-pointer hover:bg-green-100";
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
         playlistBox.addEventListener(
             "click",
-            changeContent.bind("playlist", "playlists", playlist.songList)
+            changeContent.bind(this, "playlist", "playlists", playlist.songList)
         );
 
         // playlist cover
         const playlistCover = document.createElement("img");
         playlistCover.src = playlist.image;
-        playlistCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+        playlistCover.className = "hidden md:block w-full mb-4 rounded-md";
 
         // playlist info
         const playlistLabel = document.createElement("div");
-        playlistLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+        playlistLabel.className = "whitespace-nowrap overflow-hidden";
 
         //title
         const playlistTitle = document.createElement("p");
         playlistTitle.className =
-            "libraryItem-labelTitle text-base md:text-lg lg:text-xl";
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         playlistTitle.textContent = playlist.title;
 
         //artist
         const playlistCreator = document.createElement("p");
         playlistCreator.className =
-            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
         playlistCreator.textContent = playlist.creator;
 
         playlistBox.appendChild(playlistCover);
@@ -482,41 +490,44 @@ function loadPlaylists() {
 
         playlistBox.appendChild(playlistLabel);
         playlistGrid.appendChild(playlistBox);
+        i++;
     });
 }
 
 function loadAlbums() {
     const albumGrid = document.getElementById("albums-subsection");
+    albumGrid.innerHTML = "";
 
     i = 0;
     albumList.forEach((album) => {
         const albumBox = document.createElement("div");
         albumBox.id = "album-" + i;
         albumBox.className =
-            "libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100";
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
         albumBox.addEventListener(
             "click",
-            changeContent.bind("album", "albums", album.songList)
+            changeContent.bind(this, "album", "albums", album.songList)
         );
 
         // playlist cover
         const albumCover = document.createElement("img");
         albumCover.src = album.image;
-        albumCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+        albumCover.className = "hidden md:block w-full mb-4 rounded-md";
 
         // playlist info
         const albumLabel = document.createElement("div");
-        albumLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+        albumLabel.className = "whitespace-nowrap overflow-hidden";
 
         //title
         const albumTitle = document.createElement("p");
-        albumTitle.className = "libraryItem-labelTitle text-base md:text-lg lg:text-xl";
+        albumTitle.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         albumTitle.textContent = album.title;
 
         //artist
         const albumArtist = document.createElement("p");
         albumArtist.className =
-            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
         albumArtist.textContent = album.artist;
 
         albumBox.appendChild(albumCover);
@@ -526,41 +537,41 @@ function loadAlbums() {
 
         albumBox.appendChild(albumLabel);
         albumGrid.appendChild(albumBox);
+        i++;
     });
 }
 
 function loadArtists() {
     const artistGrid = document.getElementById("artists-subsection");
+    artistGrid.innerHTML = "";
 
     i = 0;
     artistList.forEach((artist) => {
         const artistBox = document.createElement("div");
         artistBox.id = "artist-" + i;
         artistBox.className =
-            "libraryItem-artist p-2 rounded hover:cursor-pointer hover:bg-green-100";
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
         artistBox.addEventListener(
             "click",
-            changeContent.bind("artist", "artists", artist.discography)
+            changeContent.bind(this, "artist", "artists", artist.discography)
         );
 
         // playlist cover
         const artistCover = document.createElement("img");
-        artistCover.src = album.image;
-        artistCover.className = "library-libraryItem-cover w-28 mb-4 rounded-full";
+        artistCover.src = artist.image;
+        artistCover.className = "hidden md:block w-full mb-4 rounded-full";
 
         // playlist info
         const artistLabel = document.createElement("div");
-        artistLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+        artistLabel.className = "whitespace-nowrap overflow-hidden";
 
         //artist
         const name = document.createElement("p");
-        name.className =
-            "libraryItem-labelArtist text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        name.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         name.textContent = artist.name;
 
         artistBox.appendChild(artistCover);
 
-        artistLabel.appendChild(artistTitle);
         artistLabel.appendChild(name);
 
         artistBox.appendChild(artistLabel);
@@ -569,37 +580,38 @@ function loadArtists() {
 }
 
 function loadDiscography(discography) {
-    const discGrid = document.getElementById("albums-subsection");
+    const discGrid = document.getElementById("discography-subsection");
 
     i = 0;
     discography.forEach((album) => {
         const albumBox = document.createElement("div");
         albumBox.id = "disco-" + i;
         albumBox.className =
-            "libraryItem-album p-2 rounded hover:cursor-pointer hover:bg-green-100";
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
         albumBox.addEventListener(
             "click",
-            changeContent.bind("album", "artist", album.songList)
+            changeContent.bind(this, "album", "artist", album.songList)
         );
 
         // playlist cover
         const albumCover = document.createElement("img");
         albumCover.src = album.image;
-        albumCover.className = "library-libraryItem-cover w-28 mb-4 rounded";
+        albumCover.className = "hidden md:block w-full mb-4 rounded-md";
 
         // playlist info
         const albumLabel = document.createElement("div");
-        albumLabel.className = "library-libraryItem-label w-11/12 whitespace-nowrap";
+        albumLabel.className = "whitespace-nowrap overflow-hidden";
 
         //title
         const albumTitle = document.createElement("p");
-        albumTitle.className = "libraryItem-labelTitle text-base md:text-lg lg:text-xl";
+        albumTitle.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         albumTitle.textContent = album.title;
 
         //artist
         const albumArtist = document.createElement("p");
         albumArtist.className =
-            "libraryItem-labelArtist text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
         albumArtist.textContent = album.artist;
 
         albumBox.appendChild(albumCover);
@@ -609,48 +621,56 @@ function loadDiscography(discography) {
 
         albumBox.appendChild(albumLabel);
         discGrid.appendChild(albumBox);
+        i++;
     });
 }
 
 function loadPreviews(areaID) {
-    const PREVIEW_SIZE = 5;
+    const PREVIEW_SIZE = 8;
     // populate the liked song preview
-    const area = document.getElementById("liked-songs-area");
-    // const area = document.getElementById(areaID + '-area');
+    const area = document.getElementById(areaID + "-area");
 
-    const header = document.createElement("h3");
-    header.className = "text-3xl font-bold mb-4";
+    const header = document.createElement("div");
+    header.className = "flex flex-row justify-start items-center gap-x-4";
+
+    const areaName = document.createElement("h3");
+    areaName.className = "text-3xl font-bold mb-4";
     switch (areaID) {
         case "liked-songs":
-            header.textContent = "Liked Songs";
+            areaName.textContent = "Liked Songs";
             break;
         case "playlists":
-            header.textContent = "Playlists";
+            areaName.textContent = "Playlists";
             break;
         case "albums":
-            header.textContent = "Albums";
+            areaName.textContent = "Albums";
             break;
         case "artists":
-            header.textContent = "Artists";
+            areaName.textContent = "Artists";
             break;
     }
-    header.textContent = "Liked Songs";
 
     // container for preview and more button
     const container = document.createElement("div");
-    container.className = "w-fit flex flex-row justify-start items-center";
+    // container.className = "w-fit flex flex-row justify-start items-center";
 
     const preview = document.createElement("div");
 
     preview.id = areaID + "-preview";
     preview.className = "flex flex-row justify-start gap-x-4 mr-4";
+    preview.className =
+        "grid grid-rows-1 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1440px]:grid-cols-5 min-[1640px]:grid-cols-6 min-[1800px]:grid-cols-7 min-[2000px]:grid-cols-8 gap-x-4";
+    // "grid grid-rows-1 grid-cols-2 min-[880px]:grid-cols-3 lg:grid-cols-4 min-[1440px]:grid-cols-6 min-[1560px]:grid-cols-8 gap-x-4";
 
     const more = document.createElement("button");
     more.type = "button";
     more.className =
-        "px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300";
-    more.addEventListener("click", changeContent.bind(areaID, "library"));
-    more.textContent = "More";
+        "w-16 h-fit px-2 text-base rounded-full bg-zinc-200 hover:bg-green-300";
+    more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
+    more.textContent = "...";
+
+    header.appendChild(areaName);
+    header.appendChild(more);
 
     list = undefined;
     switch (areaID) {
@@ -669,58 +689,110 @@ function loadPreviews(areaID) {
     }
 
     for (let i = 0; i < Math.min(PREVIEW_SIZE, list.length); i++) {
-        let song = list[i]; // song json
+        let item = list[i]; // song json
 
-        const songBox = document.createElement("div");
-        songBox.id = "preview-song-" + i;
-        songBox.className =
-            "h-fit p-2 rounded-lg hover:cursor-pointer hover:bg-green-100";
+        const box = document.createElement("div");
+        box.id = "preview-song-" + i;
+        box.className =
+            "h-fit p-4 rounded-lg hover:cursor-pointer hover:bg-green-100 border-2";
 
-        if (i > 2) {
-            songBox.className += " hidden lg:block";
-        } else if (i > 1) {
-            songBox.className += " hidden md:block";
+        switch (i) {
+            case 7:
+                box.className += " hidden min-[2000px]:block";
+                break;
+            case 6:
+                box.className += " hidden min-[1800px]:block";
+                break;
+            case 5:
+                box.className += " hidden min-[1640px]:block";
+                break;
+            case 4:
+                box.className += " hidden min-[1440px]:block";
+                break;
+            case 3:
+                box.className += " hidden xl:block";
+                break;
+            case 2:
+                box.className += " hidden lg:block";
+                break;
         }
 
-        const songCover = document.createElement("img");
-        songCover.src = song.image;
-        songCover.className = "preview-cover w-full mb-4 rounded";
-        songCover.style = "max-width: 12rem;";
+        const cover = document.createElement("img");
+        cover.src = item.image;
+        cover.className = "preview-cover w-full mb-4";
+
+        if (areaID == "artists") {
+            cover.className += " rounded-full";
+        } else {
+            cover.className += " rounded-md";
+        }
+
+        box.appendChild(cover);
 
         //song info
-        const songLabel = document.createElement("div");
-        songLabel.className = "whitespace-nowrap";
+        const label = document.createElement("div");
+        label.className = "whitespace-nowrap overflow-hidden";
 
         //title
         const title = document.createElement("p");
         title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
-        title.textContent = song.title;
 
-        //artist
-        const artist = document.createElement("p");
-        artist.className =
-            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
-        artist.textContent = song.artist;
+        if (areaID != "artists") {
+            title.textContent = item.title;
+            label.appendChild(title);
+            //artist
+            const artist = document.createElement("p");
+            artist.className =
+                "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            artist.textContent = item.artist;
+            label.appendChild(artist);
+        } else {
+            title.textContent = item.name;
+            label.appendChild(title);
+        }
 
-        songBox.appendChild(songCover);
+        box.appendChild(label);
 
-        songLabel.appendChild(title);
-        songLabel.appendChild(artist);
-        songBox.appendChild(songLabel);
+        switch (areaID) {
+            case "liked-songs":
+                // placeholder event listener for playing the song
+                box.addEventListener("click", () => {
+                    console.log(item.title + " by " + item.artist);
+                });
+                break;
+            case "playlists":
+                // open the playlist
+                box.addEventListener(
+                    "click",
+                    changeContent.bind(this, "playlist", "library", item.songList)
+                );
+                break;
+            case "albums":
+                // open the playlist
+                box.addEventListener(
+                    "click",
+                    changeContent.bind(this, "album", "library", item.songList)
+                );
+                break;
+            case "artists":
+                // open the playlist
+                box.addEventListener(
+                    "click",
+                    changeContent.bind(this, "artist", "library", item.discography)
+                );
+                break;
+        }
 
-        // placeholder event listener for playing the song
-        songBox.addEventListener("click", () => {
-            console.log(song.title + " by " + song.artist);
-        });
-
-        preview.appendChild(songBox);
+        preview.appendChild(box);
     }
 
     container.appendChild(preview);
-    container.appendChild(more);
 
     area.appendChild(header);
     area.appendChild(container);
 }
 
 loadPreviews("liked-songs");
+loadPreviews("playlists");
+loadPreviews("albums");
+loadPreviews("artists");
