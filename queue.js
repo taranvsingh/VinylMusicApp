@@ -52,7 +52,7 @@ function backToHome () {
        
         var songImg = document.createElement("img");
         songImg.src = song.image;
-        songImg.className = "w-16 h-16";
+        songImg.className = "w-16 h-16 rounded";
         
        //song info
        var songInfo = document.createElement('div');
