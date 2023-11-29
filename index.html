@@ -147,20 +147,27 @@
                 id="queue-container"
                 class="row-span-1 col-span-2 border-4 border-black rounded-md">
                 <!-- Home Page Queue -->
-                <ul id="small-queue" class="active">
-                    <li class="item1">item1</li>
-                    <li class="item2">item2</li>
-                    <li class="item3">item3</li>
-                </ul>
-
-                <button
-                    id="expandButton"
-                    class="active"
-                    onclick="expandQueue()">
-                    More
-                </button>
+                <div id="small-queue" class="active ml-4 mt-2">
+                    <header class="text-3xl font-bold">
+                        Queue
+                    </header>
+                    <div class="flex flex-row items-center">
+                        <div id="queueHomeSongBoxes" class="flex flex-row items-center mt-2"> 
+                        </div>
+                        <button
+                            id="expandButton"
+                            class="active"
+                            onclick="expandQueue()">
+                            More
+                        </button>
+                       
+                    </div>
+                    
+                </div>
+                
+                
                 <!-- Expanded Queue -->
-                <div id="expanded-queue" class="hidden">
+                <div id="expanded-queue" class="hidden overflow-y-scroll">
                     <!--Queue Header-->
                     <div class="ml-4">
                         <header
@@ -182,9 +189,9 @@
                     </div>
 
                     <!--Queued Songs-->
-                    <div class="flex flex-row">
+                    <div class="flex flex-row ">
                         <div
-                            id="queued-songs-container"
+                            id="queued-songs-container "
                             class="w-full ml-4 mr-4">
                             <!-- Queued Songs Container -->
                             <div>

@@ -1,7 +1,7 @@
 var songsInQueue = [
-    { title: 'Jingle Bell Rock',                        artist: 'Brenda Lee',    image: './assets/compact-disc-solid.svg' },
-    { title: 'Let It Snow! Let it Snow! Let It Snow!', artist: 'Frank Sinatra', image: './assets/compact-disc-solid.svg' },
-    { title: 'Santa Claus Is Coming To Town',           artist: 'The Jackson 5', image: './assets/compact-disc-solid.svg' },
+    { title: 'Jingle Bell Rock',                        artist: 'Brenda Lee',    image: './assets/jingleBellRock.jpg' },
+    { title: 'Let It Snow! Let it Snow! Let It Snow!', artist: 'Frank Sinatra', image: './assets/let-it-snow.jpg' },
+    { title: 'Santa Claus Is Coming To Town',           artist: 'The Jackson 5', image: './assets/Jackson5-ChristmasAlbum.jpg' },
   ];
   
   function expandQueue () {
@@ -19,7 +19,7 @@ var songsInQueue = [
     largequeue.classList.remove('hidden');
     queuecontainer.classList.remove('row-span-1');
     queuecontainer.classList.add('row-span-4');
-
+    loadSongsInQueue();
 
 }
 
@@ -38,14 +38,67 @@ function backToHome () {
     largequeue.classList.add('hidden');
     queuecontainer.classList.add('row-span-1');
     queuecontainer.classList.remove('row-span-4');
+    loadHomePage();
 }
+  function loadHomePage()
+  {
+    var container = document.getElementById('queueHomeSongBoxes');
+    container.innerHTML = "";
+    for(var i =0; i<Math.min(3,songsInQueue.length);i++)
+    {
+        var song = songsInQueue[i]
+        var songBox = document.createElement("div");
+        songBox.className = "w-16 mr-8";
+       
+        var songImg = document.createElement("img");
+        songImg.src = song.image;
+        songImg.className = "w-16 h-16";
+        
+       //song info
+       var songInfo = document.createElement('div');
+       songInfo.className = "w-full whitespace-nowrap overflow-hidden"
 
+       //title
+       var title = document.createElement('p');
+       title.className = 'font-semibold text-xs md:text-sm lg:text-base text-ellipsis overflow-hidden' ;
+       title.textContent = song.title;
+       
+       //artist
+       var artist = document.createElement('p');
+       artist.className = 'text-gray-500 text-xs lg:text-sm text-ellipsis overflow-hidden';
+       artist.textContent = song.artist;
+
+        songBox.appendChild(songImg);
+        songInfo.appendChild(title);
+        songInfo.appendChild(artist);
+        songBox.appendChild(songInfo);
+
+        container.appendChild(songBox)
+    }
+    new Sortable(container, {
+        animation: 200,
+        sort: true,
+
+        //Update index when dropped
+        onEnd: function (evt) {
+            var newIndex = evt.newIndex;
+            
+            // Remove the item from the old position
+            var removedSong = songsInQueue.splice(evt.oldIndex, 1)[0];
+        
+            // Insert the item at the new position
+            songsInQueue.splice(newIndex, 0, removedSong);
+
+            //console.log(songsInQueue)
+        },
+      });
+  }
 
   function loadSongsInQueue()
   {
       //console.log(songsInQueue)
       var container = document.getElementById('songBoxes');
-      
+
       container.innerHTML = "";
       
       songsInQueue.forEach(song => {
@@ -54,7 +107,7 @@ function backToHome () {
          
           var songImg = document.createElement("img");
           songImg.src = song.image;
-          songImg.className = "w-20 h-20 mr-2";
+          songImg.className = "w-16 h-16 mr-2";
           
           //song info
           var songInfo = document.createElement('div');
@@ -111,4 +164,4 @@ function backToHome () {
       loadSongsInQueue();
   }
   
-  loadSongsInQueue();
+  loadHomePage();
