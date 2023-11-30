@@ -5,6 +5,9 @@ $(document).ready(function () {
     var progress = document.getElementById("player-progress-bar");
     var isPaused = true;
     var time = 0;
+    var duration = progress.max;
+    var angle = 0;
+    const ANGLE_INC = 12; //angle/sec record rotates
 
     reset();
 
@@ -12,8 +15,9 @@ $(document).ready(function () {
     window.setInterval(function () {
         if (!isPaused) {
             time++;
+            angle += ANGLE_INC;
             progress.value = time;
-            if (time > progress.max) {
+            if (time > duration) {
                 changeSong();
                 playing();
             }
@@ -23,6 +27,19 @@ $(document).ready(function () {
     //set time to current progress bar value
     progress.addEventListener("change", function () {
         time = progress.value;
+        if (time == 0) {
+            changeSong();
+            console.log(isPaused);
+        } else {
+            record.velocity("stop", true);
+            record.velocity({
+                rotateZ: parseInt((angle + time * ANGLE_INC) % 360) + "deg",
+            });
+        }
+        if (!isPaused) {
+            console.log("bruh");
+            playing();
+        }
     });
 
     //to spin the record
@@ -52,7 +69,7 @@ $(document).ready(function () {
     function reset() {
         progress.value = 0;
         time = 0;
-        paused();
+        record.velocity("stop", true);
         record.velocity({ rotateZ: "0deg" });
     }
 
