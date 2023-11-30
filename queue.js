@@ -102,7 +102,22 @@ function backToHome () {
       var container = document.getElementById('songBoxes');
 
       container.innerHTML = "";
-      
+      var empty1 = document.getElementById('empty-queue1');
+      var empty2 = document.getElementById('empty-queue2');
+      if( songsInQueue.length==0)
+      {
+        
+        empty1.classList.remove('hidden');
+
+       
+        empty2.classList.remove('hidden');
+      }
+      else
+      {
+        empty1.classList.add('hidden')
+        empty2.classList.add('hidden')
+      }
+
       songsInQueue.forEach(song => {
           var songBox = document.createElement("div");
           songBox.className = "flex items-center mb-5 h-20 border-double border-2 hover:cursor-grab hover:border-dashed select-none";
