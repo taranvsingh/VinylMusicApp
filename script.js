@@ -28,7 +28,7 @@ const albumHeader = document.getElementById("album-bar");
 const artistsHeader = document.getElementById("artists-bar");
 const artistHeader = document.getElementById("artist-bar");
 
-function changeContent(to, from) {
+function changeContent(to, from, content = null) {
     // Hide all subsections by default
     librarySubsection.classList.add("hidden");
     friendsSubsection.classList.add("hidden");
@@ -56,6 +56,10 @@ function changeContent(to, from) {
 
     if (from != null) {
         historyStack.push(from);
+    }
+
+    if (content != null) {
+        console.log(content);
     }
 
     // Show the corresponding subsection based on the selected to
