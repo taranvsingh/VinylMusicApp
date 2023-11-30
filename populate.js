@@ -277,13 +277,6 @@ const settingsButton = document.getElementById("settings-button");
 const libraryHeader = document.getElementById("library-bar");
 const friendsHeader = document.getElementById("friends-bar");
 const settingsHeader = document.getElementById("settings-bar");
-const likedSongsHeader = document.getElementById("liked-songs-bar");
-const playlistsHeader = document.getElementById("playlists-bar");
-const playlistHeader = document.getElementById("playlist-bar");
-const albumsHeader = document.getElementById("albums-bar");
-const albumHeader = document.getElementById("album-bar");
-const artistsHeader = document.getElementById("artists-bar");
-const artistHeader = document.getElementById("artist-bar");
 const playControls = document.getElementById("libraryControls-play");
 const libraryPageHeader = document.getElementById("library-page");
 
@@ -306,13 +299,6 @@ function changeContent(to, from, content = null, contentParent = null) {
     libraryHeader.classList.add("hidden");
     friendsHeader.classList.add("hidden");
     settingsHeader.classList.add("hidden");
-    likedSongsHeader.classList.add("hidden");
-    playlistsHeader.classList.add("hidden");
-    playlistHeader.classList.add("hidden");
-    albumsHeader.classList.add("hidden");
-    albumHeader.classList.add("hidden");
-    artistsHeader.classList.add("hidden");
-    artistHeader.classList.add("hidden");
     libraryPageHeader.classList.add("hidden");
     playControls.classList.add("hidden");
 
@@ -416,6 +402,7 @@ function loadSongs(list) {
         songBox.id = "grid-song-" + i;
         songBox.className =
             "grid-song relative w-full p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+        songBox.addEventListener("click", () => {});
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
