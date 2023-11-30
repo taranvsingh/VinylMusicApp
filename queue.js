@@ -19,7 +19,7 @@ var songsInQueue = [
     largequeue.classList.remove('hidden');
     queuecontainer.classList.remove('row-span-1');
     queuecontainer.classList.add('row-span-4');
-    queuecontainer.classList.add('overflow-y-scroll');
+    //queuecontainer.classList.add('overflow-y-scroll');
     loadSongsInQueue();
 
 }
@@ -39,13 +39,15 @@ function backToHome () {
     largequeue.classList.add('hidden');
     queuecontainer.classList.add('row-span-1');
     queuecontainer.classList.remove('row-span-4');
-    queuecontainer.classList.remove('overflow-y-scroll');
+    //queuecontainer.classList.remove('overflow-y-scroll');
     loadHomePage();
 }
   function loadHomePage()
   {
     var container = document.getElementById('queueHomeSongBoxes');
     container.innerHTML = "";
+    checkEmpty();
+ 
     for(var i =0; i<Math.min(3,songsInQueue.length);i++)
     {
         var song = songsInQueue[i]
@@ -77,14 +79,18 @@ function backToHome () {
 
         container.appendChild(songBox)
     }
+    
     new Sortable(container, {
         animation: 200,
         sort: true,
 
         //Update index when dropped
         onEnd: function (evt) {
+            songsInQueue = songsInQueue.filter(function( element ) {
+                return element !== undefined;
+             });
             var newIndex = evt.newIndex;
-            
+    
             // Remove the item from the old position
             var removedSong = songsInQueue.splice(evt.oldIndex, 1)[0];
         
@@ -93,17 +99,32 @@ function backToHome () {
 
             //console.log(songsInQueue)
         },
+        removeOnSpill:true,
+        onSpill: function (evt) {
+            
+            var ind = evt.oldIndex;
+            if (ind > -1)
+            {
+           
+                songsInQueue.splice(ind,1);
+                
+            }
+            
+            checkEmpty();
+        },
+
+    
       });
   }
 
-  function loadSongsInQueue()
+  function checkEmpty()
   {
-      //console.log(songsInQueue)
-      var container = document.getElementById('songBoxes');
-
-      container.innerHTML = "";
-      var empty1 = document.getElementById('empty-queue1');
+    var empty1 = document.getElementById('empty-queue1');
       var empty2 = document.getElementById('empty-queue2');
+
+      songsInQueue = songsInQueue.filter(function( element ) {
+        return element !== undefined;
+     });
       if( songsInQueue.length==0)
       {
         
@@ -117,7 +138,15 @@ function backToHome () {
         empty1.classList.add('hidden')
         empty2.classList.add('hidden')
       }
+  }
 
+  function loadSongsInQueue()
+  {
+      //console.log(songsInQueue)
+      var container = document.getElementById('songBoxes');
+
+      container.innerHTML = "";
+      checkEmpty();
       songsInQueue.forEach(song => {
           var songBox = document.createElement("div");
           songBox.className = "flex items-center mb-5 h-20 border-double border-2 hover:cursor-grab hover:border-dashed select-none";
@@ -155,8 +184,11 @@ function backToHome () {
 
         //Update index when dropped
         onEnd: function (evt) {
+            songsInQueue = songsInQueue.filter(function( element ) {
+                return element !== undefined;
+             });
             var newIndex = evt.newIndex;
-            
+    
             // Remove the item from the old position
             var removedSong = songsInQueue.splice(evt.oldIndex, 1)[0];
         
@@ -165,6 +197,21 @@ function backToHome () {
 
             //console.log(songsInQueue)
         },
+        removeOnSpill:true,
+        onSpill: function (evt) {
+            
+            var ind = evt.oldIndex;
+            if (ind > -1)
+            {
+           
+                songsInQueue.splice(ind,1);
+                
+            }
+            
+            checkEmpty();
+        },
+
+    
       });
 
   }
