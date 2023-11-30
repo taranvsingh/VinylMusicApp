@@ -50,9 +50,9 @@ function changeContent(to, from) {
     artistsHeader.classList.add("hidden");
     artistHeader.classList.add("hidden");
 
-    libraryButton.classList.remove("bg-white", "text-black");
-    friendsButton.classList.remove("bg-white", "text-black");
-    settingsButton.classList.remove("bg-white", "text-black");
+    libraryButton.classList.remove("bg-white", "text-gray-800");
+    friendsButton.classList.remove("bg-white", "text-gray-800");
+    settingsButton.classList.remove("bg-white", "text-gray-800");
 
     if (from != null) {
         historyStack.push(from);
@@ -64,21 +64,21 @@ function changeContent(to, from) {
             // display the library page
             libraryHeader.classList.remove("hidden");
             librarySubsection.classList.remove("hidden");
-            libraryButton.classList.add("bg-white", "text-black");
+            libraryButton.classList.add("bg-white", "text-gray-800");
             historyStack.length = 0; // empty the history queue
             break;
         case "friends":
             // display the friends page
             friendsHeader.classList.remove("hidden");
             friendsSubsection.classList.remove("hidden");
-            friendsButton.classList.add("bg-white", "text-black");
+            friendsButton.classList.add("bg-white", "text-gray-800");
             historyStack.length = 0; // empty the history queue
             break;
         case "settings":
             // display the settings page
             settingsHeader.classList.remove("hidden");
             settingsSubsection.classList.remove("hidden");
-            settingsButton.classList.add("bg-white", "text-black");
+            settingsButton.classList.add("bg-white", "text-gray-800");
             historyStack.length = 0; // empty the history queue
             break;
         case "liked-songs":
@@ -126,4 +126,4 @@ function changeContent(to, from) {
     }
 }
 // Intitial state
-libraryButton.classList.add("bg-white", "text-black");
+libraryButton.classList.add("bg-white", "text-gray-800");
