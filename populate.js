@@ -667,7 +667,7 @@ function loadPreviews(areaID) {
     more.className =
         "w-16 h-fit px-2 text-base rounded-full bg-zinc-200 hover:bg-green-300";
     more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
-    more.textContent = "...";
+    more.innerHTML = '<i data-feather="more-horizontal"></i>';
 
     header.appendChild(areaName);
     header.appendChild(more);
