@@ -148,32 +148,32 @@
                 class="row-span-1 col-span-2 border-4 border-black rounded-md">
                 <!-- Home Page Queue -->
                 <div id="small-queue" class="active ml-4 mt-2">
-                    <header class="text-3xl font-bold">
-                        Queue
-                    </header>
+    
                     <div class="flex flex-row items-center">
-                        <div id="queueHomeSongBoxes" class="flex flex-row items-center mt-2"> 
-                        </div>
-                    
+                        <header class="text-3xl font-bold">
+                            Queue
+                        </header>
                         <button
                             id="expandButton"
-                            class="more-button px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300"
+                            class="more-button px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300 ml-4"
                             onclick="expandQueue()">
                             More
                         </button>
+                    </div>
+                    <div id="queueHomeSongBoxes" class="flex flex-row items-center mt-2"> 
                     </div>
                     
                 </div>
                 
                 
                 <!-- Expanded Queue -->
-                <div id="expanded-queue" class="hidden overflow-y-scroll">
+                <div id="expanded-queue" class="hidden">
                     <!--Queue Header-->
                     <div class="ml-4">
                         <header
                             class="queue_navBar flex flex-row items-center gap-6 mb-8 mt-5">
                             <button
-                                class="queuePage-backButton pt-2 fill-black hover:fill-blue-400"
+                                class="queuePage-backButton pt-2 fill-black hover:fill-green-400"
                                 onclick="backToHome()">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +201,7 @@
                             <!--Clear Button-->
                             <button
                                 id="clearButton"
-                                class="flex items-center justify-center w-full h-10 border-2 border-gray-800 hover:border-blue-400 hover:text-blue-400"
+                                class="flex items-center justify-center w-full h-10 mb-4 border-2 border-gray-800 hover:border-red-400 hover:text-red-400"
                                 onclick="clickedClear()">
                                 CLEAR
                             </button>

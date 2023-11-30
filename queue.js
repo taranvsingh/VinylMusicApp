@@ -19,6 +19,7 @@ var songsInQueue = [
     largequeue.classList.remove('hidden');
     queuecontainer.classList.remove('row-span-1');
     queuecontainer.classList.add('row-span-4');
+    queuecontainer.classList.add('overflow-y-scroll');
     loadSongsInQueue();
 
 }
@@ -38,6 +39,7 @@ function backToHome () {
     largequeue.classList.add('hidden');
     queuecontainer.classList.add('row-span-1');
     queuecontainer.classList.remove('row-span-4');
+    queuecontainer.classList.remove('overflow-y-scroll');
     loadHomePage();
 }
   function loadHomePage()
@@ -48,7 +50,7 @@ function backToHome () {
     {
         var song = songsInQueue[i]
         var songBox = document.createElement("div");
-        songBox.className = "w-16 mr-8";
+        songBox.className = "w-20 mr-auto hover:cursor-grab";
        
         var songImg = document.createElement("img");
         songImg.src = song.image;
@@ -158,7 +160,7 @@ function backToHome () {
       loadSongsInQueue();
   }
 
-  function addSongs(song)
+  function addSong(song)
   {
       songsInQueue.push(song)
       loadSongsInQueue();
