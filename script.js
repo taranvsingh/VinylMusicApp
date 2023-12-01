@@ -42,7 +42,7 @@ var songsInQueue = [
         artist: "Sarah Kinsley",
         image: "./assets/albums/cypress.jpg",
     },
-    
+
     {
         title: "Jingle Bell Rock",
         artist: "Brenda Lee",
@@ -1019,18 +1019,40 @@ playButton.addEventListener("click", () => {
     );
     deselect(song);
 
+    
     while (selected.length > 0) {
         song = selected.shift();
         deselect(song);
+        songBox = document.getElementById(song);
+        
+        title= songBox.getAttribute("title")
+        artist= songBox.getAttribute("artist")
+        cover= songBox.getAttribute("cover")
+        
+        
+        addSong(title, artist, cover);
     }
 
     updateOrder();
+    loadSongsInQueue();
+    loadHomePage();
 });
 
 queueButton.addEventListener("click", () => {
-    for (let i = 0; i < selected.length; i++) {
-        const song = selected[i];
+    while (selected.length > 0) {
+        song = selected.shift();
+        deselect(song);
+        songBox = document.getElementById(song);
+        
+        title= songBox.getAttribute("title")
+        artist= songBox.getAttribute("artist")
+        cover= songBox.getAttribute("cover")
+        
+        
+        addSong(title, artist, cover);
     }
+    loadSongsInQueue();
+    loadHomePage();
 });
 
 // Intitial state
@@ -1071,7 +1093,7 @@ function expandQueue() {
     largequeue.classList.remove("hidden");
     queuecontainer.classList.remove("row-span-1");
     queuecontainer.classList.add("row-span-4");
-    //queuecontainer.classList.add('overflow-y-scroll');
+    queuecontainer.classList.add('overflow-y-scroll');
     loadSongsInQueue();
 }
 
@@ -1090,7 +1112,7 @@ function backToHome() {
     largequeue.classList.add("hidden");
     queuecontainer.classList.add("row-span-1");
     queuecontainer.classList.remove("row-span-4");
-    //queuecontainer.classList.remove('overflow-y-scroll');
+    queuecontainer.classList.remove('overflow-y-scroll');
     loadHomePage();
 }
 function loadHomePage() {
@@ -1255,13 +1277,19 @@ function clickedClear() {
     loadSongsInQueue();
 }
 
-function addSong(song) {
-    songsInQueue.push(song);
+function addSong(title, artist, cover) {
+    //console.log(songsInQueue)
+    newSong = {
+        'title':title,
+        'artist': artist,
+        'image': cover
+    }
+    songsInQueue.push(newSong);
     loadSongsInQueue();
 }
 
 function playNext() {
-    console.log(songsInQueue);
+    //console.log(songsInQueue);
     if (songsInQueue.length > 0) {
         topSong = songsInQueue.shift();
         changeSong(topSong.title, topSong.artist, topSong.image);
