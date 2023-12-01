@@ -36,6 +36,31 @@ var songList = [
     },
 ];
 
+var songsInQueue = [
+    {
+        title: "Cypress",
+        artist: "Sarah Kinsley",
+        image: "./assets/albums/cypress.jpg",
+    },
+    
+    {
+        title: "Jingle Bell Rock",
+        artist: "Brenda Lee",
+        image: "./assets/jingleBellRock.jpg",
+    },
+    {
+        title: "Let It Snow! Let it Snow! Let It Snow!",
+        artist: "Frank Sinatra",
+        image: "./assets/let-it-snow.jpg",
+    },
+    {
+        title: "Santa Claus Is Coming To Town",
+        artist: "The Jackson 5",
+        image: "./assets/Jackson5-ChristmasAlbum.jpg",
+    },
+    
+];
+
 var playlistList = [
     {
         title: "Study Vibes",
@@ -1016,27 +1041,20 @@ loadPreviews("playlists");
 loadPreviews("albums");
 loadPreviews("artists");
 
-reset(); // reset player
+function setup()
+{
+    playNext(); // reset player
+    pause.css("display", "none");
+    play.css("display", "block");
+    paused();
+}
+
+setup();
+
 feather.replace(); // Set the more button icons
 
 //QUEUE SECTION ______________________________________________________________________________________________
-var songsInQueue = [
-    {
-        title: "Jingle Bell Rock",
-        artist: "Brenda Lee",
-        image: "./assets/jingleBellRock.jpg",
-    },
-    {
-        title: "Let It Snow! Let it Snow! Let It Snow!",
-        artist: "Frank Sinatra",
-        image: "./assets/let-it-snow.jpg",
-    },
-    {
-        title: "Santa Claus Is Coming To Town",
-        artist: "The Jackson 5",
-        image: "./assets/Jackson5-ChristmasAlbum.jpg",
-    },
-];
+
 
 function expandQueue() {
     var smallqueue = document.getElementById("small-queue");
