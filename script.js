@@ -285,7 +285,7 @@ window.setInterval(function () {
         progress.value = time;
         if (time > duration) {
             playNext();
-            playing();
+            
         }
     }
 }, 1000);
@@ -1242,10 +1242,14 @@ function playNext() {
         changeSong(topSong.title, topSong.artist, topSong.image);
 
         loadHomePage();
+        playing();
     }
     //if there are no more songs, skip to the end of the song
     else {
         paused();
+        pause.css("display", "none");
+        play.css("display", "block");
+        progress.value = progress.max;
     }
 }
 loadHomePage();
