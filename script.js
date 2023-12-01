@@ -268,6 +268,8 @@ var playerArtist = $("#current-song-artist");
 var record = $("#player-record");
 var play = $(".player-play-button");
 var pause = $(".player-pause-button");
+var next = $(".player-next-button");
+var prev = $(".player-previous-button");
 var progress = document.getElementById("player-progress-bar");
 var isPaused = true;
 var time = 0;
@@ -290,19 +292,32 @@ window.setInterval(function () {
 
 //set time to current progress bar value
 progress.addEventListener("change", function () {
-    time = progress.value;
-    if (time == 0) {
-        changeSong();
-        console.log(isPaused);
-    } else {
-        record.velocity("stop", true);
-        record.velocity({
-            rotateZ: parseInt((angle + time * ANGLE_INC) % 360) + "deg",
-        });
+    if (playerTitle.text() != "Title" && playerArtist.text() != "Artist") {
+        time = progress.value;
+        if (time == 0) {
+            changeSong();
+            console.log(isPaused);
+        } else {
+            record.velocity("stop", true);
+            record.velocity({
+                rotateZ: parseInt((angle + time * ANGLE_INC) % 360) + "deg",
+            });
+        }
+        if (!isPaused) {
+            console.log("not paused");
+            playing();
+        }
     }
-    if (!isPaused) {
-        console.log("not paused");
-        playing();
+});
+
+//disables progress bar if there is no song playing
+$(".player-progress-bar").hover(function () {
+    if (playerTitle.text() != "Title" && playerArtist.text() != "Artist") {
+        $(this).css("cursor", "pointer");
+        progress.disabled = false;
+    } else {
+        $(this).css("cursor", "not-allowed");
+        progress.disabled = true;
     }
 });
 
@@ -345,16 +360,20 @@ function changeSong(title, artist, path) {
     pause.css("display", "block");
     play.css("display", "none");
     playing();
-    playerTitle.text(title);
-    playerArtist.text(artist);
-    record.attr("src", path);
+    if (title != null && artist != null && path != null) {
+        playerTitle.text(title);
+        playerArtist.text(artist);
+        record.attr("src", path);
+    }
 }
 
 //play button
 play.click(function () {
-    playing();
-    pause.css("display", "block");
-    $(this).css("display", "none");
+    if (playerTitle.text() != "Title" && playerArtist.text() != "Artist") {
+        playing();
+        pause.css("display", "block");
+        $(this).css("display", "none");
+    }
 });
 
 //pause button
@@ -367,10 +386,16 @@ pause.click(function () {
 //prev and next buttons
 // TODO make rewind and skip buttons unique
 // TODO preserve song data on rewind
-// TODO change song to next in queue or reset on emptyt
-$(".change-song").click(function () {
+// TODO change song to next in queue or reset on empty
+
+//play next button
+next.click(function () {
+    playNext();
+});
+
+//play previous button
+prev.click(function () {
     changeSong();
-    playing();
 });
 
 /**
@@ -525,12 +550,16 @@ function loadSongs(list) {
         songBox.setAttribute("title", song.title);
         songBox.setAttribute("artist", song.artist);
         songBox.setAttribute("cover", song.image);
-        songBox.addEventListener("click", toggleSelect.bind(this, songBox.id, song));
+        songBox.addEventListener(
+            "click",
+            toggleSelect.bind(this, songBox.id, song)
+        );
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
         songCover.id = "grid-song-" + i + "-cover";
-        songCover.className = "hidden md:block max-w-[200px] w-full mb-4 rounded-md";
+        songCover.className =
+            "hidden md:block max-w-[200px] w-full mb-4 rounded-md";
 
         //song info
         const songLabel = document.createElement("div");
@@ -538,7 +567,8 @@ function loadSongs(list) {
 
         //title
         const title = document.createElement("p");
-        title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         title.textContent = song.title;
 
         //artist
@@ -682,7 +712,8 @@ function loadArtists() {
 
         //artist
         const name = document.createElement("p");
-        name.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        name.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         name.textContent = artist.name;
 
         artistBox.appendChild(artistCover);
@@ -776,7 +807,10 @@ function loadPreviews(areaID) {
     more.type = "button";
     more.className =
         "w-16 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300 mb-2.5";
-    more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
+    more.addEventListener(
+        "click",
+        changeContent.bind(this, areaID, "library", songList)
+    );
     more.innerHTML = '<i data-feather="more-horizontal"></i>';
 
     header.appendChild(areaName);
@@ -846,7 +880,8 @@ function loadPreviews(areaID) {
 
         //title
         const title = document.createElement("p");
-        title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
 
         if (areaID != "artists") {
             title.textContent = item.title;
@@ -979,251 +1014,238 @@ feather.replace(); // Set the more button icons
 
 //QUEUE SECTION ______________________________________________________________________________________________
 var songsInQueue = [
-    { title: 'Jingle Bell Rock',                        artist: 'Brenda Lee',    image: './assets/jingleBellRock.jpg' },
-    { title: 'Let It Snow! Let it Snow! Let It Snow!', artist: 'Frank Sinatra', image: './assets/let-it-snow.jpg' },
-    { title: 'Santa Claus Is Coming To Town',           artist: 'The Jackson 5', image: './assets/Jackson5-ChristmasAlbum.jpg' },
-  ];
-  
-  function expandQueue () {
-    var smallqueue = document.getElementById('small-queue');
-    var largequeue = document.getElementById('expanded-queue');
-    var queuecontainer = document.getElementById('queue-container');
-    var playContainer = document.getElementById('music-player-container');
-    var expandButton = document.getElementById('expandButton');
+    {
+        title: "Jingle Bell Rock",
+        artist: "Brenda Lee",
+        image: "./assets/jingleBellRock.jpg",
+    },
+    {
+        title: "Let It Snow! Let it Snow! Let It Snow!",
+        artist: "Frank Sinatra",
+        image: "./assets/let-it-snow.jpg",
+    },
+    {
+        title: "Santa Claus Is Coming To Town",
+        artist: "The Jackson 5",
+        image: "./assets/Jackson5-ChristmasAlbum.jpg",
+    },
+];
+
+function expandQueue() {
+    var smallqueue = document.getElementById("small-queue");
+    var largequeue = document.getElementById("expanded-queue");
+    var queuecontainer = document.getElementById("queue-container");
+    var playContainer = document.getElementById("music-player-container");
+    var expandButton = document.getElementById("expandButton");
     //var hideButton = document.getElementById('backButton');
 
-    smallqueue.classList.add('hidden');
-    expandButton.classList.add('hidden');
-    playContainer.classList.add('hidden');
+    smallqueue.classList.add("hidden");
+    expandButton.classList.add("hidden");
+    playContainer.classList.add("hidden");
     //hideButton.classList.remove('hidden');
-    largequeue.classList.remove('hidden');
-    queuecontainer.classList.remove('row-span-1');
-    queuecontainer.classList.add('row-span-4');
+    largequeue.classList.remove("hidden");
+    queuecontainer.classList.remove("row-span-1");
+    queuecontainer.classList.add("row-span-4");
     //queuecontainer.classList.add('overflow-y-scroll');
     loadSongsInQueue();
-
 }
 
-function backToHome () {
-    var smallqueue = document.getElementById('small-queue');
-    var largequeue = document.getElementById('expanded-queue');
-    var queuecontainer = document.getElementById('queue-container');
-    var playContainer = document.getElementById('music-player-container');
-    var expandButton = document.getElementById('expandButton');
+function backToHome() {
+    var smallqueue = document.getElementById("small-queue");
+    var largequeue = document.getElementById("expanded-queue");
+    var queuecontainer = document.getElementById("queue-container");
+    var playContainer = document.getElementById("music-player-container");
+    var expandButton = document.getElementById("expandButton");
     //var hideButton = document.getElementById('backButton');
 
-    smallqueue.classList.remove('hidden');
-    expandButton.classList.remove('hidden');
-    playContainer.classList.remove('hidden');
+    smallqueue.classList.remove("hidden");
+    expandButton.classList.remove("hidden");
+    playContainer.classList.remove("hidden");
     //hideButton.classList.add('hidden');
-    largequeue.classList.add('hidden');
-    queuecontainer.classList.add('row-span-1');
-    queuecontainer.classList.remove('row-span-4');
+    largequeue.classList.add("hidden");
+    queuecontainer.classList.add("row-span-1");
+    queuecontainer.classList.remove("row-span-4");
     //queuecontainer.classList.remove('overflow-y-scroll');
     loadHomePage();
 }
-  function loadHomePage()
-  {
-    var container = document.getElementById('queueHomeSongBoxes');
+function loadHomePage() {
+    var container = document.getElementById("queueHomeSongBoxes");
     container.innerHTML = "";
     checkEmpty();
- 
-    for(var i =0; i<Math.min(3,songsInQueue.length);i++)
-    {
-        var song = songsInQueue[i]
+
+    for (var i = 0; i < Math.min(3, songsInQueue.length); i++) {
+        var song = songsInQueue[i];
         var songBox = document.createElement("div");
         songBox.className = "w-20 mr-auto hover:cursor-grab";
-       
+
         var songImg = document.createElement("img");
         songImg.src = song.image;
         songImg.className = "w-16 h-16 rounded";
-        
-       //song info
-       var songInfo = document.createElement('div');
-       songInfo.className = "w-full whitespace-nowrap overflow-hidden"
 
-       //title
-       var title = document.createElement('p');
-       title.className = 'font-semibold text-xs md:text-sm lg:text-base text-ellipsis overflow-hidden' ;
-       title.textContent = song.title;
-       
-       //artist
-       var artist = document.createElement('p');
-       artist.className = 'text-gray-500 text-xs lg:text-sm text-ellipsis overflow-hidden';
-       artist.textContent = song.artist;
+        //song info
+        var songInfo = document.createElement("div");
+        songInfo.className = "w-full whitespace-nowrap overflow-hidden";
+
+        //title
+        var title = document.createElement("p");
+        title.className =
+            "font-semibold text-xs md:text-sm lg:text-base text-ellipsis overflow-hidden";
+        title.textContent = song.title;
+
+        //artist
+        var artist = document.createElement("p");
+        artist.className =
+            "text-gray-500 text-xs lg:text-sm text-ellipsis overflow-hidden";
+        artist.textContent = song.artist;
 
         songBox.appendChild(songImg);
         songInfo.appendChild(title);
         songInfo.appendChild(artist);
         songBox.appendChild(songInfo);
 
-        container.appendChild(songBox)
+        container.appendChild(songBox);
     }
-    
+
     new Sortable(container, {
         animation: 200,
         sort: true,
 
         //Update index when dropped
         onEnd: function (evt) {
-            songsInQueue = songsInQueue.filter(function( element ) {
+            songsInQueue = songsInQueue.filter(function (element) {
                 return element !== undefined;
-             });
+            });
             var newIndex = evt.newIndex;
-    
+
             // Remove the item from the old position
             var removedSong = songsInQueue.splice(evt.oldIndex, 1)[0];
-        
+
             // Insert the item at the new position
             songsInQueue.splice(newIndex, 0, removedSong);
 
             //console.log(songsInQueue)
         },
-        removeOnSpill:true,
+        removeOnSpill: true,
         onSpill: function (evt) {
-            
             var ind = evt.oldIndex;
-            if (ind > -1)
-            {
-           
-                songsInQueue.splice(ind,1);
-                
+            if (ind > -1) {
+                songsInQueue.splice(ind, 1);
             }
-            
+
             checkEmpty();
         },
+    });
+}
 
-    
-      });
-  }
+function checkEmpty() {
+    var empty1 = document.getElementById("empty-queue1");
+    var empty2 = document.getElementById("empty-queue2");
 
-  function checkEmpty()
-  {
-    var empty1 = document.getElementById('empty-queue1');
-      var empty2 = document.getElementById('empty-queue2');
-
-      songsInQueue = songsInQueue.filter(function( element ) {
+    songsInQueue = songsInQueue.filter(function (element) {
         return element !== undefined;
-     });
-      if( songsInQueue.length==0)
-      {
-        
-        empty1.classList.remove('hidden');
+    });
+    if (songsInQueue.length == 0) {
+        empty1.classList.remove("hidden");
 
-       
-        empty2.classList.remove('hidden');
-      }
-      else
-      {
-        empty1.classList.add('hidden')
-        empty2.classList.add('hidden')
-      }
-  }
+        empty2.classList.remove("hidden");
+    } else {
+        empty1.classList.add("hidden");
+        empty2.classList.add("hidden");
+    }
+}
 
-  function loadSongsInQueue()
-  {
-      //console.log(songsInQueue)
-      var container = document.getElementById('songBoxes');
+function loadSongsInQueue() {
+    //console.log(songsInQueue)
+    var container = document.getElementById("songBoxes");
 
-      container.innerHTML = "";
-      checkEmpty();
-      songsInQueue.forEach(song => {
-          var songBox = document.createElement("div");
-          songBox.className = "flex items-center mb-5 h-20 border-double border-2 hover:cursor-grab hover:border-dashed select-none";
-         
-          var songImg = document.createElement("img");
-          songImg.src = song.image;
-          songImg.className = "w-16 h-16 mr-2";
-          
-          //song info
-          var songInfo = document.createElement('div');
-          songInfo.className = "w-full whitespace-nowrap overflow-hidden"
+    container.innerHTML = "";
+    checkEmpty();
+    songsInQueue.forEach((song) => {
+        var songBox = document.createElement("div");
+        songBox.className =
+            "flex items-center mb-5 h-20 border-double border-2 hover:cursor-grab hover:border-dashed select-none";
 
-          //title
-          var title = document.createElement('p');
-          title.className = 'font-semibold text-xs md:text-sm lg:text-base text-ellipsis overflow-hidden' ;
-          title.textContent = song.title;
-          
-          //artist
-          var artist = document.createElement('p');
-          artist.className = 'text-gray-500 text-xs lg:text-sm text-ellipsis overflow-hidden';
-          artist.textContent = song.artist;
+        var songImg = document.createElement("img");
+        songImg.src = song.image;
+        songImg.className = "w-16 h-16 mr-2";
 
-          songBox.appendChild(songImg);
+        //song info
+        var songInfo = document.createElement("div");
+        songInfo.className = "w-full whitespace-nowrap overflow-hidden";
 
-          songInfo.appendChild(title);
-          songInfo.appendChild(artist);
-          songBox.appendChild(songInfo);
+        //title
+        var title = document.createElement("p");
+        title.className =
+            "font-semibold text-xs md:text-sm lg:text-base text-ellipsis overflow-hidden";
+        title.textContent = song.title;
 
-          container.appendChild(songBox)
-      });
+        //artist
+        var artist = document.createElement("p");
+        artist.className =
+            "text-gray-500 text-xs lg:text-sm text-ellipsis overflow-hidden";
+        artist.textContent = song.artist;
 
-      new Sortable(container, {
+        songBox.appendChild(songImg);
+
+        songInfo.appendChild(title);
+        songInfo.appendChild(artist);
+        songBox.appendChild(songInfo);
+
+        container.appendChild(songBox);
+    });
+
+    new Sortable(container, {
         animation: 200,
         sort: true,
 
         //Update index when dropped
         onEnd: function (evt) {
-            songsInQueue = songsInQueue.filter(function( element ) {
+            songsInQueue = songsInQueue.filter(function (element) {
                 return element !== undefined;
-             });
+            });
             var newIndex = evt.newIndex;
-    
+
             // Remove the item from the old position
             var removedSong = songsInQueue.splice(evt.oldIndex, 1)[0];
-        
+
             // Insert the item at the new position
             songsInQueue.splice(newIndex, 0, removedSong);
 
             //console.log(songsInQueue)
         },
-        removeOnSpill:true,
+        removeOnSpill: true,
         onSpill: function (evt) {
-            
             var ind = evt.oldIndex;
-            if (ind > -1)
-            {
-           
-                songsInQueue.splice(ind,1);
-                
+            if (ind > -1) {
+                songsInQueue.splice(ind, 1);
             }
-            
+
             checkEmpty();
         },
+    });
+}
 
-    
-      });
+function clickedClear() {
+    songsInQueue = [];
+    loadSongsInQueue();
+}
 
-  }
+function addSong(song) {
+    songsInQueue.push(song);
+    loadSongsInQueue();
+}
 
-  function clickedClear()
-  {
-      songsInQueue = [];
-      loadSongsInQueue();
-  }
-
-  function addSong(song)
-  {
-      songsInQueue.push(song)
-      loadSongsInQueue();
-  }
-  
-  function playNext()
-  {
-    console.log(songsInQueue)
-    if(songsInQueue.length>0)
-    {
+function playNext() {
+    console.log(songsInQueue);
+    if (songsInQueue.length > 0) {
         topSong = songsInQueue.shift();
         changeSong(topSong.title, topSong.artist, topSong.image);
-        
+
         loadHomePage();
-       
     }
     //if there are no more songs, skip to the end of the song
-    else
-    {
+    else {
         paused();
     }
-    
-  }
-  loadHomePage();
+}
+loadHomePage();
