@@ -285,7 +285,6 @@ window.setInterval(function () {
         progress.value = time;
         if (time > duration) {
             playNext();
-            
         }
     }
 }, 1000);
@@ -352,6 +351,7 @@ function reset() {
     record.velocity({ rotateZ: "0deg" });
     playerTitle.text("Title");
     playerArtist.text("Artist");
+    record.attr("src", "/assets/compact-disc-solid.png");
 }
 
 //reset record and display pause button
@@ -1250,7 +1250,7 @@ function playNext() {
         pause.css("display", "none");
         play.css("display", "block");
         reset();
-        progress.value = progress.max;
+        progress.value = duration;
     }
 }
 loadHomePage();
