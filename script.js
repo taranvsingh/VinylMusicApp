@@ -334,9 +334,10 @@ function reset() {
 //reset record and display pause button
 function changeSong(path) {
     reset();
-    record.attr("src", path);
     pause.css("display", "block");
     play.css("display", "none");
+    playing();
+    record.attr("src", path);
 }
 
 //play button
@@ -881,3 +882,4 @@ loadPreviews("albums");
 loadPreviews("artists");
 
 reset(); // reset player
+feather.replace();
