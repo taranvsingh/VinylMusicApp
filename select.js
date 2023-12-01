@@ -1,10 +1,15 @@
 const gridSongs = document.getElementsByClassName("grid-song");
+console.log(gridSongs);
 const selected = [];
 
 for (const element in gridSongs) {
     if (Object.hasOwnProperty.call(gridSongs, element)) {
         const song = gridSongs[element];
-        song.addEventListener("click", select.bind(this, song.id));
+        console.log(song);
+        // song.addEventListener("click", select.bind(this, song.id));
+        song.addEventListener("click", () => {
+            console.log(song.id);
+        });
     }
 }
 
@@ -22,7 +27,6 @@ function select(songID) {
         icon.classList.remove("hidden");
         icon.innerHTML = selected.indexOf(songID);
     }
-    console.log(selected);
 }
 
 function updateOrder() {
