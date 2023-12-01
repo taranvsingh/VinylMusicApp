@@ -263,6 +263,8 @@ var artistList = [
  * MUSIC PLAYER
  */
 
+var playerTitle = $("#current-song-title");
+var playerArtist = $("#current-song-artist");
 var record = $("#player-record");
 var play = $(".player-play-button");
 var pause = $(".player-pause-button");
@@ -333,14 +335,18 @@ function reset() {
     time = 0;
     record.velocity("stop", true);
     record.velocity({ rotateZ: "0deg" });
+    playerTitle.text("Title");
+    playerArtist.text("Artist");
 }
 
 //reset record and display pause button
-function changeSong(path) {
+function changeSong(title, artist, path) {
     reset();
     pause.css("display", "block");
     play.css("display", "none");
     playing();
+    playerTitle.text(title);
+    playerArtist.text(artist);
     record.attr("src", path);
 }
 
@@ -359,6 +365,9 @@ pause.click(function () {
 });
 
 //prev and next buttons
+// TODO make rewind and skip buttons unique
+// TODO preserve song data on rewind
+// TODO change song to next in queue or reset on emptyt
 $(".change-song").click(function () {
     changeSong();
     playing();
@@ -790,8 +799,8 @@ function loadPreviews(areaID) {
         let item = list[i]; // song json
 
         const box = document.createElement("div");
-        box.id = "preview-song-" + i;
-        box.className = "h-fit p-4 rounded-lg hover:cursor-pointer hover:bg-green-100";
+        box.className =
+            "max-w-[200px] lg:max-w-none h-fit p-4 rounded-lg hover:cursor-pointer hover:bg-green-100";
 
         switch (i) {
             case 7:
@@ -816,7 +825,7 @@ function loadPreviews(areaID) {
 
         const cover = document.createElement("img");
         cover.src = item.image;
-        cover.className = "max-w-[200px] w-full mb-4";
+        cover.className = "w-full mb-4";
 
         if (areaID == "artists") {
             cover.className += " rounded-full";
@@ -853,7 +862,10 @@ function loadPreviews(areaID) {
         switch (areaID) {
             case "liked-songs":
                 // placeholder event listener for playing the song
-                box.addEventListener("click", changeSong.bind(this, item.image));
+                box.addEventListener(
+                    "click",
+                    changeSong.bind(this, item.title, item.artist, item.image)
+                );
                 break;
             case "playlists":
                 // open the playlist
@@ -925,6 +937,8 @@ const playButton = document.getElementById("libraryControlsPlay-playButton");
 const queueButton = document.getElementById("libraryControlsPlay-queueButton");
 playButton.addEventListener("click", () => {
     let song = selected.shift();
+
+    // TODO pass song json object
     changeSong(document.getElementById(song + "-cover").src);
     deselect(song);
 
