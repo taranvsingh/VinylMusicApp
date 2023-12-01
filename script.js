@@ -522,6 +522,9 @@ function loadSongs(list) {
         songBox.id = "grid-song-" + i;
         songBox.className =
             "grid-song relative w-full p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+        songBox.setAttribute("title", song.title);
+        songBox.setAttribute("artist", song.artist);
+        songBox.setAttribute("cover", song.image);
         songBox.addEventListener("click", toggleSelect.bind(this, songBox.id, song));
 
         const songCover = document.createElement("img");
@@ -937,9 +940,14 @@ const playButton = document.getElementById("libraryControlsPlay-playButton");
 const queueButton = document.getElementById("libraryControlsPlay-queueButton");
 playButton.addEventListener("click", () => {
     let song = selected.shift();
+    let songBox = document.getElementById(song);
 
     // TODO pass song json object
-    changeSong(document.getElementById(song + "-cover").src);
+    changeSong(
+        songBox.getAttribute("title"),
+        songBox.getAttribute("artist"),
+        songBox.getAttribute("cover")
+    );
     deselect(song);
 
     while (selected.length > 0) {
