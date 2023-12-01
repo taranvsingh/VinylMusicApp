@@ -958,6 +958,7 @@ queueButton.addEventListener("click", () => {
 
 // Intitial state
 libraryButton.classList.add("bg-white", "text-black");
+
 loadPreviews("liked-songs");
 loadPreviews("playlists");
 loadPreviews("albums");
