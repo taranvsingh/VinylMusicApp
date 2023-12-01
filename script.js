@@ -530,7 +530,7 @@ function loadSongs(list) {
         const songCover = document.createElement("img");
         songCover.src = song.image;
         songCover.id = "grid-song-" + i + "-cover";
-        songCover.className = "max-w-[200px] w-full mb-4 rounded-md";
+        songCover.className = "hidden md:block max-w-[200px] w-full mb-4 rounded-md";
 
         //song info
         const songLabel = document.createElement("div");
@@ -711,7 +711,7 @@ function loadDiscography(discography, artist) {
         // playlist cover
         const albumCover = document.createElement("img");
         albumCover.src = album.image;
-        albumCover.className = "hidden md:block w-full mb-4 rounded-md";
+        albumCover.className = "w-full mb-4 rounded-md";
 
         // playlist info
         const albumLabel = document.createElement("div");
@@ -749,7 +749,7 @@ function loadPreviews(areaID) {
     header.className = "flex flex-row justify-start items-center gap-x-4";
 
     const areaName = document.createElement("h3");
-    areaName.className = "text-3xl font-bold mb-4";
+    areaName.className = "text-xl md:text-3xl font-bold mb-4";
     switch (areaID) {
         case "liked-songs":
             areaName.textContent = "Liked Songs";
@@ -768,9 +768,9 @@ function loadPreviews(areaID) {
     const preview = document.createElement("div");
 
     preview.id = areaID + "-preview";
-    preview.className = "flex flex-row justify-start gap-x-4 mr-4";
+    preview.className = "flex flex-row justify-start gap-x-2 md:gap-x-4";
     preview.className =
-        "grid grid-rows-1 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1440px]:grid-cols-5 min-[1640px]:grid-cols-6 min-[1800px]:grid-cols-7 gap-x-4";
+        "grid grid-rows-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1440px]:grid-cols-5 min-[1640px]:grid-cols-6 min-[1800px]:grid-cols-7 gap-x-4";
 
     const more = document.createElement("button");
     more.type = "button";
@@ -824,6 +824,8 @@ function loadPreviews(areaID) {
             case 2:
                 box.className += " hidden lg:block";
                 break;
+            case 1:
+                box.className += " hidden md:block";
         }
 
         const cover = document.createElement("img");

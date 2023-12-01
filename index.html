@@ -141,20 +141,20 @@
                 <!-- Home Page Queue -->
                 <div id="small-queue" class="active ml-4 mt-2 ">
 
-                    <div class="flex flex-row items-center">
-                        <header class="text-3xl font-bold">
+                    <div class="flex flex-row items-center mb-4">
+                        <h2 class="text-2xl font-bold mr-4">
                             Queue
-                        </header>
+                        </h2>
                         <button
                             id="expandButton"
-                            class="more-button px-2 h-fit w-16 text-base border-2 border-black rounded-full bg-white hover:bg-green-300 ml-4"
+                            class="w-8 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300"
                             onclick="expandQueue()">
-                            More
+                            <i data-feather="more-horizontal"></i>
                         </button>
                     </div>
-                    <header id="empty-queue1" class="text-xl font-bold mt-2 hidden">
+                    <p id="empty-queue1" class="text-xl font-bold mt-2 hidden">
                         Add Songs To Queue
-                    </header>
+                    </p>
                     <div id="queueHomeSongBoxes" class="flex flex-row items-center mt-2"> 
                     </div>
                     
@@ -166,10 +166,10 @@
                 <div id="expanded-queue" class="hidden">
                     <!--Queue Header-->
                     <div class="ml-4">
-                        <header
+                        <div
                             class="queue_navBar flex flex-row items-center gap-6 mb-8 mt-5">
                             <button
-                                class="queuePage-backButton pt-2 fill-black hover:fill-green-400"
+                                class="queuePage-backButton fill-black hover:fill-green-400"
                                 onclick="backToHome()">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -180,11 +180,11 @@
                                         d="M34 17C35.1046 17 36 16.1046 36 15C36 13.8954 35.1046 13 34 13L34 17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768159 14.0948 0.0768159 13.3137 0.857864L0.585786 13.5858ZM34 13L2 13L2 17L34 17L34 13Z" />
                                 </svg>
                             </button>
-                            <h2 id="queueTitle" class="text-3xl mr-4 font-bold">Queue</h2>
-                        </header>
-                        <header id="empty-queue2" class="text-xl font-bold hidden mb-4">
+                            <h2 id="queueTitle" class="text-3xl font-bold">Queue</h2>
+                        </div>
+                        <p id="empty-queue2" class="text-xl font-bold hidden mb-4">
                             Add Songs To Queue
-                        </header>
+                        </p>
                     </div>
 
                 
@@ -234,7 +234,7 @@
                                 onclick="changeContent('library', null)">
 
                                 <i class="h-full w-7" data-feather="book-open"></i>
-                                <h2>LIBRARY</h2>
+                                <h2 class="hidden md:block">LIBRARY</h2>
 
                             </button>
                         </li>
@@ -251,8 +251,7 @@
                                 onclick="changeContent('friends', null)">
 
                                 <i class="h-full w-7" data-feather="users"></i>
-                                <h2>FRIENDS</h2>
-
+                                <h2 class="hidden md:block">FRIENDS</h2>
                             </button>
                         </li>
 
@@ -263,7 +262,7 @@
                                 class="flex gap-2 text-white bg-gray-800 border-4 border-gray-800 hover:bg-green-300 hover:text-gray-800 py-1 px-2 rounded-md"
                                 onclick="changeContent('settings', null)">
                                 <i class="h-full w-7" data-feather="settings"></i>
-                                <h2>SETTINGS</h2>
+                                <h2 class="hidden md:block">SETTINGS</h2>
                             </button>
                         </li>
                     </ul>
@@ -367,7 +366,7 @@
                 <!-- 4.b library grid -->
                 <div
                     id="library-grid"
-                    class="hidden grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1440px]:grid-cols-5 min-[1640px]:grid-cols-6 min-[1800px]:grid-cols-7 min-[2000px]:grid-cols-8 gap-4 py-4"></div>
+                    class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1440px]:grid-cols-5 min-[1640px]:grid-cols-6 min-[1800px]:grid-cols-7 min-[2000px]:grid-cols-8 gap-4 py-4"></div>
 
                 <!-- 4.c Friends Interface-->
                 <div id="friends-subsection" class="hidden">
