@@ -471,7 +471,7 @@ function changeContent(to, from, content = null, contentParent = null) {
             // display the page of a single album
             loadSongs(content.songList);
             libraryGrid.classList.remove("hidden");
-            setPageHeader(content.title);
+            setPageHeader(content.title, true);
             break;
         case "artists":
             // display the artists page
@@ -518,7 +518,7 @@ function loadSongs(list) {
         const songCover = document.createElement("img");
         songCover.src = song.image;
         songCover.id = "grid-song-" + i + "-cover";
-        songCover.className = "w-full mb-4 rounded-md";
+        songCover.className = "max-w-[200px] w-full mb-4 rounded-md";
 
         //song info
         const songLabel = document.createElement("div");
@@ -816,7 +816,7 @@ function loadPreviews(areaID) {
 
         const cover = document.createElement("img");
         cover.src = item.image;
-        cover.className = "preview-cover w-full mb-4";
+        cover.className = "max-w-[200px] w-full mb-4";
 
         if (areaID == "artists") {
             cover.className += " rounded-full";
@@ -903,7 +903,7 @@ function select(songID) {
     selected.push(songID);
     songBox.classList.add("bg-green-200");
     icon.classList.remove("hidden");
-    icon.innerHTML = selected.indexOf(songID);
+    icon.innerHTML = selected.indexOf(songID) + 1;
 }
 
 function deselect(songID) {
@@ -916,7 +916,7 @@ function deselect(songID) {
 function updateOrder() {
     for (let i = 0; i < selected.length; i++) {
         const song = document.getElementById(selected[i]);
-        document.getElementById(song.id + "-selected").innerHTML = i;
+        document.getElementById(song.id + "-selected").innerHTML = i + 1;
     }
 }
 
