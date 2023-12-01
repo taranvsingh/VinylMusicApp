@@ -1249,6 +1249,7 @@ function playNext() {
         paused();
         pause.css("display", "none");
         play.css("display", "block");
+        reset();
         progress.value = progress.max;
     }
 }
