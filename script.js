@@ -345,13 +345,20 @@ function paused() {
 
 //reset all values, record and progress bar
 function reset() {
-    progress.value = 0;
-    time = 0;
-    record.velocity("stop", true);
-    record.velocity({ rotateZ: "0deg" });
     playerTitle.text("Title");
     playerArtist.text("Artist");
     record.attr("src", "/assets/compact-disc-solid.png");
+    resetRecord();
+}
+
+function resetRecord() {
+    record.velocity("stop", true);
+    record.velocity({ rotateZ: "0deg" });
+    if (playerTitle.text() != "Title" && playerArtist.text() != "Artist") {
+        progress.value = 0;
+        time = 0;
+        playing();
+    }
 }
 
 //reset record and display pause button
@@ -395,7 +402,7 @@ next.click(function () {
 
 //play previous button
 prev.click(function () {
-    changeSong();
+    resetRecord();
 });
 
 /**
