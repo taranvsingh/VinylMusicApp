@@ -13,7 +13,7 @@
         <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
         
         <script src="script.js" defer></script>
-        <script src="queue.js" defer></script>
+        <!-- <script src="queue.js" defer></script> -->
         <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
         <!-- <script src="select.js" defer></script> -->
 
@@ -116,11 +116,11 @@
                             <i class="h-max w-9 hover:fill-green-400 hover:text-green-400" data-feather="play"></i>
                         </button>
                         <!-- pause button -->
-                        <button class="player-pause-button hidden">
+                        <button class="player-pause-button hidden" >
                             <i class="h-max w-9 hover:fill-green-400 hover:text-green-400" data-feather="pause"></i>
                         </button>
                         <!-- next button -->
-                        <button class="player-next-button change-song">
+                        <button onclick="playNext()" class="player-next-button change-song">
                             <i class="h-max w-9 hover:fill-green-400 hover:text-green-400" data-feather="skip-forward"></i>
                         </button>
                     </div>
