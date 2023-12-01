@@ -259,6 +259,10 @@ var artistList = [
     },
 ];
 
+/**
+ * MUSIC PLAYER
+ */
+
 var record = $("#player-record");
 var play = $(".player-play-button");
 var pause = $(".player-pause-button");
@@ -359,6 +363,10 @@ $(".change-song").click(function () {
     changeSong();
     playing();
 });
+
+/**
+ * PAGE NAVIGATION
+ */
 
 // page history
 const historyStack = [];
@@ -492,6 +500,10 @@ function changeContent(to, from, content = null, contentParent = null) {
     }
 }
 
+/**
+ * PAGE POPULATION
+ */
+
 function loadSongs(list) {
     libraryGrid.innerHTML = "";
 
@@ -501,10 +513,11 @@ function loadSongs(list) {
         songBox.id = "grid-song-" + i;
         songBox.className =
             "grid-song relative w-full p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
-        songBox.addEventListener("click", () => {});
+        songBox.addEventListener("click", toggleSelect.bind(this, songBox.id, song));
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
+        songCover.id = "grid-song-" + i + "-cover";
         songCover.className = "w-full mb-4 rounded-md";
 
         //song info
@@ -740,8 +753,6 @@ function loadPreviews(areaID) {
             break;
     }
 
-    // container for preview and more button
-
     const preview = document.createElement("div");
 
     preview.id = areaID + "-preview";
@@ -752,7 +763,7 @@ function loadPreviews(areaID) {
     const more = document.createElement("button");
     more.type = "button";
     more.className =
-        "w-16 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300";
+        "w-16 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300 mb-2.5";
     more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
     more.innerHTML = '<i data-feather="more-horizontal"></i>';
 
@@ -874,6 +885,63 @@ function loadPreviews(areaID) {
     area.appendChild(preview);
 }
 
+const selected = []; // queue of selected songs
+
+function toggleSelect(songID) {
+    if (selected.includes(songID)) {
+        deselect(songID);
+        selected.splice(selected.indexOf(songID), 1);
+        updateOrder();
+    } else {
+        select(songID);
+    }
+}
+
+function select(songID) {
+    const songBox = document.getElementById(songID);
+    const icon = document.getElementById(songID + "-selected");
+    selected.push(songID);
+    songBox.classList.add("bg-green-200");
+    icon.classList.remove("hidden");
+    icon.innerHTML = selected.indexOf(songID);
+}
+
+function deselect(songID) {
+    const songBox = document.getElementById(songID);
+    const icon = document.getElementById(songID + "-selected");
+    songBox.classList.remove("bg-green-200");
+    icon.classList.add("hidden");
+}
+
+function updateOrder() {
+    for (let i = 0; i < selected.length; i++) {
+        const song = document.getElementById(selected[i]);
+        document.getElementById(song.id + "-selected").innerHTML = i;
+    }
+}
+
+// Upon clicking, play buttons should play the first selected song and queue all others
+const playButton = document.getElementById("libraryControlsPlay-playButton");
+const queueButton = document.getElementById("libraryControlsPlay-queueButton");
+playButton.addEventListener("click", () => {
+    let song = selected.shift();
+    changeSong(document.getElementById(song + "-cover").src);
+    deselect(song);
+
+    while (selected.length > 0) {
+        song = selected.shift();
+        deselect(song);
+    }
+
+    updateOrder();
+});
+
+queueButton.addEventListener("click", () => {
+    for (let i = 0; i < selected.length; i++) {
+        const song = selected[i];
+    }
+});
+
 // Intitial state
 libraryButton.classList.add("bg-white", "text-black");
 loadPreviews("liked-songs");
@@ -882,4 +950,4 @@ loadPreviews("albums");
 loadPreviews("artists");
 
 reset(); // reset player
-feather.replace();
+feather.replace(); // Set the more button icons
