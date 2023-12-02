@@ -408,9 +408,9 @@ function paused() {
 function resetRecord() {
     record.velocity("stop", true);
     record.velocity({ rotateZ: "0deg" });
+    progress.value = 0;
+    time = 0;
     if (playerTitle.text() != "Title" && playerArtist.text() != "Artist") {
-        progress.value = 0;
-        time = 0;
         playing();
     }
 }
@@ -597,7 +597,10 @@ function loadSongs(list) {
         songBox.setAttribute("title", song.title);
         songBox.setAttribute("artist", song.artist);
         songBox.setAttribute("cover", song.image);
-        songBox.addEventListener("click", toggleSelect.bind(this, songBox.id, song));
+        songBox.addEventListener(
+            "click",
+            toggleSelect.bind(this, songBox.id, song)
+        );
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
@@ -610,7 +613,8 @@ function loadSongs(list) {
 
         //title
         const title = document.createElement("p");
-        title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         title.textContent = song.title;
 
         //artist
@@ -754,7 +758,8 @@ function loadArtists() {
 
         //artist
         const name = document.createElement("p");
-        name.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        name.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         name.textContent = artist.name;
 
         artistBox.appendChild(artistCover);
@@ -848,7 +853,10 @@ function loadPreviews(areaID) {
     more.type = "button";
     more.className =
         "w-16 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300 mb-2.5";
-    more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
+    more.addEventListener(
+        "click",
+        changeContent.bind(this, areaID, "library", songList)
+    );
     more.innerHTML = '<i data-feather="more-horizontal"></i>';
 
     header.appendChild(areaName);
@@ -918,7 +926,8 @@ function loadPreviews(areaID) {
 
         //title
         const title = document.createElement("p");
-        title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.className =
+            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
 
         if (areaID != "artists") {
             title.textContent = item.title;
