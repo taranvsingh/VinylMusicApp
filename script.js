@@ -58,7 +58,6 @@ var songsInQueue = [
         artist: "The Jackson 5",
         image: "./assets/Jackson5-ChristmasAlbum.jpg",
     },
-    
 ];
 
 var playlistList = [
@@ -284,9 +283,11 @@ var artistList = [
     },
 ];
 
-/**
- * MUSIC PLAYER
- */
+//===============================================
+// VARIABLES
+//===============================================
+
+// MUSIC PLAYER ---------------------------------
 
 var playerTitle = $("#current-song-title");
 var playerArtist = $("#current-song-artist");
@@ -301,6 +302,64 @@ var time = 0;
 var duration = progress.max;
 var angle = 0;
 const ANGLE_INC = 12; //angle/sec record rotates
+
+// NAVIGATION -----------------------------------
+
+const historyStack = []; // navigation history
+
+// Library Pages
+const librarySubsection = document.getElementById("library-subsection");
+const friendsSubsection = document.getElementById("friends-subsection");
+const settingsSubsection = document.getElementById("settings-subsection");
+const libraryGrid = document.getElementById("library-grid");
+
+// Navbar buttons
+const libraryButton = document.getElementById("library-button");
+const friendsButton = document.getElementById("friends-button");
+const settingsButton = document.getElementById("settings-button");
+
+// Page Headers
+const libraryHeader = document.getElementById("library-bar");
+const friendsHeader = document.getElementById("friends-bar");
+const settingsHeader = document.getElementById("settings-bar");
+const playControls = document.getElementById("libraryControls-play");
+const libraryPageHeader = document.getElementById("library-page");
+
+// SELECTION, PLAY, AND QUEUE -------------------
+
+const selected = []; // queue of selected songs
+const playButton = document.getElementById("libraryControlsPlay-playButton");
+const queueButton = document.getElementById("libraryControlsPlay-queueButton");
+
+// NOTIFICATION ---------------------------------
+
+const notification = document.getElementById("notification");
+const notifError = document.getElementById("notification-error");
+
+//===============================================
+// NOTIFICATIONS
+//===============================================
+
+function hideNotif() {
+    notification.classList.add("hidden");
+    notifError.classList.add("hidden");
+}
+
+function notify(message) {
+    notification.textContent = message;
+    notification.classList.remove("hidden");
+    setTimeout(hideNotif, 2000);
+}
+
+function notifyError(message) {
+    notifError.textContent = message;
+    notifError.classList.remove("hidden");
+    setTimeout(hideNotif, 2000);
+}
+
+//===============================================
+// MUSIC PLAYER
+//===============================================
 
 //change progress bar
 window.setInterval(function () {
@@ -368,14 +427,6 @@ function paused() {
     isPaused = true;
 }
 
-//reset all values, record and progress bar
-function reset() {
-    playerTitle.text("Title");
-    playerArtist.text("Artist");
-    record.attr("src", "/assets/compact-disc-solid.png");
-    resetRecord();
-}
-
 function resetRecord() {
     record.velocity("stop", true);
     record.velocity({ rotateZ: "0deg" });
@@ -384,6 +435,14 @@ function resetRecord() {
         time = 0;
         playing();
     }
+}
+
+//reset all values, record and progress bar
+function reset() {
+    playerTitle.text("Title");
+    playerArtist.text("Artist");
+    record.attr("src", "/assets/compact-disc-solid.png");
+    resetRecord();
 }
 
 //reset record and display pause button
@@ -415,45 +474,19 @@ pause.click(function () {
     play.css("display", "block");
 });
 
-//prev and next buttons
-// TODO make rewind and skip buttons unique
-// TODO preserve song data on rewind
-// TODO change song to next in queue or reset on empty
-
 //play next button
-next.click(function () {
-    playNext();
-});
+next.click(playNext);
 
 //play previous button
-prev.click(function () {
-    resetRecord();
-});
+prev.click(resetRecord);
 
-/**
- * PAGE NAVIGATION
- */
+//===============================================
+// NAVIGATION
+//===============================================
 
-// page history
-const historyStack = [];
-
-// Subsections
-const librarySubsection = document.getElementById("library-subsection");
-const friendsSubsection = document.getElementById("friends-subsection");
-const settingsSubsection = document.getElementById("settings-subsection");
-const libraryGrid = document.getElementById("library-grid");
-
-// Navbar buttons
-const libraryButton = document.getElementById("library-button");
-const friendsButton = document.getElementById("friends-button");
-const settingsButton = document.getElementById("settings-button");
-
-// Headers
-const libraryHeader = document.getElementById("library-bar");
-const friendsHeader = document.getElementById("friends-bar");
-const settingsHeader = document.getElementById("settings-bar");
-const playControls = document.getElementById("libraryControls-play");
-const libraryPageHeader = document.getElementById("library-page");
+function clearHistory() {
+    historyStack.length = 0;
+}
 
 function setPageHeader(pageTitle, revealPlayerButtons = false) {
     libraryPageHeader.classList.remove("hidden");
@@ -482,38 +515,40 @@ function changeContent(to, from, content = null, contentParent = null) {
     settingsButton.classList.remove("bg-white", "text-black");
 
     if (from != null) {
+        // forward navigation
+
         historyStack.push([from, contentParent]);
     }
 
-    // Show the corresponding subsection based on the selected to
+    // Show the corresponding subsection based on the target page
     switch (to) {
         case "library":
             // display the library page
             libraryHeader.classList.remove("hidden");
             librarySubsection.classList.remove("hidden");
             libraryButton.classList.add("bg-white", "text-black");
-            historyStack.length = 0; // empty the history queue
+            clearHistory();
             break;
         case "friends":
             // display the friends page
             friendsHeader.classList.remove("hidden");
             friendsSubsection.classList.remove("hidden");
             friendsButton.classList.add("bg-white", "text-black");
-            historyStack.length = 0; // empty the history queue
+            clearHistory();
             break;
         case "settings":
             // display the settings page
             settingsHeader.classList.remove("hidden");
             settingsSubsection.classList.remove("hidden");
             settingsButton.classList.add("bg-white", "text-black");
-            historyStack.length = 0; // empty the history queue
+            clearHistory();
             break;
         case "liked-songs":
             // display the liked songs page
+            clearSelection();
             loadSongs(content);
             libraryGrid.classList.remove("hidden");
             setPageHeader("Liked Songs", true);
-            // likedSongsHeader.classList.remove("hidden");
             break;
         case "playlists":
             // display the playlists page
@@ -523,6 +558,7 @@ function changeContent(to, from, content = null, contentParent = null) {
             break;
         case "playlist":
             // display the page of a single playlist
+            clearSelection();
             loadSongs(content.songList);
             libraryGrid.classList.remove("hidden");
             setPageHeader(content.title, true);
@@ -535,6 +571,7 @@ function changeContent(to, from, content = null, contentParent = null) {
             break;
         case "album":
             // display the page of a single album
+            clearSelection();
             loadSongs(content.songList);
             libraryGrid.classList.remove("hidden");
             setPageHeader(content.title, true);
@@ -566,9 +603,9 @@ function changeContent(to, from, content = null, contentParent = null) {
     }
 }
 
-/**
- * PAGE POPULATION
- */
+//===============================================
+// LIBRARY POPULATION
+//===============================================
 
 function loadSongs(list) {
     libraryGrid.innerHTML = "";
@@ -578,20 +615,16 @@ function loadSongs(list) {
         const songBox = document.createElement("div");
         songBox.id = "grid-song-" + i;
         songBox.className =
-            "grid-song relative w-full p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+            "grid-song relative w-fit p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
         songBox.setAttribute("title", song.title);
         songBox.setAttribute("artist", song.artist);
         songBox.setAttribute("cover", song.image);
-        songBox.addEventListener(
-            "click",
-            toggleSelect.bind(this, songBox.id, song)
-        );
+        songBox.addEventListener("click", toggleSelect.bind(this, songBox.id, song));
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
         songCover.id = "grid-song-" + i + "-cover";
-        songCover.className =
-            "hidden md:block max-w-[200px] w-full mb-4 rounded-md";
+        songCover.className = "max-w-[200px] w-full mb-4 rounded-md";
 
         //song info
         const songLabel = document.createElement("div");
@@ -599,8 +632,7 @@ function loadSongs(list) {
 
         //title
         const title = document.createElement("p");
-        title.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         title.textContent = song.title;
 
         //artist
@@ -744,8 +776,7 @@ function loadArtists() {
 
         //artist
         const name = document.createElement("p");
-        name.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        name.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         name.textContent = artist.name;
 
         artistBox.appendChild(artistCover);
@@ -839,10 +870,7 @@ function loadPreviews(areaID) {
     more.type = "button";
     more.className =
         "w-16 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300 mb-2.5";
-    more.addEventListener(
-        "click",
-        changeContent.bind(this, areaID, "library", songList)
-    );
+    more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
     more.innerHTML = '<i data-feather="more-horizontal"></i>';
 
     header.appendChild(areaName);
@@ -912,8 +940,7 @@ function loadPreviews(areaID) {
 
         //title
         const title = document.createElement("p");
-        title.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+        title.className = "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
 
         if (areaID != "artists") {
             title.textContent = item.title;
@@ -969,16 +996,14 @@ function loadPreviews(areaID) {
     area.appendChild(preview);
 }
 
-const selected = []; // queue of selected songs
+//===============================================
+// SONG SELECTION AND QUEUE
+//===============================================
 
-function toggleSelect(songID) {
-    if (selected.includes(songID)) {
-        deselect(songID);
-        selected.splice(selected.indexOf(songID), 1);
-        updateOrder();
-    } else {
-        select(songID);
-    }
+// SELECTION ------------------------------------
+
+function clearSelection() {
+    selected.length = 0;
 }
 
 function select(songID) {
@@ -1004,14 +1029,23 @@ function updateOrder() {
     }
 }
 
+function toggleSelect(songID) {
+    if (selected.includes(songID)) {
+        deselect(songID);
+        selected.splice(selected.indexOf(songID), 1);
+        updateOrder();
+    } else {
+        select(songID);
+    }
+}
+
+// PLAY -----------------------------------------
+
 // Upon clicking, play buttons should play the first selected song and queue all others
-const playButton = document.getElementById("libraryControlsPlay-playButton");
-const queueButton = document.getElementById("libraryControlsPlay-queueButton");
 playButton.addEventListener("click", () => {
     let song = selected.shift();
     let songBox = document.getElementById(song);
 
-    // TODO pass song json object
     changeSong(
         songBox.getAttribute("title"),
         songBox.getAttribute("artist"),
@@ -1019,64 +1053,51 @@ playButton.addEventListener("click", () => {
     );
     deselect(song);
 
-    
+    if (selected.length > 0) {
+        notify("Songs added to queue");
+    }
+
     while (selected.length > 0) {
         song = selected.shift();
         deselect(song);
         songBox = document.getElementById(song);
-        
-        title= songBox.getAttribute("title")
-        artist= songBox.getAttribute("artist")
-        cover= songBox.getAttribute("cover")
-        
-        
+
+        title = songBox.getAttribute("title");
+        artist = songBox.getAttribute("artist");
+        cover = songBox.getAttribute("cover");
+
         addSong(title, artist, cover);
     }
 
     updateOrder();
     loadSongsInQueue();
-    loadHomePage();
+    loadMainQueue();
 });
 
-queueButton.addEventListener("click", () => {
-    while (selected.length > 0) {
-        song = selected.shift();
-        deselect(song);
-        songBox = document.getElementById(song);
-        
-        title= songBox.getAttribute("title")
-        artist= songBox.getAttribute("artist")
-        cover= songBox.getAttribute("cover")
-        
-        
-        addSong(title, artist, cover);
-    }
-    loadSongsInQueue();
-    loadHomePage();
-});
-
-// Intitial state
-libraryButton.classList.add("bg-white", "text-black");
-
-loadPreviews("liked-songs");
-loadPreviews("playlists");
-loadPreviews("albums");
-loadPreviews("artists");
-
-function setup()
-{
+function setupPlayer() {
     playNext(); // reset player
     pause.css("display", "none");
     play.css("display", "block");
     paused();
 }
 
-setup();
+// QUEUE SECTION ---------------------------------
+queueButton.addEventListener("click", () => {
+    notify("Songs added to queue");
+    while (selected.length > 0) {
+        song = selected.shift();
+        deselect(song);
+        songBox = document.getElementById(song);
 
-feather.replace(); // Set the more button icons
+        title = songBox.getAttribute("title");
+        artist = songBox.getAttribute("artist");
+        cover = songBox.getAttribute("cover");
 
-//QUEUE SECTION ______________________________________________________________________________________________
-
+        addSong(title, artist, cover);
+    }
+    loadSongsInQueue();
+    loadMainQueue();
+});
 
 function expandQueue() {
     var smallqueue = document.getElementById("small-queue");
@@ -1084,41 +1105,38 @@ function expandQueue() {
     var queuecontainer = document.getElementById("queue-container");
     var playContainer = document.getElementById("music-player-container");
     var expandButton = document.getElementById("expandButton");
-    //var hideButton = document.getElementById('backButton');
 
     smallqueue.classList.add("hidden");
     expandButton.classList.add("hidden");
     playContainer.classList.add("hidden");
-    //hideButton.classList.remove('hidden');
     largequeue.classList.remove("hidden");
     queuecontainer.classList.remove("row-span-1");
     queuecontainer.classList.add("row-span-4");
-    queuecontainer.classList.add('overflow-y-scroll');
+    queuecontainer.classList.add("overflow-y-scroll");
     loadSongsInQueue();
 }
 
-function backToHome() {
+function closeQueue() {
     var smallqueue = document.getElementById("small-queue");
     var largequeue = document.getElementById("expanded-queue");
     var queuecontainer = document.getElementById("queue-container");
     var playContainer = document.getElementById("music-player-container");
     var expandButton = document.getElementById("expandButton");
-    //var hideButton = document.getElementById('backButton');
 
     smallqueue.classList.remove("hidden");
     expandButton.classList.remove("hidden");
     playContainer.classList.remove("hidden");
-    //hideButton.classList.add('hidden');
     largequeue.classList.add("hidden");
     queuecontainer.classList.add("row-span-1");
     queuecontainer.classList.remove("row-span-4");
-    queuecontainer.classList.remove('overflow-y-scroll');
-    loadHomePage();
+    queuecontainer.classList.remove("overflow-y-scroll");
+    loadMainQueue();
 }
-function loadHomePage() {
+
+function loadMainQueue() {
     var container = document.getElementById("queueHomeSongBoxes");
     container.innerHTML = "";
-    checkEmpty();
+    checkEmptyQueue();
 
     for (var i = 0; i < Math.min(3, songsInQueue.length); i++) {
         var song = songsInQueue[i];
@@ -1179,12 +1197,12 @@ function loadHomePage() {
                 songsInQueue.splice(ind, 1);
             }
 
-            checkEmpty();
+            checkEmptyQueue();
         },
     });
 }
 
-function checkEmpty() {
+function checkEmptyQueue() {
     var empty1 = document.getElementById("empty-queue1");
     var empty2 = document.getElementById("empty-queue2");
 
@@ -1202,15 +1220,14 @@ function checkEmpty() {
 }
 
 function loadSongsInQueue() {
-    //console.log(songsInQueue)
     var container = document.getElementById("songBoxes");
 
     container.innerHTML = "";
-    checkEmpty();
+    checkEmptyQueue();
     songsInQueue.forEach((song) => {
         var songBox = document.createElement("div");
         songBox.className =
-            "flex items-center mb-5 h-20 border-double border-2 hover:cursor-grab hover:border-dashed select-none";
+            "flex items-center mb-5 h-20 border-double hover:cursor-grab hover:border-dashed select-none";
 
         var songImg = document.createElement("img");
         songImg.src = song.image;
@@ -1257,8 +1274,6 @@ function loadSongsInQueue() {
 
             // Insert the item at the new position
             songsInQueue.splice(newIndex, 0, removedSong);
-
-            //console.log(songsInQueue)
         },
         removeOnSpill: true,
         onSpill: function (evt) {
@@ -1267,7 +1282,7 @@ function loadSongsInQueue() {
                 songsInQueue.splice(ind, 1);
             }
 
-            checkEmpty();
+            checkEmptyQueue();
         },
     });
 }
@@ -1278,23 +1293,22 @@ function clickedClear() {
 }
 
 function addSong(title, artist, cover) {
-    //console.log(songsInQueue)
     newSong = {
-        'title':title,
-        'artist': artist,
-        'image': cover
-    }
+        title: title,
+        artist: artist,
+        image: cover,
+    };
     songsInQueue.push(newSong);
     loadSongsInQueue();
 }
 
 function playNext() {
-    //console.log(songsInQueue);
     if (songsInQueue.length > 0) {
         topSong = songsInQueue.shift();
         changeSong(topSong.title, topSong.artist, topSong.image);
 
-        loadHomePage();
+        loadMainQueue();
+        resetRecord();
         playing();
     }
     //if there are no more songs, skip to the end of the song
@@ -1306,4 +1320,20 @@ function playNext() {
         progress.value = duration;
     }
 }
-loadHomePage();
+
+//===============================================
+// INITIAL STATE
+//===============================================
+
+libraryButton.classList.add("bg-white", "text-black");
+
+loadPreviews("liked-songs");
+loadPreviews("playlists");
+loadPreviews("albums");
+loadPreviews("artists");
+
+setupPlayer();
+
+loadMainQueue();
+
+feather.replace(); // Set feather icons

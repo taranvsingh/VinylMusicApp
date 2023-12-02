@@ -4,18 +4,17 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://unpkg.com/feather-icons"></script>
         <link rel="stylesheet" href="style.css" />
         
         <!-- CDNs -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
-        
-        <script src="script.js" defer></script>
-        <!-- <script src="queue.js" defer></script> -->
         <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
-        <!-- <script src="select.js" defer></script> -->
+        
+        <!-- Scripts -->
+        <script src="script.js" defer></script>
 
         <title>VinylMusic</title>
     </head>
@@ -167,10 +166,12 @@
                     <!--Queue Header-->
                     <div class="ml-4">
                         <div
-                            class="queue_navBar flex flex-row items-center gap-6 mb-8 mt-5">
+                        id="queue_navBar"
+                            class="flex flex-row items-center gap-6 mb-8 mt-5">
                             <button
-                                class="queuePage-backButton fill-black hover:fill-green-400"
-                                onclick="backToHome()">
+                                id="queuePage-backButton"
+                                class=" fill-black hover:fill-green-400"
+                                onclick="closeQueue()">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="32"
@@ -202,7 +203,7 @@
                             <!--Clear Button-->
                             <button
                                 id="clearButton"
-                                class="flex items-center justify-center w-full h-10 mb-4 border-2 border-gray-800 hover:border-red-400 hover:text-red-400"
+                                class="flex items-center justify-center w-44 h-10 mx-auto mb-4 border-2 border-gray-800 hover:border-red-400 hover:text-red-400"
                                 onclick="clickedClear()">
                                 CLEAR
                             </button>
@@ -400,6 +401,11 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Notifications -->
+            <p id="notification" class="hidden absolute bottom-8 inset-x-1/2 w-fit px-4 py-2 rounded-lg whitespace-nowrap bg-green-300"></p>
+            <p id="notification-error" class="hidden absolute bottom-8 inset-x-1/2 w-fit px-4 py-2 rounded-lg whitespace-nowrap bg-red-300"></p>
+
             <script src="friends.js"></script>
     </body>
 </html>
