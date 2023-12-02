@@ -36,30 +36,6 @@ var songList = [
     },
 ];
 
-var songsInQueue = [
-    {
-        title: "Cypress",
-        artist: "Sarah Kinsley",
-        image: "./assets/albums/cypress.jpg",
-    },
-
-    {
-        title: "Jingle Bell Rock",
-        artist: "Brenda Lee",
-        image: "./assets/jingleBellRock.jpg",
-    },
-    {
-        title: "Let It Snow! Let it Snow! Let It Snow!",
-        artist: "Frank Sinatra",
-        image: "./assets/let-it-snow.jpg",
-    },
-    {
-        title: "Santa Claus Is Coming To Town",
-        artist: "The Jackson 5",
-        image: "./assets/Jackson5-ChristmasAlbum.jpg",
-    },
-];
-
 var playlistList = [
     {
         title: "Study Vibes",
@@ -330,6 +306,8 @@ const libraryPageHeader = document.getElementById("library-page");
 const selected = []; // queue of selected songs
 const playButton = document.getElementById("libraryControlsPlay-playButton");
 const queueButton = document.getElementById("libraryControlsPlay-queueButton");
+
+var songsInQueue = [];
 
 // NOTIFICATION ---------------------------------
 
@@ -615,7 +593,7 @@ function loadSongs(list) {
         const songBox = document.createElement("div");
         songBox.id = "grid-song-" + i;
         songBox.className =
-            "grid-song relative w-fit p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+            "grid-song relative max-w-[200px] h-fit p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
         songBox.setAttribute("title", song.title);
         songBox.setAttribute("artist", song.artist);
         songBox.setAttribute("cover", song.image);
@@ -624,7 +602,7 @@ function loadSongs(list) {
         const songCover = document.createElement("img");
         songCover.src = song.image;
         songCover.id = "grid-song-" + i + "-cover";
-        songCover.className = "max-w-[200px] w-full mb-4 rounded-md";
+        songCover.className = "w-full mb-4 rounded-md";
 
         //song info
         const songLabel = document.createElement("div");
@@ -897,7 +875,7 @@ function loadPreviews(areaID) {
 
         const box = document.createElement("div");
         box.className =
-            "max-w-[200px] lg:max-w-none h-fit p-4 rounded-lg hover:cursor-pointer hover:bg-green-100";
+            "max-w-[200px] h-fit p-4 rounded-lg hover:cursor-pointer hover:bg-green-100";
 
         switch (i) {
             case 7:
@@ -1145,7 +1123,7 @@ function loadMainQueue() {
 
         var songImg = document.createElement("img");
         songImg.src = song.image;
-        songImg.className = "w-16 h-16 rounded";
+        songImg.className = "w-20 h-20 rounded";
 
         //song info
         var songInfo = document.createElement("div");
@@ -1209,13 +1187,19 @@ function checkEmptyQueue() {
     songsInQueue = songsInQueue.filter(function (element) {
         return element !== undefined;
     });
+
+    // TODO when player and queue is empty, disable player buttons
     if (songsInQueue.length == 0) {
         empty1.classList.remove("hidden");
 
         empty2.classList.remove("hidden");
+        // prev.addClass("hover:cursor-not-allowed hover:bg-black hover:fill-black");
+        // play.addClass("hover:cursor-not-allowed hover:bg-black hover:fill-black");
     } else {
         empty1.classList.add("hidden");
         empty2.classList.add("hidden");
+        // prev.removeClass("hover:cursor-not-allowed hover:bg-black hover:fill-black");
+        // play.removeClass("hover:cursor-not-allowed hover:bg-black hover:fill-black");
     }
 }
 
@@ -1227,7 +1211,7 @@ function loadSongsInQueue() {
     songsInQueue.forEach((song) => {
         var songBox = document.createElement("div");
         songBox.className =
-            "flex items-center mb-5 h-20 border-double hover:cursor-grab hover:border-dashed select-none";
+            "flex items-center mb-5 h-20 border-4 border-double px-4 hover:cursor-grab hover:border-dashed select-none";
 
         var songImg = document.createElement("img");
         songImg.src = song.image;
