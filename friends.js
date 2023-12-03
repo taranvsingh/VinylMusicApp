@@ -127,6 +127,16 @@ globalUsers = [
 const friendsGrid = document.getElementById("friends-subsection");
 let totalActiveFriends = 0;
 
+function renderActiveCount() {
+    totalActiveFriends = 0
+    friends.forEach((friend) => {
+        if (friend.isActive) {
+            totalActiveFriends++;
+        }
+    });
+    const activeCountElement = document.getElementById("active-users-count");
+    activeCountElement.textContent = totalActiveFriends;
+}
 function renderFriends() {
   friendsGrid.innerHTML = "";
 
@@ -172,9 +182,7 @@ function renderFriends() {
     subInfo.className = "text-sm text-gray-500 mb-1";
     subInfo.textContent = `${friend.artist} - ${friend.album}`;
 
-    if (friend.isActive) {
-      totalActiveFriends++;
-    } else {
+    if (!friend.isActive) {
       isActiveIcon.classList.add("hidden");
     }
 
@@ -200,18 +208,12 @@ function renderFriends() {
     nameDiv.classList.add("flex", "col-span-2");
     songCover.classList.add("w-20", "rounded-full", "max-h-20", "ml-8");
 
+    renderActiveCount();
     deleteFriendContainer.addEventListener('click', function(event) {
         deleteFriend(friend.id);
-        friend => friend.id !== friendId;
-        if (friend.isActive) {
-            totalActiveFriends--;
-        }
-        const activeCountElement = document.getElementById("active-users-count");
-        activeCountElement.textContent = totalActiveFriends;
-    });
-
-    const activeCountElement = document.getElementById("active-users-count");
-    activeCountElement.textContent = totalActiveFriends;
+        renderActiveCount();
+        } 
+    );
 
     feather.replace(); // Set feather icons
   });
@@ -222,13 +224,14 @@ function deleteFriend(friendId) {
     renderFriends();
 }
 
+let id = 3
+
 function addFriend() {
   const friendSearchInput = document.getElementById("friend-search");
   const friendName = friendSearchInput.value.trim();
 
-  const id = Math.floor(Math.random() * 10) + 1;
-
   const userToAddById = globalUsers.find((user) => user.id === id);
+  id++;
   userToAddById.name = friendName;
   friends.push(userToAddById);
   console.log(friends);
