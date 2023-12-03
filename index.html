@@ -14,6 +14,7 @@
         <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
         
         <!-- Scripts -->
+        <script src="friends.js" defer></script>
         <script src="script.js" defer></script>
 
         <title>VinylMusic</title>
@@ -328,23 +329,26 @@
                     </div>
                     <div id="friends-bar" class="hidden flex items-center justify-between w-full">
                         <h2 id="friends-bar-title" class="text-5xl text-gray-800 font-bold">Friends</h2>
-                        <!-- Rounded Search Bar and Button -->
+                        
                         <div class="flex items-center">
                             <input type="text" id="friend-search" placeholder="Search" class="rounded-l-md p-2 w-4/5 shadow-sm">
-                            <button class="bg-gray-800 hover:bg-gray-600 text-white rounded-r-md p-2 ml-1">
-                                <i data-feather="search"></i>
+                            <button class="bg-gray-800 hover:bg-gray-600 text-white rounded-r-md p-2 ml-1" onclick="addFriend()">
+                                <i data-feather="plus-circle"></i>
                             </button>
                         </div>
                         <div class="active-users flex items-center">
-                            <h2 class="font-sans text-gray-800 text-xl font-bold">Active: 0</h2>
+                            <h2 id="active-users-count" class="font-sans text-gray-800 text-xl font-bold">0</h2>
+                            <i class="fill-green-400" data-feather="circle" height="10px" color="green"></i>
                         </div>
                     </div>
-                    <div id="settings-bar" class="hidden">
+                    <div id="settings-bar" class="hidden flex">
                         <h2
                             id="settings-bar-title"
                             class="text-5xl text-gray-800 font-bold">
                             Settings
                         </h2>
+                        <i data-feather="info" color="red"></i>
+                        <span class=" text-red-500 pl-1">Non Function Section</span>
                     </div>
                 </div>
             </div>
@@ -405,7 +409,8 @@
             <!-- Notifications -->
             <p id="notification" class="hidden absolute bottom-8 inset-x-1/2 w-fit px-4 py-2 rounded-lg whitespace-nowrap bg-green-300"></p>
             <p id="notification-error" class="hidden absolute bottom-8 inset-x-1/2 w-fit px-4 py-2 rounded-lg whitespace-nowrap bg-red-300"></p>
+        
+        <script>feather.replace();</script>
 
-            <script src="friends.js"></script>
     </body>
 </html>

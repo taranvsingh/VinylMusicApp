@@ -1346,5 +1346,3 @@ loadPreviews("artists");
 setupPlayer();
 
 loadMainQueue();
-
-feather.replace(); // Set feather icons
