@@ -150,7 +150,7 @@ function renderFriends() {
 
     // Friend information
     const name = document.createElement("h3");
-    name.className = "text-lg font-bold mb-1";
+    name.className = "text-lg font-bold";
     name.textContent = friend.name;
 
     const isActiveIcon = document.createElement("i");
@@ -167,7 +167,7 @@ function renderFriends() {
     deleteFriendIcon.setAttribute("color", "red");
 
     const songCover = document.createElement("img");
-    songCover.src = "/assets/songs/my-love.jpg";
+    songCover.src = "/assets/compact-disc-solid.png";
     songCover.alt = "Song Cover";
 
     const lastPlayed = document.createElement("p");
@@ -186,10 +186,10 @@ function renderFriends() {
       isActiveIcon.classList.add("hidden");
     }
 
-    nameDiv.appendChild(name);
-    nameDiv.appendChild(isActiveIcon);
     deleteFriendContainer.appendChild(deleteFriendIcon);
     nameDiv.appendChild(deleteFriendContainer);
+    nameDiv.appendChild(name);
+    nameDiv.appendChild(isActiveIcon);
     songInfoDiv.appendChild(lastPlayed);
     songInfoDiv.appendChild(songInfo);
     songInfoDiv.appendChild(subInfo);
@@ -202,11 +202,10 @@ function renderFriends() {
 
     // Append friendDiv to the friendsGrid
     friendsGrid.appendChild(friendDiv);
-
-    deleteFriendIcon.classList.add('ml-4','cursor-pointer');
-    friendDiv.classList.add("flex", "items-center");
-    nameDiv.classList.add("flex", "col-span-2");
-    songCover.classList.add("w-20", "rounded-full", "max-h-20", "ml-8");
+    nameDiv.classList.add("flex", "items-ceter");
+    deleteFriendIcon.classList.add('mr-4','cursor-pointer','border-2', 'border-red-500','hover:bg-red-200');
+    friendDiv.classList.add("flex", "items-center", "justify-between", "max-w-md", "shadow-md");
+    songCover.classList.add("w-20", "rounded-full", "max-h-20");
 
     renderActiveCount();
     deleteFriendContainer.addEventListener('click', function(event) {
