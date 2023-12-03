@@ -423,6 +423,14 @@ function reset() {
     resetRecord();
 }
 
+function previous()
+{
+    if(songsInQueue.length>0)
+    {
+        resetRecord();
+    }
+}   
+
 //reset record and display pause button
 function changeSong(title, artist, path) {
     reset();
@@ -456,7 +464,7 @@ pause.click(function () {
 next.click(playNext);
 
 //play previous button
-prev.click(resetRecord);
+prev.click(previous);
 
 //===============================================
 // NAVIGATION
@@ -488,9 +496,9 @@ function changeContent(to, from, content = null, contentParent = null) {
     libraryPageHeader.classList.add("hidden");
     playControls.classList.add("hidden");
 
-    libraryButton.classList.remove("bg-white", "text-black");
-    friendsButton.classList.remove("bg-white", "text-black");
-    settingsButton.classList.remove("bg-white", "text-black");
+    libraryButton.classList.remove("bg-green-300", "text-gray-800");
+    friendsButton.classList.remove("bg-green-300", "text-gray-800");
+    settingsButton.classList.remove("bg-green-300", "text-gray-800");
 
     if (from != null) {
         // forward navigation
@@ -504,21 +512,21 @@ function changeContent(to, from, content = null, contentParent = null) {
             // display the library page
             libraryHeader.classList.remove("hidden");
             librarySubsection.classList.remove("hidden");
-            libraryButton.classList.add("bg-white", "text-black");
+            libraryButton.classList.add("bg-green-300", "text-gray-800");
             clearHistory();
             break;
         case "friends":
             // display the friends page
             friendsHeader.classList.remove("hidden");
             friendsSubsection.classList.remove("hidden");
-            friendsButton.classList.add("bg-white", "text-black");
+            friendsButton.classList.add("bg-green-300", "text-gray-800");
             clearHistory();
             break;
         case "settings":
             // display the settings page
             settingsHeader.classList.remove("hidden");
             settingsSubsection.classList.remove("hidden");
-            settingsButton.classList.add("bg-white", "text-black");
+            settingsButton.classList.add("bg-green-300", "text-gray-800");
             clearHistory();
             break;
         case "liked-songs":
@@ -1318,7 +1326,7 @@ function playNext() {
 // INITIAL STATE
 //===============================================
 
-libraryButton.classList.add("bg-white", "text-black");
+libraryButton.classList.add("bg-green-300", "text-gray-800");
 
 loadPreviews("liked-songs");
 loadPreviews("playlists");
