@@ -1193,6 +1193,7 @@ function loadMainQueue() {
             }
 
             checkEmptyQueue();
+            loadMainQueue();
         },
     });
 }
