@@ -177,7 +177,7 @@ function renderFriends() {
         deleteFriendIcon.setAttribute("color", "red");
 
         const songCover = document.createElement("img");
-        songCover.src = "/assets/compact-disc-solid.png";
+        songCover.src = "./assets/compact-disc-solid.png";
         songCover.alt = "Song Cover";
 
         const lastPlayed = document.createElement("p");
@@ -256,7 +256,7 @@ function addFriend() {
     let friendName = friendSearchInput.value.trim();
 
     // Check if friendName is empty or contains non-alphabetic characters
-    if (friendName === '' || containsNonAlphabetic(friendName)) {
+    if (friendName === "" || containsNonAlphabetic(friendName)) {
         // Handle invalid input (you can display an error message or simply exit)
         console.log("Invalid input");
         return;

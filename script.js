@@ -429,7 +429,7 @@ function resetRecord() {
 function reset() {
     playerTitle.text("Title");
     playerArtist.text("Artist");
-    record.attr("src", "/assets/compact-disc-solid.png");
+    record.attr("src", "./assets/compact-disc-solid.png");
     resetRecord();
 }
 
@@ -1410,3 +1410,4 @@ loadPreviews("artists");
 setupPlayer();
 
 loadMainQueue();
+feather.replace();
