@@ -403,7 +403,7 @@ function playing() {
 
 // Checks if a song is currently loaded in the player
 function isLoaded() {
-    return record.attr("loaded");
+    return record.attr("loaded") == "true";
 }
 
 // set whether a song is playing
@@ -649,7 +649,10 @@ function loadSongs(list) {
         songBox.setAttribute("title", song.title);
         songBox.setAttribute("artist", song.artist);
         songBox.setAttribute("cover", song.image);
-        songBox.addEventListener("click", toggleSelect.bind(this, songBox.id, song));
+        songBox.addEventListener(
+            "click",
+            toggleSelect.bind(this, songBox.id, song)
+        );
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
@@ -743,7 +746,8 @@ function loadAlbums() {
     albumList.forEach((album) => {
         const albumBox = document.createElement("div");
         albumBox.id = "album-" + i;
-        albumBox.className = "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
+        albumBox.className =
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
         albumBox.addEventListener(
             "click",
             changeContent.bind(this, "album", "albums", album)
@@ -788,7 +792,8 @@ function loadArtists() {
     artistList.forEach((artist) => {
         const artistBox = document.createElement("div");
         artistBox.id = "artist-" + i;
-        artistBox.className = "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
+        artistBox.className =
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
         artistBox.addEventListener(
             "click",
             changeContent.bind(this, "artist", "artists", artist)
@@ -870,7 +875,8 @@ function loadPreviews(areaID) {
     const area = document.getElementById(areaID + "-area");
 
     const header = document.createElement("div");
-    header.className = "flex flex-row justify-start items-center gap-x-4 border-b-4 mb-2";
+    header.className =
+        "flex flex-row justify-start items-center gap-x-4 border-b-4 mb-2";
 
     const areaName = document.createElement("h3");
     areaName.className = "text-xl md:text-3xl font-bold text-gray-500 mb-4";
@@ -900,7 +906,10 @@ function loadPreviews(areaID) {
     more.type = "button";
     more.className =
         "w-16 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300 mb-2.5";
-    more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
+    more.addEventListener(
+        "click",
+        changeContent.bind(this, areaID, "library", songList)
+    );
     more.innerHTML = '<i data-feather="more-horizontal"></i>';
 
     header.appendChild(areaName);
@@ -1147,9 +1156,7 @@ queueButton.addEventListener("click", () => {
             addSong(title, artist, cover);
         }
 
-        console.log(isLoaded());
         if (!isLoaded()) {
-            console.log("playing next");
             playNext();
         }
     } else {
@@ -1164,6 +1171,10 @@ queueButton.addEventListener("click", () => {
             cover = songBox.getAttribute("cover");
 
             addSong(title, artist, cover);
+        }
+
+        if (!isLoaded()) {
+            playNext();
         }
     }
     loadSongsInQueue();
@@ -1414,5 +1425,3 @@ loadPreviews("artists");
 setupPlayer();
 
 loadMainQueue();
-
-feather.replace();
