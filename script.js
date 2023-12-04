@@ -423,13 +423,11 @@ function reset() {
     resetRecord();
 }
 
-function previous()
-{
-    if(songsInQueue.length>0)
-    {
+function previous() {
+    if (songsInQueue.length > 0) {
         resetRecord();
     }
-}   
+}
 
 //reset record and display pause button
 function changeSong(title, artist, path) {
@@ -496,9 +494,13 @@ function changeContent(to, from, content = null, contentParent = null) {
     libraryPageHeader.classList.add("hidden");
     playControls.classList.add("hidden");
 
-    libraryButton.classList.remove("bg-green-300", "text-gray-800");
-    friendsButton.classList.remove("bg-green-300", "text-gray-800");
-    settingsButton.classList.remove("bg-green-300", "text-gray-800");
+    libraryButton.classList.remove("bg-gray-700", "text-white");
+    friendsButton.classList.remove("bg-gray-700", "text-white");
+    settingsButton.classList.remove("bg-gray-700", "text-white");
+
+    libraryButton.classList.remove("bg-gray-100", "text-gray-700");
+    friendsButton.classList.remove("bg-gray-100", "text-gray-700");
+    settingsButton.classList.remove("bg-gray-100", "text-gray-700");
 
     if (from != null) {
         // forward navigation
@@ -512,21 +514,30 @@ function changeContent(to, from, content = null, contentParent = null) {
             // display the library page
             libraryHeader.classList.remove("hidden");
             librarySubsection.classList.remove("hidden");
-            libraryButton.classList.add("bg-green-300", "text-gray-800");
+
+            libraryButton.classList.add("bg-gray-100", "text-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             clearHistory();
             break;
         case "friends":
             // display the friends page
             friendsHeader.classList.remove("hidden");
             friendsSubsection.classList.remove("hidden");
-            friendsButton.classList.add("bg-green-300", "text-gray-800");
+            friendsButton.classList.add("bg-gray-100", "text-gray-700");
+
+            libraryButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             clearHistory();
             break;
         case "settings":
             // display the settings page
             settingsHeader.classList.remove("hidden");
             settingsSubsection.classList.remove("hidden");
-            settingsButton.classList.add("bg-green-300", "text-gray-800");
+
+            libraryButton.classList.add("bg-gray-700", "text-white");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-100", "text-gray-700");
             clearHistory();
             break;
         case "liked-songs":
@@ -534,12 +545,18 @@ function changeContent(to, from, content = null, contentParent = null) {
             clearSelection();
             loadSongs(content);
             libraryGrid.classList.remove("hidden");
+            libraryButton.classList.add("bg-gray-100", "text-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             setPageHeader("Liked Songs", true);
             break;
         case "playlists":
             // display the playlists page
             loadPlaylists();
             libraryGrid.classList.remove("hidden");
+            libraryButton.classList.add("bg-gray-100", "text-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             setPageHeader("Playlists");
             break;
         case "playlist":
@@ -547,12 +564,18 @@ function changeContent(to, from, content = null, contentParent = null) {
             clearSelection();
             loadSongs(content.songList);
             libraryGrid.classList.remove("hidden");
+            libraryButton.classList.add("bg-gray-100", "text-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             setPageHeader(content.title, true);
             break;
         case "albums":
             // display the albums page
             loadAlbums();
             libraryGrid.classList.remove("hidden");
+            libraryButton.classList.add("bg-gray-100", "ttext-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             setPageHeader("Albums");
             break;
         case "album":
@@ -560,17 +583,26 @@ function changeContent(to, from, content = null, contentParent = null) {
             clearSelection();
             loadSongs(content.songList);
             libraryGrid.classList.remove("hidden");
+            libraryButton.classList.add("bg-gray-100", "text-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             setPageHeader(content.title, true);
             break;
         case "artists":
             // display the artists page
             loadArtists();
             libraryGrid.classList.remove("hidden");
+            libraryButton.classList.add("bg-gray-100", "text-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             setPageHeader("Artists");
             break;
         case "artist":
             // display the page of a single artist
             loadDiscography(content.discography, content);
+            libraryButton.classList.add("bg-gray-100", "text-gray-700");
+            friendsButton.classList.add("bg-gray-700", "text-white");
+            settingsButton.classList.add("bg-gray-700", "text-white");
             libraryGrid.classList.remove("hidden");
             setPageHeader(content.name);
             break;
@@ -601,14 +633,11 @@ function loadSongs(list) {
         const songBox = document.createElement("div");
         songBox.id = "grid-song-" + i;
         songBox.className =
-            "grid-song relative max-w-[200px] h-fit p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+            "grid-song relative max-w-[200px] h-fit p-4 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
         songBox.setAttribute("title", song.title);
         songBox.setAttribute("artist", song.artist);
         songBox.setAttribute("cover", song.image);
-        songBox.addEventListener(
-            "click",
-            toggleSelect.bind(this, songBox.id, song)
-        );
+        songBox.addEventListener("click", toggleSelect.bind(this, songBox.id, song));
 
         const songCover = document.createElement("img");
         songCover.src = song.image;
@@ -622,20 +651,20 @@ function loadSongs(list) {
         //title
         const title = document.createElement("p");
         title.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+            "text-base text-gray-800 md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         title.textContent = song.title;
 
         //artist
         const artist = document.createElement("p");
         artist.className =
-            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm text-gray-500 md:text-base lg:text-lg text-ellipsis overflow-hidden";
         artist.textContent = song.artist;
 
         // selection position
         const selectIcon = document.createElement("div");
         selectIcon.id = "grid-song-" + i + "-selected";
         selectIcon.className =
-            "hidden absolute -top-2 -right-2 lg:-top-3 lg:-right-3 w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center bg-yellow-300 rounded-full";
+            "hidden absolute -top-2 -right-2 lg:-top-3 lg:-right-3 w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center bg-green-500 shadow-md rounded-full text-white";
 
         songBox.appendChild(songCover);
 
@@ -657,7 +686,7 @@ function loadPlaylists() {
         const playlistBox = document.createElement("div");
         playlistBox.id = "playlist-" + i;
         playlistBox.className =
-            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
         playlistBox.addEventListener(
             "click",
             changeContent.bind(this, "playlist", "playlists", playlist)
@@ -675,13 +704,13 @@ function loadPlaylists() {
         //title
         const playlistTitle = document.createElement("p");
         playlistTitle.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+            "text-base text-gray-800 md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         playlistTitle.textContent = playlist.title;
 
         //artist
         const playlistCreator = document.createElement("p");
         playlistCreator.className =
-            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm text-gray-500 md:text-base lg:text-lg text-ellipsis overflow-hidden";
         playlistCreator.textContent = playlist.creator;
 
         playlistBox.appendChild(playlistCover);
@@ -702,8 +731,7 @@ function loadAlbums() {
     albumList.forEach((album) => {
         const albumBox = document.createElement("div");
         albumBox.id = "album-" + i;
-        albumBox.className =
-            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+        albumBox.className = "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
         albumBox.addEventListener(
             "click",
             changeContent.bind(this, "album", "albums", album)
@@ -721,13 +749,13 @@ function loadAlbums() {
         //title
         const albumTitle = document.createElement("p");
         albumTitle.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+            "text-base text-gray-800 md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         albumTitle.textContent = album.title;
 
         //artist
         const albumArtist = document.createElement("p");
         albumArtist.className =
-            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm text-gray-500 md:text-base lg:text-lg text-ellipsis overflow-hidden";
         albumArtist.textContent = album.artist;
 
         albumBox.appendChild(albumCover);
@@ -748,8 +776,7 @@ function loadArtists() {
     artistList.forEach((artist) => {
         const artistBox = document.createElement("div");
         artistBox.id = "artist-" + i;
-        artistBox.className =
-            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+        artistBox.className = "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white";
         artistBox.addEventListener(
             "click",
             changeContent.bind(this, "artist", "artists", artist)
@@ -767,7 +794,7 @@ function loadArtists() {
         //artist
         const name = document.createElement("p");
         name.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+            "text-base text-gray-800 md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         name.textContent = artist.name;
 
         artistBox.appendChild(artistCover);
@@ -787,7 +814,7 @@ function loadDiscography(discography, artist) {
         const albumBox = document.createElement("div");
         albumBox.id = "disco-" + i;
         albumBox.className =
-            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-green-100";
+            "p-2 xl:p-4 rounded-md hover:cursor-pointer hover:bg-white hover:border border-white";
         albumBox.addEventListener(
             "click",
             changeContent.bind(this, "album", "artist", album, artist)
@@ -805,13 +832,13 @@ function loadDiscography(discography, artist) {
         //title
         const albumTitle = document.createElement("p");
         albumTitle.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+            "text-base text-gray-800 md:text-lg lg:text-xl text-ellipsis overflow-hidden";
         albumTitle.textContent = album.title;
 
         //artist
         const albumArtist = document.createElement("p");
         albumArtist.className =
-            "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+            "text-sm text-gray-500 md:text-base lg:text-lg text-ellipsis overflow-hidden";
         albumArtist.textContent = album.artist;
 
         albumBox.appendChild(albumCover);
@@ -831,10 +858,10 @@ function loadPreviews(areaID) {
     const area = document.getElementById(areaID + "-area");
 
     const header = document.createElement("div");
-    header.className = "flex flex-row justify-start items-center gap-x-4";
+    header.className = "flex flex-row justify-start items-center gap-x-4 border-b-4 mb-2";
 
     const areaName = document.createElement("h3");
-    areaName.className = "text-xl md:text-3xl font-bold mb-4";
+    areaName.className = "text-xl md:text-3xl font-bold text-gray-500 mb-4";
     switch (areaID) {
         case "liked-songs":
             areaName.textContent = "Liked Songs";
@@ -861,10 +888,7 @@ function loadPreviews(areaID) {
     more.type = "button";
     more.className =
         "w-16 h-fit px-2 flex justify-center text-base rounded-full bg-zinc-200 hover:bg-green-300 mb-2.5";
-    more.addEventListener(
-        "click",
-        changeContent.bind(this, areaID, "library", songList)
-    );
+    more.addEventListener("click", changeContent.bind(this, areaID, "library", songList));
     more.innerHTML = '<i data-feather="more-horizontal"></i>';
 
     header.appendChild(areaName);
@@ -891,7 +915,7 @@ function loadPreviews(areaID) {
 
         const box = document.createElement("div");
         box.className =
-            "max-w-[200px] h-fit p-4 rounded-lg hover:cursor-pointer hover:bg-green-100";
+            "max-w-[200px] h-fit p-4 hover:shadow-sm rounded-lg hover:cursor-pointer hover:bg-white hover:border border-white";
 
         switch (i) {
             case 7:
@@ -935,7 +959,7 @@ function loadPreviews(areaID) {
         //title
         const title = document.createElement("p");
         title.className =
-            "text-base md:text-lg lg:text-xl text-ellipsis overflow-hidden";
+            "text-base text-gray-800 md:text-lg lg:text-xl text-ellipsis overflow-hidden";
 
         if (areaID != "artists") {
             title.textContent = item.title;
@@ -943,7 +967,7 @@ function loadPreviews(areaID) {
             //artist
             const artist = document.createElement("p");
             artist.className =
-                "text-sm md:text-base lg:text-lg text-ellipsis overflow-hidden";
+                "text-sm text-gray-500 md:text-base lg:text-lg text-ellipsis overflow-hidden";
             artist.textContent = item.artist;
             label.appendChild(artist);
         } else {
@@ -1136,7 +1160,8 @@ function loadMainQueue() {
     for (var i = 0; i < Math.min(3, songsInQueue.length); i++) {
         var song = songsInQueue[i];
         var songBox = document.createElement("div");
-        songBox.className = "w-20 mr-auto hover:cursor-grab";
+        songBox.className =
+            "w-24 mr-8 hover:cursor-grab border-2 hover:bg-white rounded-md border-gray-100 p-2";
 
         var songImg = document.createElement("img");
         songImg.src = song.image;
@@ -1326,9 +1351,6 @@ function playNext() {
 //===============================================
 // INITIAL STATE
 //===============================================
-
-libraryButton.classList.add("bg-green-300", "text-gray-800");
-
 loadPreviews("liked-songs");
 loadPreviews("playlists");
 loadPreviews("albums");
@@ -1337,5 +1359,3 @@ loadPreviews("artists");
 setupPlayer();
 
 loadMainQueue();
-
-feather.replace(); // Set feather icons
