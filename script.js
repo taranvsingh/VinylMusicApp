@@ -1270,6 +1270,7 @@ function loadMainQueue() {
             }
 
             checkEmptyQueue();
+            loadMainQueue();
         },
     });
 }
