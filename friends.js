@@ -255,7 +255,10 @@ function addFriend() {
     const friendSearchInput = document.getElementById("friend-search");
     let friendName = friendSearchInput.value.trim();
 
-    if (friendName === '' || containsEmojis(friendName) || containsNumbers(friendName)) {
+    // Check if friendName is empty or contains non-alphabetic characters
+    if (friendName === '' || containsNonAlphabetic(friendName)) {
+        // Handle invalid input (you can display an error message or simply exit)
+        console.log("Invalid input");
         return;
     }
 
@@ -267,14 +270,11 @@ function addFriend() {
     console.log(friends);
     renderFriends();
 }
-function containsEmojis(str) {
-    const emojiRegex = /[\u{1F600}-\u{1F6FF}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
-    return emojiRegex.test(str);
-}
 
-function containsNumbers(str) {
-    const numberRegex = /\d/;
-    return numberRegex.test(str);
+// Function to check if a string contains non-alphabetic characters
+function containsNonAlphabetic(str) {
+    const nonAlphabeticRegex = /[^a-zA-Z]/;
+    return nonAlphabeticRegex.test(str);
 }
 
 renderFriends();
