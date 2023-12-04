@@ -433,12 +433,6 @@ function reset() {
     resetRecord();
 }
 
-function previous() {
-    if (songsInQueue.length > 0) {
-        resetRecord();
-    }
-}
-
 //reset record and display pause button
 function changeSong(title, artist, path) {
     reset();
@@ -472,7 +466,7 @@ pause.click(function () {
 next.click(playNext);
 
 //play previous button
-prev.click(previous);
+prev.click(resetRecord);
 
 //===============================================
 // NAVIGATION
