@@ -279,6 +279,8 @@ var duration = progress.max;
 var angle = 0;
 const ANGLE_INC = 12; //angle/sec record rotates
 
+record.attr("loaded", false); // plyaer initialized with no song loaded
+
 // NAVIGATION -----------------------------------
 
 const historyStack = []; // navigation history
@@ -397,6 +399,16 @@ function playing() {
             delay: 0,
         }
     );
+}
+
+// Checks if a song is currently loaded in the player
+function isLoaded() {
+    return record.attr("loaded");
+}
+
+// set whether a song is playing
+function setLoaded(loadSong) {
+    record.attr("loaded", loadSong);
 }
 
 //pause record
@@ -1062,33 +1074,53 @@ function toggleSelect(songID) {
 
 // Upon clicking, play buttons should play the first selected song and queue all others
 playButton.addEventListener("click", () => {
-    let song = selected.shift();
-    let songBox = document.getElementById(song);
+    if (selected.length == 0) {
+        // play and queue all songs in the grid
+        let allSongs = document.getElementsByClassName("grid-song");
+        for (let i = 0; i < allSongs.length; i++) {
+            const song = allSongs[i];
+            if (i == 0) {
+                changeSong(
+                    song.getAttribute("title"),
+                    song.getAttribute("artist"),
+                    song.getAttribute("cover")
+                );
+            } else {
+                title = song.getAttribute("title");
+                artist = song.getAttribute("artist");
+                cover = song.getAttribute("cover");
 
-    changeSong(
-        songBox.getAttribute("title"),
-        songBox.getAttribute("artist"),
-        songBox.getAttribute("cover")
-    );
-    deselect(song);
+                addSong(title, artist, cover);
+            }
+        }
+    } else {
+        let song = selected.shift();
+        let songBox = document.getElementById(song);
 
-    if (selected.length > 0) {
-        notify("Songs added to queue");
-    }
-
-    while (selected.length > 0) {
-        song = selected.shift();
+        changeSong(
+            songBox.getAttribute("title"),
+            songBox.getAttribute("artist"),
+            songBox.getAttribute("cover")
+        );
         deselect(song);
-        songBox = document.getElementById(song);
 
-        title = songBox.getAttribute("title");
-        artist = songBox.getAttribute("artist");
-        cover = songBox.getAttribute("cover");
+        if (selected.length > 0) {
+            notify("Songs added to queue");
+        }
 
-        addSong(title, artist, cover);
+        while (selected.length > 0) {
+            song = selected.shift();
+            deselect(song);
+            songBox = document.getElementById(song);
+
+            title = songBox.getAttribute("title");
+            artist = songBox.getAttribute("artist");
+            cover = songBox.getAttribute("cover");
+
+            addSong(title, artist, cover);
+        }
     }
 
-    updateOrder();
     loadSongsInQueue();
     loadMainQueue();
 });
@@ -1103,16 +1135,36 @@ function setupPlayer() {
 // QUEUE SECTION ---------------------------------
 queueButton.addEventListener("click", () => {
     notify("Songs added to queue");
-    while (selected.length > 0) {
-        song = selected.shift();
-        deselect(song);
-        songBox = document.getElementById(song);
+    if (selected.length == 0) {
+        // queue all songs in the grid
+        let allSongs = document.getElementsByClassName("grid-song");
+        for (let i = 0; i < allSongs.length; i++) {
+            const song = allSongs[i];
+            title = song.getAttribute("title");
+            artist = song.getAttribute("artist");
+            cover = song.getAttribute("cover");
 
-        title = songBox.getAttribute("title");
-        artist = songBox.getAttribute("artist");
-        cover = songBox.getAttribute("cover");
+            addSong(title, artist, cover);
+        }
 
-        addSong(title, artist, cover);
+        console.log(isLoaded());
+        if (!isLoaded()) {
+            console.log("playing next");
+            playNext();
+        }
+    } else {
+        // queue all selected songs
+        while (selected.length > 0) {
+            song = selected.shift();
+            deselect(song);
+            songBox = document.getElementById(song);
+
+            title = songBox.getAttribute("title");
+            artist = songBox.getAttribute("artist");
+            cover = songBox.getAttribute("cover");
+
+            addSong(title, artist, cover);
+        }
     }
     loadSongsInQueue();
     loadMainQueue();
@@ -1329,6 +1381,7 @@ function addSong(title, artist, cover) {
 }
 
 function playNext() {
+    console.log(songsInQueue.length);
     if (songsInQueue.length > 0) {
         topSong = songsInQueue.shift();
         changeSong(topSong.title, topSong.artist, topSong.image);
@@ -1336,6 +1389,7 @@ function playNext() {
         loadMainQueue();
         resetRecord();
         playing();
+        setLoaded(true);
     }
     //if there are no more songs, skip to the end of the song
     else {
@@ -1344,6 +1398,7 @@ function playNext() {
         play.css("display", "block");
         reset();
         progress.value = duration;
+        setLoaded(false);
     }
 }
 
