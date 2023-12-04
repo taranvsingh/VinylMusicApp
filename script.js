@@ -1414,3 +1414,5 @@ loadPreviews("artists");
 setupPlayer();
 
 loadMainQueue();
+
+feather.replace();
