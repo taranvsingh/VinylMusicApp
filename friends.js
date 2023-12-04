@@ -254,7 +254,9 @@ let id = 3;
 function addFriend() {
     const friendSearchInput = document.getElementById("friend-search");
     const friendName = friendSearchInput.value.trim();
-
+    if (friendName == '') {
+        exit();
+    }
     const userToAddById = globalUsers.find((user) => user.id === id);
 
     id++;
