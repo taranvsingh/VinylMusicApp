@@ -125,15 +125,23 @@ globalUsers = [
 ];
 
 const friendsGrid = document.getElementById("friends-subsection");
+
 let totalActiveFriends = 0;
 
 function hideNotif() {
     notification.classList.add("hidden");
+    notifError.classList.add("hidden");
 }
 
 function notify(message) {
     notification.textContent = message;
     notification.classList.remove("hidden");
+    setTimeout(hideNotif, 2000);
+}
+
+function notifyError(message) {
+    notifError.textContent = message;
+    notifError.classList.remove("hidden");
     setTimeout(hideNotif, 2000);
 }
 
@@ -256,9 +264,12 @@ function addFriend() {
     let friendName = friendSearchInput.value.trim();
 
     // Check if friendName is empty or contains non-alphabetic characters
-    if (friendName === "" || containsNonAlphabetic(friendName)) {
+    if (friendName === "") {
         // Handle invalid input (you can display an error message or simply exit)
-        console.log("Invalid input");
+        notifyError("Error. No input given.");
+        return;
+    } else if (containsNonAlphabetic(friendName)) {
+        notifyError("Error. Name can only contain letters.");
         return;
     }
 
